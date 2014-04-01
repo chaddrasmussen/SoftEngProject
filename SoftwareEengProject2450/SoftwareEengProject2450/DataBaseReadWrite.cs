@@ -46,6 +46,11 @@ namespace SoftwareEengProject2450
             
         }
     }
+
+    class Book
+    {
+
+    }
                
                
 }
