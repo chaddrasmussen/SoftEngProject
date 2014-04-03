@@ -2,7 +2,7 @@
 namespace Library
 {
     [Serializable]
-	sealed class Child : MediaObject
+	sealed class Child : Media
 	{
 		// ********************************* Constants ***************************************
 
