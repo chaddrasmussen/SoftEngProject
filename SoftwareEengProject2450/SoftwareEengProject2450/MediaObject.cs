@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Library
 {
+    [Serializable]
 	abstract class MediaObject
 	{		
 

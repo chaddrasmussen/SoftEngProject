@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
 namespace SoftwareEengProject2450
 {
     class DataBaseReadWrite
     {
+        //variables used to write data to a file
+        private Stream fs;
+        private BinaryFormatter bf;
         void readCatalog(StreamReader b, SortedDictionary<uint,Book> catalog)
         {
             uint i = 0;
@@ -31,6 +36,49 @@ namespace SoftwareEengProject2450
 
                 i++;
             }
+        }
+        /// <summary>
+        /// Pre-Condition - a sorted dictionary of all media is passed in
+        /// Post-Condition - the data is serialized and written to a file
+        /// </summary>
+        void writeCatalog(SortedDictionary<uint,Media> m)
+        {
+            //
+            SaveFileDialog save = new SaveFileDialog();
+            try
+            {
+                save.Filter = "bin files (*.bin)|*.bin";
+                save.AddExtension = true;
+                save.FileName = "patronData";
+                save.DefaultExt = "bin";
+                save.RestoreDirectory = true;
+                if (save.ShowDialog() == DialogResult.OK)
+                {
+                    if ((fs = save.OpenFile()) != null)
+                    {
+                        bf = new BinaryFormatter();
+                        bf.Serialize(fs, m);
+                        fs.Close();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Pre-Condition - a sorted dictionary of all patrons is passed in
+        /// Post-Condition - the data is serialized and written to a file 
+        /// </summary>
+        void writePatron(SortedDictionary<uint, Patron> p)
+        {
+
         }
 
         uint searchTitle(SortedDictionary<uint,Book> b, string n)

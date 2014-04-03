@@ -1,5 +1,7 @@
-﻿namespace Library
+﻿using System;
+namespace Library
 {
+    [Serializable]
 	abstract class Media : MediaObject
 	{
 		// ******************************* Constructors **************************************

@@ -1,6 +1,7 @@
-﻿
+﻿using System;
 namespace Library
 {
+    [Serializable]
 	sealed class Child : MediaObject
 	{
 		// ********************************* Constants ***************************************

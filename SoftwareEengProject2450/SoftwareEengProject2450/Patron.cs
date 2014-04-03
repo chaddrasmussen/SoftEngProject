@@ -8,6 +8,7 @@ namespace Library
     /// <summary>
     /// Class Patron
     /// </summary>
+    [Serializable]
     abstract class Patron : object
     {
         protected string _name;
@@ -70,6 +71,7 @@ namespace Library
     /// <summary>
     /// Adult Patron
     /// </summary>
+    [Serializable]
     sealed class Adult : Patron
     {
         private string maxChecked = "This patron has already checked out the maximum number of items, ";
@@ -103,6 +105,7 @@ namespace Library
     /// <summary>
     /// Child Patron
     /// </summary>
+    [Serializable]
     sealed class Child : Patron
     {
         private const int MAX_AGE = 18;
@@ -129,6 +132,7 @@ namespace Library
             }
         }
     }
+    [Serializable]
     public class MediaObject
     {
 

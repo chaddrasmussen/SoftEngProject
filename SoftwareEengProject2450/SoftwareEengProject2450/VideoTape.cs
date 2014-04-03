@@ -1,5 +1,7 @@
-﻿namespace Library
+﻿using System;
+namespace Library
 {
+    [Serializable]
 	class VideoTape : Media
 	{
 		// ********************************* Constants ***************************************

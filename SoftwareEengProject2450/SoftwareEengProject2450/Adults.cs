@@ -1,5 +1,7 @@
-﻿namespace Library
+﻿using System;
+namespace Library
 {
+    [Serializable]
 	sealed class Adult : MediaObject
 	{
 		// ********************************* Constants ***************************************
