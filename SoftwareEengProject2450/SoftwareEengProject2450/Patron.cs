@@ -19,7 +19,7 @@ namespace Library
         public bool _overdueMedia { get; set; }
         private string noneChecked = "This patron does not have any checked-out books to be removed.";
 
-        public SortedDictionary<uint, MediaObject> _currentChecked { get; set; }
+        public SortedDictionary<uint, Media> _currentChecked { get; set; }
 
         public Patron()
         {
@@ -28,7 +28,7 @@ namespace Library
             _address = "";
             _age = 0;
             _overdueMedia = false;
-            _currentChecked = new SortedDictionary<uint, MediaObject>();
+            _currentChecked = new SortedDictionary<uint, Media>();
             _maxCheckouts = 0;
 
         }
@@ -47,7 +47,7 @@ namespace Library
                 _maxCheckouts = 3; 
             }
             _overdueMedia = fines;
-            _currentChecked = new SortedDictionary<uint, MediaObject>();
+            _currentChecked = new SortedDictionary<uint, Media>();
         }
         /// <summary>
         /// Purpose: to return number of checked books
@@ -58,7 +58,7 @@ namespace Library
             return _currentChecked.Count;
         }
 
-        public virtual void addMedia(MediaObject media, uint ID)
+        public virtual void addMedia(Media media, uint ID)
         {
             if(_currentChecked.Count <= _maxCheckouts)
             {
@@ -70,7 +70,7 @@ namespace Library
             }
         }
         
-        public virtual void removeMedia(MediaObject media, uint ID)
+        public virtual void removeMedia(Media media, uint ID)
         {
             if (_currentChecked.Count == 0)
             {
