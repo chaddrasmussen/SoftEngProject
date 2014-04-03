@@ -4,47 +4,88 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-namespace SoftwareEengProject2450
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+namespace Library
 {
     class DataBaseReadWrite
     {
-        void readCatalog(StreamReader b, SortedDictionary<uint,Book> catalog)
+        //variables used to write data to a file
+        private Stream mediaStream;
+        private Stream patronStream;
+        private BinaryFormatter bf;
+        void readCatalog(SortedDictionary<uint, Media> m)
         {
-            uint i = 0;
-            while (!b.EndOfStream)
-            {
-                string[] r = b.ReadLine().Split('\t');
-                catalog[uint.Parse(r[0])] = new Book(r[1], r[2], r[3], r[4], r[5]);
-
-                i++;
+            mediaStream = new FileStream("media.bin", FileMode.OpenOrCreate);
+            try 
+            { 
+                m = (SortedDictionary<uint,Media>)bf.Deserialize(mediaStream);
             }
-            b.Close();
-        }
-
-        void readPatron(StreamReader b, SortedDictionary<uint, Patron> p)
-        {
-            uint i = 0;
-            while (!b.EndOfStream)
+            catch
             {
-                string[] r = b.ReadLine().Split('\t');
-                p[uint.Parse(r[0])] = new Patron(r[1], r[2], uint.Parse(r[3]), r[4], r[5]);
-
-                i++;
+                MessageBox.Show("empty file");
             }
-        }
-
-        uint searchTitle(SortedDictionary<uint,Book> b, string n)
-        {
-            foreach (KeyValuePair<uint,Book> item in b)
-            {
-                if (item.Value.title.Contains(n))
-                {
-                    return item.Key;
-                }
-            }
-            return 0;
             
         }
+
+        void readPatron(SortedDictionary<uint, Patron> p)
+        {
+            patronStream = new FileStream("patron.bin", FileMode.OpenOrCreate);
+            try
+            {
+                p = (SortedDictionary<uint, Patron>)bf.Deserialize(mediaStream);
+            }
+            catch
+            {
+                MessageBox.Show("empty file");
+            }
+        }
+        /// <summary>
+        /// Pre-Condition - a sorted dictionary of all media is passed in
+        /// Post-Condition - the data is serialized and written to a file
+        /// </summary>
+        void writeCatalog(SortedDictionary<uint,Media> m)
+        {
+            try
+            {
+                bf.Serialize(mediaStream, m);
+                mediaStream.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Pre-Condition - a sorted dictionary of all patrons is passed in
+        /// Post-Condition - the data is serialized and written to a file 
+        /// </summary>
+        void writePatron(SortedDictionary<uint, Patron> p)
+        {
+            try
+            {
+                bf.Serialize(patronStream, p);
+                patronStream.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //uint searchTitle(SortedDictionary<uint,MediaObject> b, string n)
+        //{
+        //    foreach (KeyValuePair<uint,MediaObject> item in b)
+        //    {
+        //        if (item.Value.title.Contains(n))
+        //        {
+        //            return item.Key;
+        //        }
+        //    }
+        //    return 0;
+            
+        //}
     }
                
                
