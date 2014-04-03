@@ -30,6 +30,7 @@
         {
             this.tabControlLibrary = new System.Windows.Forms.TabControl();
             this.tabLibraryMain = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCheckInOut = new System.Windows.Forms.Button();
@@ -55,7 +56,6 @@
             this.tabAddRemovePatron = new System.Windows.Forms.TabPage();
             this.tabAddRemoveMedia = new System.Windows.Forms.TabPage();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -100,8 +100,18 @@
             this.tabLibraryMain.Text = "Library Main";
             this.tabLibraryMain.UseVisualStyleBackColor = true;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(39, 437);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(156, 23);
+            this.button5.TabIndex = 27;
+            this.button5.Text = "View Checked Out Media";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(28, 38);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
@@ -328,15 +338,6 @@
             this.btnQuit.TabIndex = 27;
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(39, 437);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(156, 23);
-            this.button5.TabIndex = 27;
-            this.button5.Text = "View Checked Out Media";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
