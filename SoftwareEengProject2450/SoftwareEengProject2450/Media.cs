@@ -16,6 +16,7 @@ namespace Library
 
 		public static uint UniqueTitleCount { get; private set; }
 
+        public DateTime dateCheckedOut { get; set; }
 		public uint LoanTime { get; private set; }
 		public uint NumberOfCopies { get; private set; }
 		public uint AvailableCopies { get; private set; }
