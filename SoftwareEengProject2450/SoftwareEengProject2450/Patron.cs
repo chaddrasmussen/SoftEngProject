@@ -9,16 +9,17 @@ namespace Library
     /// Class Patron
     /// </summary>
     [Serializable]
-    abstract class Patron : object
+    class Patron : object
     {
-        protected string _name;
-        protected string _address;
-        protected string _phoneNumber;
-        protected uint _age;
-        protected bool _overdueMedia;
+        public string _name { get; set; }
+        public string _address { get; set; }
+        public string _phoneNumber { get; set; }
+        public uint _age { get; set; }
+        public uint _maxCheckouts { get; set; }
+        public bool _overdueMedia { get; set; }
         private string noneChecked = "This patron does not have any checked-out books to be removed.";
 
-        protected SortedDictionary<uint, MediaObject> _currentChecked;
+        public SortedDictionary<uint, MediaObject> _currentChecked { get; set; }
 
         public Patron()
         {
@@ -28,6 +29,7 @@ namespace Library
             _age = 0;
             _overdueMedia = false;
             _currentChecked = new SortedDictionary<uint, MediaObject>();
+            _maxCheckouts = 0;
 
         }
         public Patron(string name, string address, string phoneNumber, uint age, bool fines, int numChecked)
@@ -36,6 +38,14 @@ namespace Library
             _address = address;
             _phoneNumber = phoneNumber;
             _age = age;
+            if(age >= 18)
+            { 
+                _maxCheckouts = 6; 
+            }
+            else
+            { 
+                _maxCheckouts = 3; 
+            }
             _overdueMedia = fines;
             _currentChecked = new SortedDictionary<uint, MediaObject>();
         }
@@ -47,10 +57,19 @@ namespace Library
         {
             return _currentChecked.Count;
         }
+
         public virtual void addMedia(MediaObject media, uint ID)
         {
-
+            if(_currentChecked.Count <= _maxCheckouts)
+            {
+                _currentChecked.Add(ID, media);
+            }
+            else
+            {
+                MessageBox.Show("You have reached the maximum(" + _maxCheckouts + ") number of checkouts allowed\n");
+            }
         }
+        
         public virtual void removeMedia(MediaObject media, uint ID)
         {
             if (_currentChecked.Count == 0)
@@ -59,6 +78,7 @@ namespace Library
             }
             _currentChecked.Remove(ID);
         }
+        
         public bool Fines
         {
             //if media.overdue = true, fines = true;
@@ -68,73 +88,5 @@ namespace Library
 
 
     }
-    /// <summary>
-    /// Adult Patron
-    /// </summary>
-    [Serializable]
-    sealed class Adult : Patron
-    {
-        private string maxChecked = "This patron has already checked out the maximum number of items, ";
 
-        private const int MIN_AGE = 18;
-        private const int MAX_CHECKED = 6;
-        public Adult()
-            : base()
-        {
-
-        }
-        public Adult(string name, string address, string phoneNumber, uint age, bool fines, int numChecked)
-            : base()
-        {
-
-        }
-        public override void addMedia(MediaObject media, uint ID)
-        {
-            if (_currentChecked.Count < MAX_CHECKED)
-            {
-                _currentChecked.Add(ID, media);
-            }
-            else
-            {
-                MessageBox.Show(maxChecked + MAX_CHECKED + ".");
-            }
-        }
-
-
-    }
-    /// <summary>
-    /// Child Patron
-    /// </summary>
-    [Serializable]
-    sealed class Child : Patron
-    {
-        private const int MAX_AGE = 18;
-        private const int MAX_CHECKED = 3;
-        public Child()
-            : base()
-        {
-
-        }
-        public Child(string name, string address, string phoneNumber, uint age, bool fines, int numChecked)
-            : base()
-        {
-
-        }
-        public override void addMedia(MediaObject media, uint ID)
-        {
-            if (_currentChecked.Count < MAX_CHECKED)
-            {
-                _currentChecked.Add(ID, media);
-            }
-            else
-            {
-                MessageBox.Show("This patron has already checked out the maximum number of items, " + MAX_CHECKED + ".");
-            }
-        }
-    }
-    [Serializable]
-    public class MediaObject
-    {
-
-    }
 }
