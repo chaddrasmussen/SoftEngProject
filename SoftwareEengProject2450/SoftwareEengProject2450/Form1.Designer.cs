@@ -108,6 +108,7 @@
             this.btnViewChkedPerPatron.TabIndex = 27;
             this.btnViewChkedPerPatron.Text = "View Checked Out Media";
             this.btnViewChkedPerPatron.UseVisualStyleBackColor = true;
+            this.btnViewChkedPerPatron.Click += new System.EventHandler(this.btnViewChkedPerPatron_Click);
             // 
             // dateTimePicker
             // 
@@ -179,6 +180,7 @@
             this.btnDisplayAllMedia.TabIndex = 19;
             this.btnDisplayAllMedia.Text = "Display All";
             this.btnDisplayAllMedia.UseVisualStyleBackColor = true;
+            this.btnDisplayAllMedia.Click += new System.EventHandler(this.btnDisplayAllMedia_Click);
             // 
             // txtSearchMedia
             // 

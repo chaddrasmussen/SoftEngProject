@@ -18,21 +18,28 @@ namespace Library
         public uint _maxCheckouts { get; set; }
         public bool _overdueMedia { get; set; }
         private string noneChecked = "This patron does not have any checked-out books to be removed.";
-
+        public static string name = "\nName: ";
+        public static string address = "\nAddress: ";
+        public static string age = "\nAge: ";
+        public static string overdueMedia = "\nOverdue Media? ";
+        public static string maxCheckouts = "\nMaximum allowed checkouts: ";
+        public static string phoneNumber = "\nPhone Number: ";
+        public static string newLine = "\n";
+       
         public SortedDictionary<uint, Media> _currentChecked { get; set; }
 
         public Patron()
         {
             _name = "";
             _address = "";
-            _address = "";
             _age = 0;
+            _phoneNumber = "";
             _overdueMedia = false;
             _currentChecked = new SortedDictionary<uint, Media>();
             _maxCheckouts = 0;
 
         }
-        public Patron(string name, string address, string phoneNumber, uint age, bool fines, int numChecked)
+        public Patron(string name, string address, string phoneNumber, uint age, bool overdue, int numChecked)
         {
             _name = name;
             _address = address;
@@ -46,7 +53,7 @@ namespace Library
             { 
                 _maxCheckouts = 3; 
             }
-            _overdueMedia = fines;
+            _overdueMedia = overdue;
             _currentChecked = new SortedDictionary<uint, Media>();
         }
         /// <summary>
@@ -79,13 +86,17 @@ namespace Library
             _currentChecked.Remove(ID);
         }
         
-        public bool Fines
+        public bool Overdue
         {
             //if media.overdue = true, fines = true;
             get { return _overdueMedia; }
             set { _overdueMedia = value; }
         }
-
+        public override string ToString()
+        {
+            return String.Format(name + _name + address + _address + phoneNumber + _phoneNumber + age + _age.ToString() + overdueMedia +
+                _overdueMedia.ToString() + maxCheckouts + _maxCheckouts.ToString() + newLine);
+        }
 
     }
 
