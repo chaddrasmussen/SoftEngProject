@@ -11,7 +11,16 @@ namespace Library
 		// ********************************* Variables ***************************************
 
 		private Patron _borrower;
-
+        public static string _dateCheckedOut = "\nDate Checked Out: ";
+        public static string _loanTime = "\nLoan Tine: ";
+        public static string _numCopies = "\nNumber of Copies: ";
+        public static string _availableCopies = "\nAvailable Copies";
+        public static string _id = "\nID Number: ";
+        public static string _title = "\nTitle: ";
+        public static string _checkedOut = "\nCurrently Checked Out? ";
+        public static string _overdue = "\nOverdue? ";
+        public static string _newline = "\n";
+        public static string _patronBorrower = "\nBorrower: ";
 		// ******************************** Properties ***************************************
 
 		public static uint UniqueTitleCount { get; private set; }
@@ -24,7 +33,7 @@ namespace Library
 		public string Title { get; private set; }
 		public bool CheckedOut { get; private set; }
 		public bool Overdue { get; set; }
-
+       
 		public Patron Borrower
 		{
 			get { return _borrower; }
@@ -92,5 +101,12 @@ namespace Library
 		}
 
 		// ***********************************************************************************
+
+        public override string ToString()
+        {
+            return String.Format(_patronBorrower+ _borrower._name + _id + ID + _dateCheckedOut + dateCheckedOut.ToString() + _loanTime +
+                LoanTime.ToString()  + _numCopies + NumberOfCopies.ToString() + _availableCopies + AvailableCopies.ToString() + _title + 
+                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString());
+        }
 	}
 }
