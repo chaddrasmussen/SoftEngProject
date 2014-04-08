@@ -106,7 +106,7 @@ namespace Library
         {
             return String.Format(_patronBorrower+ _borrower._name + _id + ID + _dateCheckedOut + dateCheckedOut.ToString() + _loanTime +
                 LoanTime.ToString()  + _numCopies + NumberOfCopies.ToString() + _availableCopies + AvailableCopies.ToString() + _title + 
-                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString());
+                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() + newLine);
         }
 	}
 }
