@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Text.RegularExpressions;
 namespace Library
 {
     /// <summary>
@@ -15,6 +15,7 @@ namespace Library
         public string _address { get; set; }
         public string _phoneNumber { get; set; }
         private DateTime _birthday;
+        static Regex validator;
         public int getAge()
         {
             int _age = 0;
@@ -31,7 +32,12 @@ namespace Library
         public static string maxCheckouts = "\nMaximum allowed checkouts: ";
         public static string phoneNumber = "\nPhone Number: ";
         public static string newLine = "\n";
-       
+        public static bool validate(string name, string address, string city, string state, string zip, string phone)
+        {
+           // validator = new Regex(@"[A-Z|a-z|0-9|.|,|-|#|]");
+
+            return true;
+        }
         public SortedDictionary<uint, Media> _currentChecked { get; set; }
 
         public Patron()
@@ -45,7 +51,7 @@ namespace Library
             _maxCheckouts = 0;
 
         }
-        public Patron(string name, string address, string phoneNumber, DateTime birthday, bool overdue, int numChecked)
+        public Patron(string name, string address, string phoneNumber, DateTime birthday)
         {
             _name = name;
             _address = address;
@@ -59,7 +65,7 @@ namespace Library
             { 
                 _maxCheckouts = 3; 
             }
-            _overdueMedia = overdue;
+            _overdueMedia = false;
             _currentChecked = new SortedDictionary<uint, Media>();
         }
         /// <summary>

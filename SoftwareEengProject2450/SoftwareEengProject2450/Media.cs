@@ -9,7 +9,7 @@ namespace Library
 	{		
 
 		// ********************************* Variables ***************************************
-
+        //enum media type
 		private Patron _borrower;
         public static string _dateCheckedOut = "\nDate Checked Out: ";
         public static string _loanTime = "\nLoan Tine: ";
@@ -54,10 +54,10 @@ namespace Library
 
 		public Media() { }
 
-		public Media(string title, uint loanTime, uint numberOfCopies)
+		public Media(string title, uint numberOfCopies)
 		{
 			Title = title;
-			LoanTime = loanTime;
+            LoanTime = 0; 
 			CheckedOut = false;
 			NumberOfCopies = numberOfCopies;
 			AvailableCopies = numberOfCopies;
@@ -96,7 +96,7 @@ namespace Library
 			}
 			else
 			{
-				throw new Exception("Available copies are already at their max");
+				throw new Exception("Available copies are already at their max.");
 			}
 		}
 
@@ -106,7 +106,7 @@ namespace Library
         {
             return String.Format(_patronBorrower+ _borrower._name + _id + ID + _dateCheckedOut + dateCheckedOut.ToString() + _loanTime +
                 LoanTime.ToString()  + _numCopies + NumberOfCopies.ToString() + _availableCopies + AvailableCopies.ToString() + _title + 
-                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() + newLine);
+                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() + _newLine);
         }
 	}
 }

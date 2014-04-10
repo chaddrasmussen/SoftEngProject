@@ -13,18 +13,18 @@ namespace Library
     public partial class Form1 : Form
     {
         private SortedDictionary<uint, Media> mediaSD;
-        private SortedDictionary<uint, Patron> patronSD;
+        private SortedDictionary<string, Patron> patronSD;
 
         public Form1()
         {
             InitializeComponent();
-            mediaSD = new SortedDictionary<uint,Media>{};
-            patronSD = new SortedDictionary<uint, Patron> { };
+            mediaSD = new SortedDictionary<uint, Media> { };
+            patronSD = new SortedDictionary<string, Patron> { };
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -45,9 +45,7 @@ namespace Library
         /// </summary>
         private void displayPatrons()
         {
-
-            
-            foreach (KeyValuePair<uint,Patron> p in this.patronSD)
+            foreach (KeyValuePair<string, Patron> p in this.patronSD)
             {
                 txtDisplayPatron.Items.Add(p);
             }
@@ -57,13 +55,13 @@ namespace Library
         /// </summary>
         private void btnViewChkedPerPatron_Click(object sender, EventArgs e)
         {
-            //if no selection
-            //{
-                MessageBox.Show("You must choose a patron from the list.");
-            //}
+            if (txtDisplayPatron.SelectedIndex.Equals(null))
+            {
+                MessageBox.Show("Please select a patron for which to view checked out media.");
+            }
             Patron P = (Patron)txtDisplayPatron.SelectedItem; //=txtDisplayPatron.SelectedText
             displayChecked(P);
-            
+
         }
         /// <summary>
         /// Purpose: helper for btnDisplayCheckedPerPatron
@@ -86,11 +84,34 @@ namespace Library
         }
         private void displayMedia()
         {
-            foreach (KeyValuePair<uint,Media> m in mediaSD)
+            foreach (KeyValuePair<uint, Media> m in mediaSD)
             {
                 txtDisplayMedia.Items.Add(m.Value.ToString());
             }
         }
-       
+
+        private void btnAddPatron_Click(object sender, EventArgs e)
+        {
+            saveNewPatron();
+        }
+        private void saveNewPatron()
+        {
+            if (Patron.validate(txtPatronName.Text, txtPatronAddress.Text, txtPatronCity.Text, txtPatronState.Text, txtPatronZip.Text, txtPatronPhone.Text))
+            {
+                string combinedAddress = string.Concat(txtPatronAddress.Text, " ,", txtPatronCity.Text, ", ", txtPatronState.Text, ", ", txtPatronZip.Text);
+                patronSD.Add(txtPatronName.Text, new Patron(txtPatronName.Text, combinedAddress, txtPatronPhone.Text, txtPatronDateofBirth.Value));
+            }
+        }
+        private void btnAddMedia_Click()
+        {
+            saveNewMedia();
+        }
+        private void saveNewMedia()
+        {
+            Media m = new Media(txtMediaTitle.Text, int.Parse(txtMediaNumCopies.Text));
+
+        }
+
+
     }
 }
