@@ -13,13 +13,13 @@ namespace Library
     public partial class Form1 : Form
     {
         private SortedDictionary<uint, Media> mediaSD;
-        private SortedDictionary<string, Patron> patronSD;
+        private SortedDictionary<uint, Patron> patronSD;
 
         public Form1()
         {
             InitializeComponent();
             mediaSD = new SortedDictionary<uint, Media> { };
-            patronSD = new SortedDictionary<string, Patron> { };
+            patronSD = new SortedDictionary<uint, Patron> { };
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace Library
         /// </summary>
         private void displayPatrons()
         {
-            foreach (KeyValuePair<string, Patron> p in this.patronSD)
+            foreach (KeyValuePair<uint, Patron> p in this.patronSD)
             {
                 txtDisplayPatron.Items.Add(p);
             }
@@ -96,10 +96,10 @@ namespace Library
         }
         private void saveNewPatron()
         {
-            if (Patron.validate(txtPatronName.Text, txtPatronAddress.Text, txtPatronCity.Text, txtPatronState.Text, txtPatronZip.Text, txtPatronPhone.Text))
+            if (Patron.validate(txtPatronName.Text, txtPatronAddress.Text, txtPatronCity.Text, txtPatronState.Text, txtPatronZip.Text, txtPatronPhone.Text, txtPatronCardNum.Text))
             {
                 string combinedAddress = string.Concat(txtPatronAddress.Text, " ,", txtPatronCity.Text, ", ", txtPatronState.Text, ", ", txtPatronZip.Text);
-                patronSD.Add(txtPatronName.Text, new Patron(txtPatronName.Text, combinedAddress, txtPatronPhone.Text, txtPatronDateofBirth.Value));
+                patronSD.Add(uint.Parse(txtPatronCardNum.Text), new Patron(txtPatronName.Text, uint.Parse(txtPatronCardNum.Text), combinedAddress, txtPatronPhone.Text, txtPatronDateofBirth.Value));
             }
         }
         private void btnAddMedia_Click()
@@ -108,7 +108,7 @@ namespace Library
         }
         private void saveNewMedia()
         {
-            Media m = new Media(txtMediaTitle.Text, int.Parse(txtMediaNumCopies.Text));
+            Media m = new Media(txtMediaTitle.Text, int.Parse(txtMediaNumCopies.Text), );
 
         }
 

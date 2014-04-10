@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 namespace Library
 {
+    public enum MediaType { DVD, VIDEO, BOOK };
     [Serializable]
-	abstract class Media
-	{		
-
+	public class Media
+	{
+        
 		// ********************************* Variables ***************************************
         //enum media type
 		private Patron _borrower;

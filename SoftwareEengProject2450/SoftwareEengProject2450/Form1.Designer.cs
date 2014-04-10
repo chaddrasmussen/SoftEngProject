@@ -87,6 +87,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.txtMediaType = new System.Windows.Forms.TextBox();
+            this.txtPatronCardNum = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -345,6 +347,8 @@
             // 
             // tabAddRemovePatron
             // 
+            this.tabAddRemovePatron.Controls.Add(this.txtPatronCardNum);
+            this.tabAddRemovePatron.Controls.Add(this.label20);
             this.tabAddRemovePatron.Controls.Add(this.label19);
             this.tabAddRemovePatron.Controls.Add(this.txtMediaType);
             this.tabAddRemovePatron.Controls.Add(this.btnRemoveMedia);
@@ -396,7 +400,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(172, 476);
+            this.btnRemove.Location = new System.Drawing.Point(194, 472);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(200, 23);
             this.btnRemove.TabIndex = 42;
@@ -415,7 +419,7 @@
             // 
             // btnAddPatron
             // 
-            this.btnAddPatron.Location = new System.Drawing.Point(172, 356);
+            this.btnAddPatron.Location = new System.Drawing.Point(194, 360);
             this.btnAddPatron.Name = "btnAddPatron";
             this.btnAddPatron.Size = new System.Drawing.Size(200, 23);
             this.btnAddPatron.TabIndex = 40;
@@ -453,7 +457,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(202, 400);
+            this.label16.Location = new System.Drawing.Point(224, 396);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(125, 18);
             this.label16.TabIndex = 36;
@@ -461,7 +465,7 @@
             // 
             // txtPatronRemoveName
             // 
-            this.txtPatronRemoveName.Location = new System.Drawing.Point(172, 439);
+            this.txtPatronRemoveName.Location = new System.Drawing.Point(194, 435);
             this.txtPatronRemoveName.Name = "txtPatronRemoveName";
             this.txtPatronRemoveName.Size = new System.Drawing.Size(200, 20);
             this.txtPatronRemoveName.TabIndex = 35;
@@ -469,7 +473,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(67, 442);
+            this.label18.Location = new System.Drawing.Point(89, 438);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(41, 13);
             this.label18.TabIndex = 34;
@@ -505,7 +509,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(202, 41);
+            this.label12.Location = new System.Drawing.Point(224, 37);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(129, 18);
             this.label12.TabIndex = 17;
@@ -514,7 +518,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 147);
+            this.label5.Location = new System.Drawing.Point(60, 151);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 3;
@@ -522,7 +526,7 @@
             // 
             // txtPatronDateofBirth
             // 
-            this.txtPatronDateofBirth.Location = new System.Drawing.Point(172, 141);
+            this.txtPatronDateofBirth.Location = new System.Drawing.Point(194, 145);
             this.txtPatronDateofBirth.Name = "txtPatronDateofBirth";
             this.txtPatronDateofBirth.Size = new System.Drawing.Size(200, 20);
             this.txtPatronDateofBirth.TabIndex = 2;
@@ -530,7 +534,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(83, 323);
+            this.label10.Location = new System.Drawing.Point(105, 327);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(25, 13);
             this.label10.TabIndex = 0;
@@ -539,7 +543,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(75, 286);
+            this.label9.Location = new System.Drawing.Point(97, 290);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 13);
             this.label9.TabIndex = 0;
@@ -548,7 +552,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(83, 253);
+            this.label8.Location = new System.Drawing.Point(105, 257);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(27, 13);
             this.label8.TabIndex = 0;
@@ -557,7 +561,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(63, 218);
+            this.label7.Location = new System.Drawing.Point(85, 222);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 13);
             this.label7.TabIndex = 0;
@@ -566,7 +570,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 182);
+            this.label6.Location = new System.Drawing.Point(52, 186);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(84, 13);
             this.label6.TabIndex = 0;
@@ -574,42 +578,42 @@
             // 
             // txtPatronZip
             // 
-            this.txtPatronZip.Location = new System.Drawing.Point(172, 320);
+            this.txtPatronZip.Location = new System.Drawing.Point(194, 324);
             this.txtPatronZip.Name = "txtPatronZip";
             this.txtPatronZip.Size = new System.Drawing.Size(200, 20);
             this.txtPatronZip.TabIndex = 1;
             // 
             // txtPatronState
             // 
-            this.txtPatronState.Location = new System.Drawing.Point(172, 283);
+            this.txtPatronState.Location = new System.Drawing.Point(194, 287);
             this.txtPatronState.Name = "txtPatronState";
             this.txtPatronState.Size = new System.Drawing.Size(200, 20);
             this.txtPatronState.TabIndex = 1;
             // 
             // txtPatronCity
             // 
-            this.txtPatronCity.Location = new System.Drawing.Point(172, 250);
+            this.txtPatronCity.Location = new System.Drawing.Point(194, 254);
             this.txtPatronCity.Name = "txtPatronCity";
             this.txtPatronCity.Size = new System.Drawing.Size(200, 20);
             this.txtPatronCity.TabIndex = 5;
             // 
             // txtPatronAddress
             // 
-            this.txtPatronAddress.Location = new System.Drawing.Point(172, 215);
+            this.txtPatronAddress.Location = new System.Drawing.Point(194, 219);
             this.txtPatronAddress.Name = "txtPatronAddress";
             this.txtPatronAddress.Size = new System.Drawing.Size(200, 20);
             this.txtPatronAddress.TabIndex = 4;
             // 
             // txtPatronPhone
             // 
-            this.txtPatronPhone.Location = new System.Drawing.Point(172, 179);
+            this.txtPatronPhone.Location = new System.Drawing.Point(194, 183);
             this.txtPatronPhone.Name = "txtPatronPhone";
             this.txtPatronPhone.Size = new System.Drawing.Size(200, 20);
             this.txtPatronPhone.TabIndex = 3;
             // 
             // txtPatronName
             // 
-            this.txtPatronName.Location = new System.Drawing.Point(172, 105);
+            this.txtPatronName.Location = new System.Drawing.Point(194, 72);
             this.txtPatronName.Name = "txtPatronName";
             this.txtPatronName.Size = new System.Drawing.Size(200, 20);
             this.txtPatronName.TabIndex = 1;
@@ -617,7 +621,7 @@
             // lblpatronName
             // 
             this.lblpatronName.AutoSize = true;
-            this.lblpatronName.Location = new System.Drawing.Point(67, 108);
+            this.lblpatronName.Location = new System.Drawing.Point(89, 75);
             this.lblpatronName.Name = "lblpatronName";
             this.lblpatronName.Size = new System.Drawing.Size(41, 13);
             this.lblpatronName.TabIndex = 0;
@@ -664,6 +668,22 @@
             this.txtMediaType.Name = "txtMediaType";
             this.txtMediaType.Size = new System.Drawing.Size(200, 20);
             this.txtMediaType.TabIndex = 45;
+            // 
+            // txtPatronCardNum
+            // 
+            this.txtPatronCardNum.Location = new System.Drawing.Point(194, 108);
+            this.txtPatronCardNum.Name = "txtPatronCardNum";
+            this.txtPatronCardNum.Size = new System.Drawing.Size(200, 20);
+            this.txtPatronCardNum.TabIndex = 47;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(25, 111);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(109, 13);
+            this.label20.TabIndex = 46;
+            this.label20.Text = "Library Card Number: ";
             // 
             // Form1
             // 
@@ -747,6 +767,8 @@
         private System.Windows.Forms.TextBox txtMediaType;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtMediaNumCopies;
+        private System.Windows.Forms.TextBox txtPatronCardNum;
+        private System.Windows.Forms.Label label20;
 
     }
 }

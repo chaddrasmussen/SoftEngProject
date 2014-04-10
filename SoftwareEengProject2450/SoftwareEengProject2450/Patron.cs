@@ -14,6 +14,8 @@ namespace Library
         public string _name { get; set; }
         public string _address { get; set; }
         public string _phoneNumber { get; set; }
+        private uint _cardNumber;
+        public uint CardNumber { get { return _cardNumber; } }
         private DateTime _birthday;
         static Regex validator;
         public int getAge()
@@ -28,11 +30,13 @@ namespace Library
         public static string name = "\nName: ";
         public static string address = "\nAddress: ";
         public static string age = "\nAge: ";
+        public static string cardNumber = "\nCard Number";
         public static string overdueMedia = "\nOverdue Media? ";
         public static string maxCheckouts = "\nMaximum allowed checkouts: ";
         public static string phoneNumber = "\nPhone Number: ";
         public static string newLine = "\n";
-        public static bool validate(string name, string address, string city, string state, string zip, string phone)
+        
+        public static bool validate(string name, string address, string city, string state, string zip, string phone, string cardNumber )
         {
            // validator = new Regex(@"[A-Z|a-z|0-9|.|,|-|#|]");
 
@@ -49,9 +53,9 @@ namespace Library
             _overdueMedia = false;
             _currentChecked = new SortedDictionary<uint, Media>();
             _maxCheckouts = 0;
-
+            _cardNumber = 0;
         }
-        public Patron(string name, string address, string phoneNumber, DateTime birthday)
+        public Patron(string name, uint cardNumber, string address, string phoneNumber, DateTime birthday)
         {
             _name = name;
             _address = address;
@@ -66,6 +70,7 @@ namespace Library
                 _maxCheckouts = 3; 
             }
             _overdueMedia = false;
+            _cardNumber = cardNumber;
             _currentChecked = new SortedDictionary<uint, Media>();
         }
         /// <summary>
@@ -106,7 +111,7 @@ namespace Library
         }
         public override string ToString()
         {
-            return String.Format(name + _name + address + _address + phoneNumber + _phoneNumber + age + _birthday.ToString() + overdueMedia +
+            return String.Format(name + _name + cardNumber + _cardNumber + address + _address + phoneNumber + _phoneNumber + age + _birthday.ToString() + overdueMedia +
                 _overdueMedia.ToString() + maxCheckouts + _maxCheckouts.ToString() + newLine);
         }
 
