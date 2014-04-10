@@ -134,7 +134,7 @@ namespace Library
         public override string ToString()
         {
             return String.Format(_patronBorrower+ _borrower._name + _id + ID + _dateCheckedOut + dateCheckedOut.ToString() + _loanTime +
-                LoanTime.ToString()  + _numCopies + NumberOfCopies.ToString() + _availableCopies + AvailableCopies.ToString() + _title + 
+                loanTime.ToString()  + _numCopies + NumberOfCopies.ToString() + _availableCopies + AvailableCopies.ToString() + _title + 
                 Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() +"\n");
         }
 	}
