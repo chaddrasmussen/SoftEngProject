@@ -14,7 +14,13 @@ namespace Library
         public string _name { get; set; }
         public string _address { get; set; }
         public string _phoneNumber { get; set; }
-        public uint _age { get; set; }
+        private DateTime _birthday;
+        public int getAge()
+        {
+            int _age = 0;
+            return _age = ((DateTime.Now.Year - _birthday.Year) * 372 + 
+                (DateTime.Now.Month - _birthday.Month) * 31 + (DateTime.Now.Day - _birthday.Day)) / 372; 
+        }
         public uint _maxCheckouts { get; set; }
         public bool _overdueMedia { get; set; }
         private string noneChecked = "This patron does not have any checked-out books to be removed.";
@@ -32,20 +38,20 @@ namespace Library
         {
             _name = "";
             _address = "";
-            _age = 0;
+            _birthday = DateTime.Today;
             _phoneNumber = "";
             _overdueMedia = false;
             _currentChecked = new SortedDictionary<uint, Media>();
             _maxCheckouts = 0;
 
         }
-        public Patron(string name, string address, string phoneNumber, uint age, bool overdue, int numChecked)
+        public Patron(string name, string address, string phoneNumber, DateTime birthday, bool overdue, int numChecked)
         {
             _name = name;
             _address = address;
             _phoneNumber = phoneNumber;
-            _age = age;
-            if(age >= 18)
+            _birthday = birthday;
+            if (getAge() >= 18)
             { 
                 _maxCheckouts = 6; 
             }
@@ -94,7 +100,7 @@ namespace Library
         }
         public override string ToString()
         {
-            return String.Format(name + _name + address + _address + phoneNumber + _phoneNumber + age + _age.ToString() + overdueMedia +
+            return String.Format(name + _name + address + _address + phoneNumber + _phoneNumber + age + _birthday.ToString() + overdueMedia +
                 _overdueMedia.ToString() + maxCheckouts + _maxCheckouts.ToString() + newLine);
         }
 

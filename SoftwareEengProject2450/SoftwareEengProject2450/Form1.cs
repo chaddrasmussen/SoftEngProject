@@ -46,10 +46,10 @@ namespace Library
         private void displayPatrons()
         {
 
-            txtDisplayPatron.Clear();
+            
             foreach (KeyValuePair<uint,Patron> p in this.patronSD)
             {
-                txtDisplayPatron.Text += p.Value.ToString();
+                txtDisplayPatron.Items.Add(p);
             }
         }
         /// <summary>
@@ -57,7 +57,11 @@ namespace Library
         /// </summary>
         private void btnViewChkedPerPatron_Click(object sender, EventArgs e)
         {
-            Patron P = new Patron(); //=txtDisplayPatron.SelectedText
+            //if no selection
+            //{
+                MessageBox.Show("You must choose a patron from the list.");
+            //}
+            Patron P = (Patron)txtDisplayPatron.SelectedItem; //=txtDisplayPatron.SelectedText
             displayChecked(P);
             
         }
@@ -84,7 +88,7 @@ namespace Library
         {
             foreach (KeyValuePair<uint,Media> m in mediaSD)
             {
-                txtDisplayMedia.Text += m.Value.ToString();
+                txtDisplayMedia.Items.Add(m.Value.ToString());
             }
         }
        
