@@ -108,7 +108,23 @@ namespace Library
         }
         private void saveNewMedia()
         {
-            Media m = new Media(txtMediaTitle.Text, int.Parse(txtMediaNumCopies.Text), );
+            Media m;
+            if (txtMediaType.SelectedValue.ToString() == MediaType.CHILDBOOK.ToString())
+            {
+                m = new Media(txtMediaTitle.Text, uint.Parse(txtMediaNumCopies.Text), MediaType.CHILDBOOK);
+            }
+            if (txtMediaType.SelectedValue.ToString() == MediaType.ADULTBOOK.ToString())
+            {
+                m = new Media(txtMediaTitle.Text, uint.Parse(txtMediaNumCopies.Text), MediaType.ADULTBOOK);
+            }
+            if (txtMediaType.SelectedValue.ToString() == MediaType.DVD.ToString())
+            {
+                m = new Media(txtMediaTitle.Text, uint.Parse(txtMediaNumCopies.Text), MediaType.DVD);
+            }
+            if (txtMediaType.SelectedValue.ToString() == MediaType.VIDEO.ToString())
+            {
+                m = new Media(txtMediaType.Text, uint.Parse(txtMediaNumCopies.Text), MediaType.VIDEO);
+            }
 
         }
 

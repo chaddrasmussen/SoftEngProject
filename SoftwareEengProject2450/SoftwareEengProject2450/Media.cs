@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace Library
 {
-    public enum MediaType { DVD, VIDEO, BOOK };
+    public enum MediaType { CHILDBOOK, ADULTBOOK, DVD, VIDEO };
     [Serializable]
 	public class Media
 	{
         
 		// ********************************* Variables ***************************************
         //enum media type
-		private Patron _borrower;
+		
         public static string _dateCheckedOut = "\nDate Checked Out: ";
         public static string _loanTime = "\nLoan Tine: ";
         public static string _numCopies = "\nNumber of Copies: ";
@@ -23,18 +23,23 @@ namespace Library
         public static string _newline = "\n";
         public static string _patronBorrower = "\nBorrower: ";
 		// ******************************** Properties ***************************************
-
+        private Patron _borrower;
+        //private TimeSpan loanTime;
 		public static uint UniqueTitleCount { get; private set; }
-
+        private MediaType mType;
+        public MediaType Mtype {get { return mType; }}
         public DateTime dateCheckedOut { get; set; }
-		public uint LoanTime { get; private set; }
+        private uint loanTime;
 		public uint NumberOfCopies { get; private set; }
 		public uint AvailableCopies { get; private set; }
 		public uint ID { get; private set; }
 		public string Title { get; private set; }
 		public bool CheckedOut { get; private set; }
 		public bool Overdue { get; set; }
-       
+        private const uint MAX_CHILD_LOAN = 7;
+        private const uint MAX_ADULT_LOAN = 14;
+        private const uint MAX_DVD_LOAN = 2;
+        private const uint MAX_VIDEO_LOAN = 3;
 		public Patron Borrower
 		{
 			get { return _borrower; }
@@ -55,19 +60,42 @@ namespace Library
 
 		public Media() { }
 
-		public Media(string title, uint numberOfCopies)
+		public Media(string title, uint numberOfCopies, MediaType mType)
 		{
 			Title = title;
-            LoanTime = 0; 
+            setLoanTime(mType);
 			CheckedOut = false;
 			NumberOfCopies = numberOfCopies;
 			AvailableCopies = numberOfCopies;
 			ID = ++ID;
 			++UniqueTitleCount;
+            this.mType = mType;
 		}
 
 		// ********************************* Methods *****************************************
-
+        public void setLoanTime(MediaType mt)
+        {
+            if (mt == MediaType.CHILDBOOK)
+            {
+                loanTime = MAX_CHILD_LOAN;
+            }
+            if (mt == MediaType.ADULTBOOK)
+            {
+                loanTime = MAX_ADULT_LOAN;
+            }
+            if (mt == MediaType.DVD)
+            {
+                loanTime = MAX_DVD_LOAN;
+            }
+            if (mt == MediaType.VIDEO)
+            {
+                loanTime = MAX_VIDEO_LOAN;
+            }
+        }
+        public uint getLoanTime()
+        {
+            return loanTime;
+        }
 		/// <summary>
 		/// Checks the book out, assigns borrower
 		/// </summary>
@@ -107,7 +135,7 @@ namespace Library
         {
             return String.Format(_patronBorrower+ _borrower._name + _id + ID + _dateCheckedOut + dateCheckedOut.ToString() + _loanTime +
                 LoanTime.ToString()  + _numCopies + NumberOfCopies.ToString() + _availableCopies + AvailableCopies.ToString() + _title + 
-                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() + _newLine);
+                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() +"\n");
         }
 	}
 }

@@ -54,6 +54,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.displayOverdueMedia = new System.Windows.Forms.RichTextBox();
             this.tabAddRemovePatron = new System.Windows.Forms.TabPage();
+            this.txtMediaType = new System.Windows.Forms.ComboBox();
+            this.txtPatronCardNum = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.btnRemoveMedia = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAddMedia = new System.Windows.Forms.Button();
@@ -62,10 +66,12 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtPatronRemoveName = new System.Windows.Forms.TextBox();
+            this.txtRemovePatron = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txtMediaTitle = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtMediaNumCopies = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -83,12 +89,6 @@
             this.txtPatronName = new System.Windows.Forms.TextBox();
             this.lblpatronName = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.txtMediaNumCopies = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtMediaType = new System.Windows.Forms.TextBox();
-            this.txtPatronCardNum = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -347,10 +347,10 @@
             // 
             // tabAddRemovePatron
             // 
+            this.tabAddRemovePatron.Controls.Add(this.txtMediaType);
             this.tabAddRemovePatron.Controls.Add(this.txtPatronCardNum);
             this.tabAddRemovePatron.Controls.Add(this.label20);
             this.tabAddRemovePatron.Controls.Add(this.label19);
-            this.tabAddRemovePatron.Controls.Add(this.txtMediaType);
             this.tabAddRemovePatron.Controls.Add(this.btnRemoveMedia);
             this.tabAddRemovePatron.Controls.Add(this.btnRemove);
             this.tabAddRemovePatron.Controls.Add(this.btnAddMedia);
@@ -359,7 +359,7 @@
             this.tabAddRemovePatron.Controls.Add(this.label14);
             this.tabAddRemovePatron.Controls.Add(this.label15);
             this.tabAddRemovePatron.Controls.Add(this.label16);
-            this.tabAddRemovePatron.Controls.Add(this.txtPatronRemoveName);
+            this.tabAddRemovePatron.Controls.Add(this.txtRemovePatron);
             this.tabAddRemovePatron.Controls.Add(this.label18);
             this.tabAddRemovePatron.Controls.Add(this.txtMediaTitle);
             this.tabAddRemovePatron.Controls.Add(this.label13);
@@ -389,12 +389,50 @@
             this.tabAddRemovePatron.Text = "Add  or Remove New Patron/Media";
             this.tabAddRemovePatron.UseVisualStyleBackColor = true;
             // 
+            // txtMediaType
+            // 
+            this.txtMediaType.FormattingEnabled = true;
+            this.txtMediaType.Items.AddRange(new object[] {
+            "CHILDBOOK",
+            "ADULTBOOK",
+            "DVD",
+            "VIDEO"});
+            this.txtMediaType.Location = new System.Drawing.Point(661, 175);
+            this.txtMediaType.Name = "txtMediaType";
+            this.txtMediaType.Size = new System.Drawing.Size(200, 21);
+            this.txtMediaType.TabIndex = 12;
+            // 
+            // txtPatronCardNum
+            // 
+            this.txtPatronCardNum.Location = new System.Drawing.Point(194, 108);
+            this.txtPatronCardNum.Name = "txtPatronCardNum";
+            this.txtPatronCardNum.Size = new System.Drawing.Size(200, 20);
+            this.txtPatronCardNum.TabIndex = 2;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(25, 111);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(109, 13);
+            this.label20.TabIndex = 46;
+            this.label20.Text = "Library Card Number: ";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(530, 175);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(69, 13);
+            this.label19.TabIndex = 44;
+            this.label19.Text = "Media Type: ";
+            // 
             // btnRemoveMedia
             // 
             this.btnRemoveMedia.Location = new System.Drawing.Point(661, 476);
             this.btnRemoveMedia.Name = "btnRemoveMedia";
             this.btnRemoveMedia.Size = new System.Drawing.Size(200, 23);
-            this.btnRemoveMedia.TabIndex = 43;
+            this.btnRemoveMedia.TabIndex = 17;
             this.btnRemoveMedia.Text = "Remove Media";
             this.btnRemoveMedia.UseVisualStyleBackColor = true;
             // 
@@ -403,7 +441,7 @@
             this.btnRemove.Location = new System.Drawing.Point(194, 472);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(200, 23);
-            this.btnRemove.TabIndex = 42;
+            this.btnRemove.TabIndex = 15;
             this.btnRemove.Text = "Remove Patron";
             this.btnRemove.UseVisualStyleBackColor = true;
             // 
@@ -412,17 +450,16 @@
             this.btnAddMedia.Location = new System.Drawing.Point(661, 213);
             this.btnAddMedia.Name = "btnAddMedia";
             this.btnAddMedia.Size = new System.Drawing.Size(200, 23);
-            this.btnAddMedia.TabIndex = 41;
+            this.btnAddMedia.TabIndex = 13;
             this.btnAddMedia.Text = "Add Media";
             this.btnAddMedia.UseVisualStyleBackColor = true;
-            this.btnAddMedia.Click += new System.EventHandler(this.btnAddMedia_Click);
             // 
             // btnAddPatron
             // 
             this.btnAddPatron.Location = new System.Drawing.Point(194, 360);
             this.btnAddPatron.Name = "btnAddPatron";
             this.btnAddPatron.Size = new System.Drawing.Size(200, 23);
-            this.btnAddPatron.TabIndex = 40;
+            this.btnAddPatron.TabIndex = 9;
             this.btnAddPatron.Text = "Add Patron";
             this.btnAddPatron.UseVisualStyleBackColor = true;
             this.btnAddPatron.Click += new System.EventHandler(this.btnAddPatron_Click);
@@ -432,7 +469,7 @@
             this.txtMediaRemoveID.Location = new System.Drawing.Point(661, 435);
             this.txtMediaRemoveID.Name = "txtMediaRemoveID";
             this.txtMediaRemoveID.Size = new System.Drawing.Size(200, 20);
-            this.txtMediaRemoveID.TabIndex = 39;
+            this.txtMediaRemoveID.TabIndex = 16;
             // 
             // label14
             // 
@@ -463,28 +500,28 @@
             this.label16.TabIndex = 36;
             this.label16.Text = "Remove Patron";
             // 
-            // txtPatronRemoveName
+            // txtRemovePatron
             // 
-            this.txtPatronRemoveName.Location = new System.Drawing.Point(194, 435);
-            this.txtPatronRemoveName.Name = "txtPatronRemoveName";
-            this.txtPatronRemoveName.Size = new System.Drawing.Size(200, 20);
-            this.txtPatronRemoveName.TabIndex = 35;
+            this.txtRemovePatron.Location = new System.Drawing.Point(194, 435);
+            this.txtRemovePatron.Name = "txtRemovePatron";
+            this.txtRemovePatron.Size = new System.Drawing.Size(200, 20);
+            this.txtRemovePatron.TabIndex = 14;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(89, 438);
+            this.label18.Location = new System.Drawing.Point(27, 435);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(41, 13);
+            this.label18.Size = new System.Drawing.Size(109, 13);
             this.label18.TabIndex = 34;
-            this.label18.Text = "Name: ";
+            this.label18.Text = "Library Card Number: ";
             // 
             // txtMediaTitle
             // 
             this.txtMediaTitle.Location = new System.Drawing.Point(661, 105);
             this.txtMediaTitle.Name = "txtMediaTitle";
             this.txtMediaTitle.Size = new System.Drawing.Size(200, 20);
-            this.txtMediaTitle.TabIndex = 33;
+            this.txtMediaTitle.TabIndex = 10;
             // 
             // label13
             // 
@@ -494,6 +531,22 @@
             this.label13.Size = new System.Drawing.Size(33, 13);
             this.label13.TabIndex = 29;
             this.label13.Text = "Title: ";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(508, 143);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(91, 13);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "Copies Available: ";
+            // 
+            // txtMediaNumCopies
+            // 
+            this.txtMediaNumCopies.Location = new System.Drawing.Point(661, 140);
+            this.txtMediaNumCopies.Name = "txtMediaNumCopies";
+            this.txtMediaNumCopies.Size = new System.Drawing.Size(200, 20);
+            this.txtMediaNumCopies.TabIndex = 11;
             // 
             // label11
             // 
@@ -526,10 +579,11 @@
             // 
             // txtPatronDateofBirth
             // 
+            this.txtPatronDateofBirth.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txtPatronDateofBirth.Location = new System.Drawing.Point(194, 145);
             this.txtPatronDateofBirth.Name = "txtPatronDateofBirth";
             this.txtPatronDateofBirth.Size = new System.Drawing.Size(200, 20);
-            this.txtPatronDateofBirth.TabIndex = 2;
+            this.txtPatronDateofBirth.TabIndex = 3;
             // 
             // label10
             // 
@@ -581,35 +635,35 @@
             this.txtPatronZip.Location = new System.Drawing.Point(194, 324);
             this.txtPatronZip.Name = "txtPatronZip";
             this.txtPatronZip.Size = new System.Drawing.Size(200, 20);
-            this.txtPatronZip.TabIndex = 1;
+            this.txtPatronZip.TabIndex = 8;
             // 
             // txtPatronState
             // 
             this.txtPatronState.Location = new System.Drawing.Point(194, 287);
             this.txtPatronState.Name = "txtPatronState";
             this.txtPatronState.Size = new System.Drawing.Size(200, 20);
-            this.txtPatronState.TabIndex = 1;
+            this.txtPatronState.TabIndex = 7;
             // 
             // txtPatronCity
             // 
             this.txtPatronCity.Location = new System.Drawing.Point(194, 254);
             this.txtPatronCity.Name = "txtPatronCity";
             this.txtPatronCity.Size = new System.Drawing.Size(200, 20);
-            this.txtPatronCity.TabIndex = 5;
+            this.txtPatronCity.TabIndex = 6;
             // 
             // txtPatronAddress
             // 
             this.txtPatronAddress.Location = new System.Drawing.Point(194, 219);
             this.txtPatronAddress.Name = "txtPatronAddress";
             this.txtPatronAddress.Size = new System.Drawing.Size(200, 20);
-            this.txtPatronAddress.TabIndex = 4;
+            this.txtPatronAddress.TabIndex = 5;
             // 
             // txtPatronPhone
             // 
             this.txtPatronPhone.Location = new System.Drawing.Point(194, 183);
             this.txtPatronPhone.Name = "txtPatronPhone";
             this.txtPatronPhone.Size = new System.Drawing.Size(200, 20);
-            this.txtPatronPhone.TabIndex = 3;
+            this.txtPatronPhone.TabIndex = 4;
             // 
             // txtPatronName
             // 
@@ -636,54 +690,6 @@
             this.btnQuit.TabIndex = 27;
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
-            // 
-            // txtMediaNumCopies
-            // 
-            this.txtMediaNumCopies.Location = new System.Drawing.Point(661, 140);
-            this.txtMediaNumCopies.Name = "txtMediaNumCopies";
-            this.txtMediaNumCopies.Size = new System.Drawing.Size(200, 20);
-            this.txtMediaNumCopies.TabIndex = 31;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(508, 143);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(91, 13);
-            this.label17.TabIndex = 22;
-            this.label17.Text = "Copies Available: ";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(520, 178);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(69, 13);
-            this.label19.TabIndex = 44;
-            this.label19.Text = "Media Type: ";
-            // 
-            // txtMediaType
-            // 
-            this.txtMediaType.Location = new System.Drawing.Point(661, 175);
-            this.txtMediaType.Name = "txtMediaType";
-            this.txtMediaType.Size = new System.Drawing.Size(200, 20);
-            this.txtMediaType.TabIndex = 45;
-            // 
-            // txtPatronCardNum
-            // 
-            this.txtPatronCardNum.Location = new System.Drawing.Point(194, 108);
-            this.txtPatronCardNum.Name = "txtPatronCardNum";
-            this.txtPatronCardNum.Size = new System.Drawing.Size(200, 20);
-            this.txtPatronCardNum.TabIndex = 47;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(25, 111);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(109, 13);
-            this.label20.TabIndex = 46;
-            this.label20.Text = "Library Card Number: ";
             // 
             // Form1
             // 
@@ -757,18 +763,18 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtPatronRemoveName;
+        private System.Windows.Forms.TextBox txtRemovePatron;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button btnRemoveMedia;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAddMedia;
         private System.Windows.Forms.Button btnAddPatron;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox txtMediaType;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtMediaNumCopies;
         private System.Windows.Forms.TextBox txtPatronCardNum;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox txtMediaType;
 
     }
 }
