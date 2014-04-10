@@ -14,12 +14,14 @@ namespace Library
     {
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
-
+        private DataBaseReadWrite db;
         public Form1()
         {
             InitializeComponent();
             mediaSD = new SortedDictionary<uint, Media> { };
-            patronSD = new SortedDictionary<uint, Patron> { };
+            patronSD = new SortedDictionary<uint, Patron> { };            
+            db = new DataBaseReadWrite();
+            db.readPatron(ref patronSD);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -30,7 +32,7 @@ namespace Library
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             MessageBox.Show("closing");
-            //serialize and write dictionary to file
+            db.writePatron(patronSD);
             base.OnFormClosing(e);
         }
         /// <summary>
@@ -45,7 +47,8 @@ namespace Library
         /// </summary>
         private void displayPatrons()
         {
-            foreach (KeyValuePair<uint, Patron> p in this.patronSD)
+            txtDisplayPatron.Text = "";
+            foreach (KeyValuePair<uint, Patron> p in patronSD)
             {
                 txtDisplayPatron.Items.Add(p);
             }
@@ -108,8 +111,12 @@ namespace Library
         }
         private void saveNewMedia()
         {
-            Media m = new Media(txtMediaTitle.Text, int.Parse(txtMediaNumCopies.Text), );
 
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
 

@@ -6,7 +6,7 @@ namespace Library
 {
     public enum MediaType { DVD, VIDEO, BOOK };
     [Serializable]
-	public class Media
+	class Media
 	{
         
 		// ********************************* Variables ***************************************
@@ -79,6 +79,7 @@ namespace Library
 				CheckedOut = true;
 				Borrower = borrower;
 				--AvailableCopies;
+                borrower._currentChecked.Add(this.ID, this);
 			}
 		}
 
@@ -87,13 +88,14 @@ namespace Library
 		/// <summary>
 		/// Checks the book in, releases borrower
 		/// </summary>
-		public void CheckIn()
+		public void CheckIn(Patron borrower)
 		{
 			if (AvailableCopies < NumberOfCopies)
 			{
 				CheckedOut = false;
 				Borrower = null;//Patron.None;
 				++AvailableCopies;
+                borrower._currentChecked.Remove(this.ID);
 			}
 			else
 			{
@@ -107,7 +109,7 @@ namespace Library
         {
             return String.Format(_patronBorrower+ _borrower._name + _id + ID + _dateCheckedOut + dateCheckedOut.ToString() + _loanTime +
                 LoanTime.ToString()  + _numCopies + NumberOfCopies.ToString() + _availableCopies + AvailableCopies.ToString() + _title + 
-                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() + _newLine);
+                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() + _newline);
         }
 	}
 }

@@ -13,8 +13,8 @@ namespace Library
         //variables used to write data to a file
         private Stream mediaStream;
         private Stream patronStream;
-        private BinaryFormatter bf;
-        void readCatalog(SortedDictionary<uint, Media> m)
+        private BinaryFormatter bf = new BinaryFormatter();
+        public void readCatalog(ref SortedDictionary<uint, Media> m)
         {
             mediaStream = new FileStream("media.bin", FileMode.OpenOrCreate);
             try 
@@ -28,12 +28,12 @@ namespace Library
             
         }
 
-        void readPatron(SortedDictionary<uint, Patron> p)
+        public void readPatron(ref SortedDictionary<uint, Patron> p)
         {
             patronStream = new FileStream("patron.bin", FileMode.OpenOrCreate);
             try
             {
-                p = (SortedDictionary<uint, Patron>)bf.Deserialize(mediaStream);
+                p = (SortedDictionary<uint, Patron>)bf.Deserialize(patronStream);
             }
             catch
             {
@@ -44,11 +44,13 @@ namespace Library
         /// Pre-Condition - a sorted dictionary of all media is passed in
         /// Post-Condition - the data is serialized and written to a file
         /// </summary>
-        void writeCatalog(SortedDictionary<uint,Media> m)
+        public void writeCatalog(SortedDictionary<uint,Media> m)
         {
             try
             {
+                
                 bf.Serialize(mediaStream, m);
+                mediaStream.Flush();
                 mediaStream.Close();
             }
             catch (Exception ex)
@@ -61,11 +63,11 @@ namespace Library
         /// Pre-Condition - a sorted dictionary of all patrons is passed in
         /// Post-Condition - the data is serialized and written to a file 
         /// </summary>
-        void writePatron(SortedDictionary<uint, Patron> p)
+        public void writePatron(SortedDictionary<uint, Patron> p)
         {
             try
             {
-                bf.Serialize(patronStream, p);
+                bf.Serialize(patronStream, p,null);                
                 patronStream.Close();
             }
             catch (Exception ex)
