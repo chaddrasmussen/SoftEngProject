@@ -9,7 +9,7 @@ namespace Library
     /// Class Patron
     /// </summary>
     [Serializable]
-    class Patron : object
+    public class Patron : object
     {
         public string _name { get; set; }
         public string _address { get; set; }
