@@ -11,19 +11,27 @@ namespace Library
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
         private Media m;
+        DataBaseReadWrite db = new DataBaseReadWrite();
         public Form1()
         {
             InitializeComponent();
             mediaSD = new SortedDictionary<uint, Media> { };
             patronSD = new SortedDictionary<uint, Patron> { };
             txtMediaType.SelectedIndex = 0;
+            db.readCatalog(ref mediaSD);
+            db.readPatron(ref patronSD);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-
+        protected override void OnClosed(EventArgs e)
+        {
+            db.writeCatalog(mediaSD);
+            db.writePatron(patronSD);
+            base.OnClosed(e);
+        }
         /// <summary>
         /// Purpose: to display all patrons
         /// </summary>

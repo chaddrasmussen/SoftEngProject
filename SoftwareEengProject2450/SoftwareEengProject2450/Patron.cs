@@ -62,7 +62,7 @@ namespace Library
                 return false;
             }
             validator = new Regex(@"^\d{5}$");
-            if (!validator.Match(state).Success)
+            if (!validator.Match(zip).Success)
             {
                 MessageBox.Show(zip + "was an invalid entry for zip code. Please try again.");
                 return false;
