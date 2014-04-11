@@ -70,8 +70,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.txtMediaTitle = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtMediaNumCopies = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -363,8 +361,6 @@
             this.tabAddRemovePatron.Controls.Add(this.label18);
             this.tabAddRemovePatron.Controls.Add(this.txtMediaTitle);
             this.tabAddRemovePatron.Controls.Add(this.label13);
-            this.tabAddRemovePatron.Controls.Add(this.label17);
-            this.tabAddRemovePatron.Controls.Add(this.txtMediaNumCopies);
             this.tabAddRemovePatron.Controls.Add(this.label11);
             this.tabAddRemovePatron.Controls.Add(this.label12);
             this.tabAddRemovePatron.Controls.Add(this.label5);
@@ -393,11 +389,12 @@
             // 
             this.txtMediaType.FormattingEnabled = true;
             this.txtMediaType.Items.AddRange(new object[] {
-            "CHILDBOOK",
+            "NONE",
             "ADULTBOOK",
+            "CHILDBOOK",
             "DVD",
             "VIDEO"});
-            this.txtMediaType.Location = new System.Drawing.Point(661, 175);
+            this.txtMediaType.Location = new System.Drawing.Point(661, 142);
             this.txtMediaType.Name = "txtMediaType";
             this.txtMediaType.Size = new System.Drawing.Size(200, 21);
             this.txtMediaType.TabIndex = 12;
@@ -421,7 +418,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(530, 175);
+            this.label19.Location = new System.Drawing.Point(530, 142);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(69, 13);
             this.label19.TabIndex = 44;
@@ -447,12 +444,13 @@
             // 
             // btnAddMedia
             // 
-            this.btnAddMedia.Location = new System.Drawing.Point(661, 213);
+            this.btnAddMedia.Location = new System.Drawing.Point(661, 180);
             this.btnAddMedia.Name = "btnAddMedia";
             this.btnAddMedia.Size = new System.Drawing.Size(200, 23);
             this.btnAddMedia.TabIndex = 13;
             this.btnAddMedia.Text = "Add Media";
             this.btnAddMedia.UseVisualStyleBackColor = true;
+            this.btnAddMedia.Click += new System.EventHandler(this.btnAddMedia_Click);
             // 
             // btnAddPatron
             // 
@@ -531,22 +529,6 @@
             this.label13.Size = new System.Drawing.Size(33, 13);
             this.label13.TabIndex = 29;
             this.label13.Text = "Title: ";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(508, 143);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(91, 13);
-            this.label17.TabIndex = 22;
-            this.label17.Text = "Copies Available: ";
-            // 
-            // txtMediaNumCopies
-            // 
-            this.txtMediaNumCopies.Location = new System.Drawing.Point(661, 140);
-            this.txtMediaNumCopies.Name = "txtMediaNumCopies";
-            this.txtMediaNumCopies.Size = new System.Drawing.Size(200, 20);
-            this.txtMediaNumCopies.TabIndex = 11;
             // 
             // label11
             // 
@@ -640,6 +622,7 @@
             // txtPatronState
             // 
             this.txtPatronState.Location = new System.Drawing.Point(194, 287);
+            this.txtPatronState.MaxLength = 2;
             this.txtPatronState.Name = "txtPatronState";
             this.txtPatronState.Size = new System.Drawing.Size(200, 20);
             this.txtPatronState.TabIndex = 7;
@@ -690,6 +673,7 @@
             this.btnQuit.TabIndex = 27;
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // Form1
             // 
@@ -770,8 +754,6 @@
         private System.Windows.Forms.Button btnAddMedia;
         private System.Windows.Forms.Button btnAddPatron;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtMediaNumCopies;
         private System.Windows.Forms.TextBox txtPatronCardNum;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox txtMediaType;

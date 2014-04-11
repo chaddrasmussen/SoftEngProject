@@ -1,45 +1,61 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Windows.Forms;
 namespace Library
 {
-    public enum MediaType { CHILDBOOK, ADULTBOOK, DVD, VIDEO };
+    public enum MediaType {ADULTBOOK, CHILDBOOK, DVD, VIDEO };
     [Serializable]
 	public class Media
 	{
         
 		// ********************************* Variables ***************************************
-        //enum media type
-		
-        public static string _dateCheckedOut = "\nDate Checked Out: ";
-        public static string _loanTime = "\nLoan Tine: ";
-        public static string _numCopies = "\nNumber of Copies: ";
-        public static string _availableCopies = "\nAvailable Copies";
+ 
         public static string _id = "\nID Number: ";
         public static string _title = "\nTitle: ";
-        public static string _checkedOut = "\nCurrently Checked Out? ";
-        public static string _overdue = "\nOverdue? ";
-        public static string _newline = "\n";
-        public static string _patronBorrower = "\nBorrower: ";
+     
 		// ******************************** Properties ***************************************
         private Patron _borrower;
-        //private TimeSpan loanTime;
 		public static uint UniqueTitleCount { get; private set; }
         private MediaType mType;
         public MediaType Mtype {get { return mType; }}
         public DateTime dateCheckedOut { get; set; }
-        private uint loanTime;
-		public uint NumberOfCopies { get; private set; }
-		public uint AvailableCopies { get; private set; }
+        private TimeSpan loanTime;
 		public uint ID { get; private set; }
 		public string Title { get; private set; }
 		public bool CheckedOut { get; private set; }
-		public bool Overdue { get; set; }
-        private const uint MAX_CHILD_LOAN = 7;
-        private const uint MAX_ADULT_LOAN = 14;
-        private const uint MAX_DVD_LOAN = 2;
-        private const uint MAX_VIDEO_LOAN = 3;
+        private TimeSpan MAX_CHILD_LOAN = new TimeSpan(7, 0, 0, 0);
+        private TimeSpan MAX_ADULT_LOAN = new TimeSpan(14, 0, 0, 0);
+        private TimeSpan MAX_DVD_LOAN = new TimeSpan(2, 0, 0, 0);
+        private TimeSpan MAX_VIDEO_LOAN = new TimeSpan(3, 0, 0, 0);
+        private bool overdue;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date">Datetime - from GUI</param>
+        /// <returns>bool</returns>
+        public bool Overdue(DateTime date)
+        {
+            TimeSpan diff = date - dateCheckedOut;
+            if (this.mType == MediaType.ADULTBOOK && diff >= MAX_ADULT_LOAN)
+            {
+                return true;
+            }
+            if (this.mType == MediaType.CHILDBOOK && diff >= MAX_CHILD_LOAN)
+            {
+                return true;
+            }
+            if (this.mType == MediaType.DVD && diff >= MAX_DVD_LOAN)
+            {
+                return true;
+            }
+            if (this.mType == MediaType.VIDEO && diff >= MAX_VIDEO_LOAN)
+            {
+                return true;
+            }
+            return false;
+        }
+      
 		public Patron Borrower
 		{
 			get { return _borrower; }
@@ -59,20 +75,27 @@ namespace Library
 		// ******************************* Constructors **************************************
 
 		public Media() { }
-
-		public Media(string title, uint numberOfCopies, MediaType mType)
+        /// <summary>
+        /// Parameterized Constructor
+        /// </summary>
+        /// <param name="title">string</param>
+        /// <param name="numberOfCopies">uint</param>
+        /// <param name="mType">MediaType</param>
+		public Media(string title, MediaType mType)
 		{
 			Title = title;
             setLoanTime(mType);
-			CheckedOut = false;
-			NumberOfCopies = numberOfCopies;
-			AvailableCopies = numberOfCopies;
+            CheckedOut = false;
 			ID = ++ID;
 			++UniqueTitleCount;
             this.mType = mType;
 		}
 
 		// ********************************* Methods *****************************************
+        /// <summary>
+        /// Set allowed loan time based on MediaType
+        /// </summary>
+        /// <param name="mt">MediaType</param>
         public void setLoanTime(MediaType mt)
         {
             if (mt == MediaType.CHILDBOOK)
@@ -92,7 +115,7 @@ namespace Library
                 loanTime = MAX_VIDEO_LOAN;
             }
         }
-        public uint getLoanTime()
+        public TimeSpan getLoanTime()
         {
             return loanTime;
         }
@@ -102,12 +125,15 @@ namespace Library
 		/// <param name="borrower">Patron borrowing the media</param>
 		public void CheckOut(Patron borrower)
 		{
-			if (AvailableCopies > 0)
-			{
-				CheckedOut = true;
-				Borrower = borrower;
-				--AvailableCopies;
-			}
+          //call checkout from patron, which needs to check age for eligibility
+            //has patron already checked maximum number of items?
+            //is book already checked out?
+            if (this.CheckedOut == true)
+            {
+                MessageBox.Show("Sorry, the requested media item is already checked out.");
+            }
+            this.CheckedOut = true;
+            borrower.addMedia(this, this.ID);
 		}
 
 		// *********************************************************
@@ -117,25 +143,16 @@ namespace Library
 		/// </summary>
 		public void CheckIn()
 		{
-			if (AvailableCopies < NumberOfCopies)
-			{
-				CheckedOut = false;
-				Borrower = null;//Patron.None;
-				++AvailableCopies;
-			}
-			else
-			{
-				throw new Exception("Available copies are already at their max.");
-			}
+            this.CheckedOut = false;
+            Borrower.removeMedia(this, this.ID);
 		}
 
 		// ***********************************************************************************
 
         public override string ToString()
         {
-            return String.Format(_patronBorrower+ _borrower._name + _id + ID + _dateCheckedOut + dateCheckedOut.ToString() + _loanTime +
-                loanTime.ToString()  + _numCopies + NumberOfCopies.ToString() + _availableCopies + AvailableCopies.ToString() + _title + 
-                Title + _checkedOut + CheckedOut.ToString() + _overdue + Overdue.ToString() +"\n");
+            return String.Format(_title+Title);
         }
+      
 	}
 }

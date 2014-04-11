@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Library
@@ -14,12 +10,13 @@ namespace Library
     {
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
-
+        private Media m;
         public Form1()
         {
             InitializeComponent();
             mediaSD = new SortedDictionary<uint, Media> { };
             patronSD = new SortedDictionary<uint, Patron> { };
+            txtMediaType.SelectedIndex = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,12 +24,6 @@ namespace Library
 
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            MessageBox.Show("closing");
-            //serialize and write dictionary to file
-            base.OnFormClosing(e);
-        }
         /// <summary>
         /// Purpose: to display all patrons
         /// </summary>
@@ -100,34 +91,60 @@ namespace Library
             {
                 string combinedAddress = string.Concat(txtPatronAddress.Text, " ,", txtPatronCity.Text, ", ", txtPatronState.Text, ", ", txtPatronZip.Text);
                 patronSD.Add(uint.Parse(txtPatronCardNum.Text), new Patron(txtPatronName.Text, uint.Parse(txtPatronCardNum.Text), combinedAddress, txtPatronPhone.Text, txtPatronDateofBirth.Value));
+                MessageBox.Show("Patron added successfully!");
             }
         }
-        private void btnAddMedia_Click()
+        private void btnAddMedia_Click(object sender, EventArgs e)
         {
             saveNewMedia();
         }
         private void saveNewMedia()
         {
-            Media m;
-            if (txtMediaType.SelectedValue.ToString() == MediaType.CHILDBOOK.ToString())
+            
+            if (validateMedia())
             {
-                m = new Media(txtMediaTitle.Text, uint.Parse(txtMediaNumCopies.Text), MediaType.CHILDBOOK);
+                if (txtMediaType.SelectedIndex == 1)
+                {
+                    m = new Media(txtMediaTitle.Text, MediaType.ADULTBOOK);
+                    mediaSD.Add(m.ID, m);
+                }
+                if (txtMediaType.SelectedIndex == 2)
+                {
+                    m = new Media(txtMediaTitle.Text, MediaType.CHILDBOOK);
+                    mediaSD.Add(m.ID, m);
+                }
+                if (txtMediaType.SelectedIndex == 3)
+                {
+                    m = new Media(txtMediaTitle.Text, MediaType.DVD);
+                    mediaSD.Add(m.ID, m);
+                }
+                if (txtMediaType.SelectedIndex == 4)
+                {
+                    m = new Media(txtMediaType.Text, MediaType.VIDEO);
+                    mediaSD.Add(m.ID, m);
+                }
+                MessageBox.Show("Media item added successfully.");
             }
-            if (txtMediaType.SelectedValue.ToString() == MediaType.ADULTBOOK.ToString())
-            {
-                m = new Media(txtMediaTitle.Text, uint.Parse(txtMediaNumCopies.Text), MediaType.ADULTBOOK);
-            }
-            if (txtMediaType.SelectedValue.ToString() == MediaType.DVD.ToString())
-            {
-                m = new Media(txtMediaTitle.Text, uint.Parse(txtMediaNumCopies.Text), MediaType.DVD);
-            }
-            if (txtMediaType.SelectedValue.ToString() == MediaType.VIDEO.ToString())
-            {
-                m = new Media(txtMediaType.Text, uint.Parse(txtMediaNumCopies.Text), MediaType.VIDEO);
-            }
-
+           
         }
-
+        private bool validateMedia()
+        {
+            if (string.IsNullOrEmpty(txtMediaTitle.Text))
+            {
+                MessageBox.Show("Please enter a title to add a book.");
+                return false;
+            }
+            if (txtMediaType.SelectedIndex == 0)
+            {
+                MessageBox.Show("Please choose a media type.");
+                return false;
+            }
+            return true;
+        }
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
     }
 }

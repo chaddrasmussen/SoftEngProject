@@ -27,19 +27,58 @@ namespace Library
         public uint _maxCheckouts { get; set; }
         public bool _overdueMedia { get; set; }
         private string noneChecked = "This patron does not have any checked-out books to be removed.";
-        public static string name = "\nName: ";
-        public static string address = "\nAddress: ";
-        public static string age = "\nAge: ";
-        public static string cardNumber = "\nCard Number";
-        public static string overdueMedia = "\nOverdue Media? ";
-        public static string maxCheckouts = "\nMaximum allowed checkouts: ";
-        public static string phoneNumber = "\nPhone Number: ";
-        public static string newLine = "\n";
-        
+        public static string nameDisplay = "\nName: ";
+        public static string cardNumberDisplay = "\nCard Number";
+
+        /// <summary>
+        /// Purpose: to validate patron info from GUI before saving new object
+        /// </summary>
+        /// <param name="name">string</param>
+        /// <param name="address">string</param>
+        /// <param name="city">string</param>
+        /// <param name="state">string</param>
+        /// <param name="zip">string</param>
+        /// <param name="phone">string</param>
+        /// <param name="cardNumber">string</param>
+        /// <returns></returns>
         public static bool validate(string name, string address, string city, string state, string zip, string phone, string cardNumber )
         {
-           // validator = new Regex(@"[A-Z|a-z|0-9|.|,|-|#|]");
-
+            validator = new Regex(@"((\d{1,6}\-\d{1,6})|(\d{1,6}\\\d{1,6})|(\d{1,6})(\/)(\d{1,6})|(\w{1}\-?\d{1,6})|(\w{1}\s\d{1,6})|((P\.?O\.?\s)((BOX)|(Box))(\s\d{1,6}))|((([R]{2})|([H][C]))(\s\d{1,6}\s)((BOX)|(Box))(\s\d{1,6}))?)$");
+           if (!validator.Match(address).Success)
+           {
+               MessageBox.Show(address+" was an invalid entry for address. Please try again.");
+               return false;
+           }
+           validator = new Regex(@"^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$");
+            if (!validator.Match(city).Success)
+            {
+                MessageBox.Show(city + "was an invalid entry for city. Please try again.");
+                return false;
+            }
+            validator = new Regex("[A-Z]{2}");
+            if (!validator.Match(state).Success)
+            {
+                MessageBox.Show(state + "was an invalid entry for state. Please try again.");
+                return false;
+            }
+            validator = new Regex(@"^\d{5}$");
+            if (!validator.Match(state).Success)
+            {
+                MessageBox.Show(zip + "was an invalid entry for zip code. Please try again.");
+                return false;
+            }
+            validator = new Regex(@"^(?:\([2-9]\d{2}\)\ ?|[2-9]\d{2}(?:\-?|\ ?))[2-9]\d{2}[- ]?\d{4}$");
+            if (!validator.Match(phone).Success)
+            {
+                MessageBox.Show(phone + "was an invalid entry for phone number. Please try again.");
+                return false;
+            }
+            validator = new Regex("[0-9]+");
+            if (!validator.Match(cardNumber).Success)
+            {
+                MessageBox.Show(cardNumber + "was an invalid entry for card number. Please try again.");
+                return false;
+            }
             return true;
         }
         public SortedDictionary<uint, Media> _currentChecked { get; set; }
@@ -111,8 +150,7 @@ namespace Library
         }
         public override string ToString()
         {
-            return String.Format(name + _name + cardNumber + _cardNumber + address + _address + phoneNumber + _phoneNumber + age + _birthday.ToString() + overdueMedia +
-                _overdueMedia.ToString() + maxCheckouts + _maxCheckouts.ToString() + newLine);
+            return String.Format(nameDisplay + _name + cardNumberDisplay + CardNumber);
         }
 
     }
