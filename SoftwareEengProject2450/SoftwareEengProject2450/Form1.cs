@@ -167,8 +167,7 @@ namespace Library
             else
             {
                 MessageBox.Show("Please enter a valid library card number");
-            }
-            
+            }            
         }
 
         private void btnRemoveMedia_Click(object sender, EventArgs e)
