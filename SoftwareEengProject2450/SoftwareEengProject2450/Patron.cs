@@ -150,7 +150,7 @@ namespace Library
         }
         public override string ToString()
         {
-            return String.Format(nameDisplay + _name + cardNumberDisplay + CardNumber);
+            return String.Format(nameDisplay + ": " + _name + '\n' + cardNumberDisplay + ": " + CardNumber + '\n');
         }
 
     }
