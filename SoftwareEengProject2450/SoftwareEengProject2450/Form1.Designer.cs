@@ -432,6 +432,7 @@
             this.btnRemoveMedia.TabIndex = 17;
             this.btnRemoveMedia.Text = "Remove Media";
             this.btnRemoveMedia.UseVisualStyleBackColor = true;
+            this.btnRemoveMedia.Click += new System.EventHandler(this.btnRemoveMedia_Click);
             // 
             // btnRemove
             // 
