@@ -170,5 +170,19 @@ namespace Library
             
         }
 
+        private void btnRemoveMedia_Click(object sender, EventArgs e)
+        {
+            uint mediaID;
+            if (uint.TryParse(txtMediaRemoveID.Text, out mediaID))
+            {
+                mediaSD.Remove(mediaID);
+                MessageBox.Show("removed");
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid media ID number");
+            }
+        }
+
     }
 }
