@@ -37,6 +37,7 @@ namespace Library
         /// </summary>
         private void btnDisplayAllPatrons_Click(object sender, EventArgs e)
         {
+            txtDisplayPatron.Items.Clear();
             displayPatrons();
         }
         /// <summary>
@@ -46,7 +47,7 @@ namespace Library
         {
             foreach (KeyValuePair<uint, Patron> p in this.patronSD)
             {
-                txtDisplayPatron.Items.Add(p);
+                txtDisplayPatron.Items.Add(p.Value.ToString());
             }
         }
         /// <summary>
@@ -152,6 +153,21 @@ namespace Library
         private void btnQuit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            uint cardNumber;
+            if(uint.TryParse(txtRemovePatron.Text,out cardNumber))
+            {
+                patronSD.Remove(cardNumber);
+                MessageBox.Show("removed");
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid library card number");
+            }
+            
         }
 
     }
