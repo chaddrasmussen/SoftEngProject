@@ -185,5 +185,15 @@ namespace Library
             }
         }
 
+        private void btnClearGUI_Click(object sender, EventArgs e)
+        {
+            txtDisplayChickInOut.Clear();
+            txtDisplayMedia.ClearSelected();
+            txtDisplayPatron.ClearSelected();
+            txtSearchMedia.Clear();
+            txtSearchPatron.Clear();
+            dateTimePicker.Value = DateTime.Today;
+        }
+
     }
 }

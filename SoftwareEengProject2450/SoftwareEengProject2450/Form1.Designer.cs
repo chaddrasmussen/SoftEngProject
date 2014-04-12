@@ -87,6 +87,8 @@
             this.txtPatronName = new System.Windows.Forms.TextBox();
             this.lblpatronName = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
+            this.btnDeselect = new System.Windows.Forms.Button();
+            this.btnClearGUI = new System.Windows.Forms.Button();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -106,6 +108,8 @@
             // 
             // tabLibraryMain
             // 
+            this.tabLibraryMain.Controls.Add(this.btnClearGUI);
+            this.tabLibraryMain.Controls.Add(this.btnDeselect);
             this.tabLibraryMain.Controls.Add(this.txtDisplayMedia);
             this.tabLibraryMain.Controls.Add(this.txtDisplayPatron);
             this.tabLibraryMain.Controls.Add(this.btnViewChkedPerPatron);
@@ -678,6 +682,25 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
+            // btnDeselect
+            // 
+            this.btnDeselect.Location = new System.Drawing.Point(695, 308);
+            this.btnDeselect.Name = "btnDeselect";
+            this.btnDeselect.Size = new System.Drawing.Size(267, 23);
+            this.btnDeselect.TabIndex = 30;
+            this.btnDeselect.Text = "Deselect";
+            this.btnDeselect.UseVisualStyleBackColor = true;
+            // 
+            // btnClearGUI
+            // 
+            this.btnClearGUI.Location = new System.Drawing.Point(695, 337);
+            this.btnClearGUI.Name = "btnClearGUI";
+            this.btnClearGUI.Size = new System.Drawing.Size(267, 23);
+            this.btnClearGUI.TabIndex = 30;
+            this.btnClearGUI.Text = "Clear All";
+            this.btnClearGUI.UseVisualStyleBackColor = true;
+            this.btnClearGUI.Click += new System.EventHandler(this.btnClearGUI_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -760,6 +783,8 @@
         private System.Windows.Forms.TextBox txtPatronCardNum;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox txtMediaType;
+        private System.Windows.Forms.Button btnClearGUI;
+        private System.Windows.Forms.Button btnDeselect;
 
     }
 }
