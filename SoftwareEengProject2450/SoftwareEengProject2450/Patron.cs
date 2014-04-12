@@ -67,7 +67,7 @@ namespace Library
                 MessageBox.Show(zip + "was an invalid entry for zip code. Please try again.");
                 return false;
             }
-            validator = new Regex(@"^(?:\([2-9]\d{2}\)\ ?|[2-9]\d{2}(?:\-?|\ ?))[2-9]\d{2}[- ]?\d{4}$");
+            validator = new Regex(@"^(?:\([1-9]\d{2}\)\ ?|[1-9]\d{2}(?:\-?|\ ?))[1-9]\d{2}[- ]?\d{4}$");
             if (!validator.Match(phone).Success)
             {
                 MessageBox.Show(phone + "was an invalid entry for phone number. Please try again.");
