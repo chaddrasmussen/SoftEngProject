@@ -187,8 +187,8 @@ namespace Library
         private void btnClearGUI_Click(object sender, EventArgs e)
         {
             txtDisplayChickInOut.Clear();
-            txtDisplayMedia.ClearSelected();
-            txtDisplayPatron.ClearSelected();
+            txtDisplayMedia.Items.Clear();
+            txtDisplayPatron.Items.Clear();
             txtSearchMedia.Clear();
             txtSearchPatron.Clear();
             dateTimePicker.Value = DateTime.Today;
