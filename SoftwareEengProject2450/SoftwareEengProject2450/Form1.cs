@@ -11,7 +11,7 @@ namespace Library
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
         private Media m;
-        DataBaseReadWrite db = new DataBaseReadWrite();
+        DataBaseReadWrite db = new DataBaseReadWrite("patron.bin","media.bin");
         public Form1()
         {
             InitializeComponent();

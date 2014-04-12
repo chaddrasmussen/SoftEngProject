@@ -8,15 +8,23 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 namespace Library
 {
-    class DataBaseReadWrite
+    public class DataBaseReadWrite
     {
         //variables used to write data to a file
         private Stream mediaStream;
         private Stream patronStream;
         private BinaryFormatter bf = new BinaryFormatter();
+        public string mediaFile { get; set; }
+        public string patronFile { get; set; }
+        
+        public DataBaseReadWrite(string p,string m)
+        {
+            mediaFile = m;
+            patronFile = p;
+        }
         public void readCatalog(ref SortedDictionary<uint, Media> m)
         {
-            mediaStream = new FileStream("media.bin", FileMode.OpenOrCreate);
+            mediaStream = new FileStream(mediaFile, FileMode.OpenOrCreate);
             try 
             { 
                 m = (SortedDictionary<uint,Media>)bf.Deserialize(mediaStream);
@@ -30,7 +38,7 @@ namespace Library
 
         public void readPatron(ref SortedDictionary<uint, Patron> p)
         {
-            patronStream = new FileStream("patron.bin", FileMode.OpenOrCreate);
+            patronStream = new FileStream(patronFile, FileMode.OpenOrCreate);
             try
             {
                 p = (SortedDictionary<uint, Patron>)bf.Deserialize(patronStream);
@@ -47,7 +55,7 @@ namespace Library
         /// </summary>
         public void writeCatalog(SortedDictionary<uint,Media> m)
         {
-            mediaStream = new FileStream("media.bin", FileMode.Create);
+            mediaStream = new FileStream(mediaFile, FileMode.Create);
             try
             {
                 bf.Serialize(mediaStream, m);
@@ -65,7 +73,7 @@ namespace Library
         /// </summary>
         public void writePatron(SortedDictionary<uint, Patron> p)
         {
-            patronStream = new FileStream("patron.bin", FileMode.Create);
+            patronStream = new FileStream(patronFile, FileMode.Create);
             try
             {
                 bf.Serialize(patronStream, p);
