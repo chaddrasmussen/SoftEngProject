@@ -15,13 +15,6 @@ namespace LibraryUnitTests
         SortedDictionary<uint, Media> temp = new SortedDictionary<uint, Media>();
         SortedDictionary<uint, Patron> ptemp = new SortedDictionary<uint, Patron>();
 
-        [TestInitialize]
-        public void init()
-        {
-            File.Delete("patronTest.bin");
-            File.Delete("mediaTest.bin");
-        }
-
         [TestMethod]
         public void readEmptyTest()
         {
@@ -57,7 +50,7 @@ namespace LibraryUnitTests
             Assert.AreEqual(temp.Values.ToString(), mediaSD.Values.ToString());
             Assert.AreEqual(ptemp.Values.ToString(), patronSD.Values.ToString());
         }
-
+   
         [TestCleanup]
         public void end()
         {

@@ -167,8 +167,7 @@ namespace Library
             else
             {
                 MessageBox.Show("Please enter a valid library card number");
-            }
-            
+            }            
         }
 
         private void btnRemoveMedia_Click(object sender, EventArgs e)
@@ -188,8 +187,8 @@ namespace Library
         private void btnClearGUI_Click(object sender, EventArgs e)
         {
             txtDisplayChickInOut.Clear();
-            txtDisplayMedia.ClearSelected();
-            txtDisplayPatron.ClearSelected();
+            txtDisplayMedia.Items.Clear();
+            txtDisplayPatron.Items.Clear();
             txtSearchMedia.Clear();
             txtSearchPatron.Clear();
             dateTimePicker.Value = DateTime.Today;
