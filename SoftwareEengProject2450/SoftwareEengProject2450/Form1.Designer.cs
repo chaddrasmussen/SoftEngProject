@@ -87,6 +87,8 @@
             this.txtPatronName = new System.Windows.Forms.TextBox();
             this.lblpatronName = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
+            this.txtbxMediaID = new System.Windows.Forms.TextBox();
+            this.lblMediaID = new System.Windows.Forms.Label();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -345,6 +347,8 @@
             // 
             // tabAddRemovePatron
             // 
+            this.tabAddRemovePatron.Controls.Add(this.lblMediaID);
+            this.tabAddRemovePatron.Controls.Add(this.txtbxMediaID);
             this.tabAddRemovePatron.Controls.Add(this.txtMediaType);
             this.tabAddRemovePatron.Controls.Add(this.txtPatronCardNum);
             this.tabAddRemovePatron.Controls.Add(this.label20);
@@ -403,6 +407,7 @@
             // 
             this.txtPatronCardNum.Location = new System.Drawing.Point(194, 108);
             this.txtPatronCardNum.Name = "txtPatronCardNum";
+            this.txtPatronCardNum.ReadOnly = true;
             this.txtPatronCardNum.Size = new System.Drawing.Size(200, 20);
             this.txtPatronCardNum.TabIndex = 2;
             // 
@@ -446,7 +451,7 @@
             // 
             // btnAddMedia
             // 
-            this.btnAddMedia.Location = new System.Drawing.Point(661, 180);
+            this.btnAddMedia.Location = new System.Drawing.Point(661, 216);
             this.btnAddMedia.Name = "btnAddMedia";
             this.btnAddMedia.Size = new System.Drawing.Size(200, 23);
             this.btnAddMedia.TabIndex = 13;
@@ -677,11 +682,28 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
+            // txtbxMediaID
+            // 
+            this.txtbxMediaID.Location = new System.Drawing.Point(661, 183);
+            this.txtbxMediaID.Name = "txtbxMediaID";
+            this.txtbxMediaID.ReadOnly = true;
+            this.txtbxMediaID.Size = new System.Drawing.Size(200, 20);
+            this.txtbxMediaID.TabIndex = 28;
+            // 
+            // lblMediaID
+            // 
+            this.lblMediaID.AutoSize = true;
+            this.lblMediaID.Location = new System.Drawing.Point(530, 190);
+            this.lblMediaID.Name = "lblMediaID";
+            this.lblMediaID.Size = new System.Drawing.Size(56, 13);
+            this.lblMediaID.TabIndex = 47;
+            this.lblMediaID.Text = "Media ID: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1048, 624);
+            this.ClientSize = new System.Drawing.Size(1047, 624);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.tabControlLibrary);
             this.Name = "Form1";
@@ -759,6 +781,8 @@
         private System.Windows.Forms.TextBox txtPatronCardNum;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox txtMediaType;
+        private System.Windows.Forms.Label lblMediaID;
+        private System.Windows.Forms.TextBox txtbxMediaID;
 
     }
 }

@@ -10,6 +10,12 @@ namespace Library
     {
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
+        private uint[] patronID;
+        private uint[] mediaID;
+        const uint initialMediaID = 10000;
+        const uint initialPatronID = 10000;
+
+
         private Media m;
         DataBaseReadWrite db = new DataBaseReadWrite("patron.bin","media.bin");
         public Form1()
@@ -184,5 +190,9 @@ namespace Library
             }
         }
 
+        private void setKeys()
+        {
+
+        }
     }
 }
