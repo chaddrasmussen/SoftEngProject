@@ -261,11 +261,22 @@ namespace Library
             //{
             //    o[i] = txtDisplayCheckInOut.Items;
             //}
-            Patron p = (Patron)txtDisplayPatron.SelectedItem;
-            Media m = (Media)txtDisplayMedia.SelectedItem;
-            if (!p.overdueBooks(dateTimePicker.Value) && p.allowed(m))
+            if (txtDisplayPatron.SelectedIndex == -1)
             {
-                m.CheckOut(p, dateTimePicker.Value);
+                MessageBox.Show("Error: No patron selected");
+            }
+            if (txtDisplayMedia.SelectedIndex == -1)
+            {
+                MessageBox.Show("Error: No media selected");
+            }
+            else
+            {
+                Patron p = (Patron)txtDisplayPatron.SelectedItem;
+                Media m = (Media)txtDisplayMedia.SelectedItem;
+                if (!p.overdueBooks(dateTimePicker.Value) && p.allowed(m))
+                {
+                    m.CheckOut(p, dateTimePicker.Value);
+                }
             }
         }
 
