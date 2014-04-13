@@ -158,7 +158,7 @@ namespace Library
 
         public override string ToString()
         {
-            return String.Format(_title+Title + _author + Author + _checkedout + CheckedOut + "\n");
+            return String.Format(_title+Title+ _checkedout + CheckedOut + "\n");
         }
       //************************************************************
 
