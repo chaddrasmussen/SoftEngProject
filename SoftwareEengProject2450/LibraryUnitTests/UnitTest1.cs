@@ -15,13 +15,6 @@ namespace LibraryUnitTests
         SortedDictionary<uint, Media> temp = new SortedDictionary<uint, Media>();
         SortedDictionary<uint, Patron> ptemp = new SortedDictionary<uint, Patron>();
 
-        [TestInitialize]
-        public void init()
-        {
-            File.Delete("patronTest.bin");
-            File.Delete("mediaTest.bin");
-        }
-
         [TestMethod]
         public void readEmptyTest()
         {
@@ -34,7 +27,7 @@ namespace LibraryUnitTests
         {
             
             mediaSD.Add(1, new Media("title", MediaType.ADULTBOOK));
-            patronSD.Add(1, new Patron("Tester", 10023, "somewhere", "801-999-6666", DateTime.Today));
+            patronSD.Add(1, new Patron("Tester", 10023,"somewhere","801-999-6666", DateTime.Today));
             db.writeCatalog(mediaSD);
             db.writePatron(patronSD);
             
@@ -57,7 +50,7 @@ namespace LibraryUnitTests
             Assert.AreEqual(temp.Values.ToString(), mediaSD.Values.ToString());
             Assert.AreEqual(ptemp.Values.ToString(), patronSD.Values.ToString());
         }
-
+   
         [TestCleanup]
         public void end()
         {

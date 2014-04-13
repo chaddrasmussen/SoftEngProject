@@ -13,7 +13,8 @@ namespace Library
  
         public static string _id = "\nID Number: ";
         public static string _title = "\nTitle: ";
-     
+        public static string _author = " Author: ";
+        public static string _checkedout = " Checked Out? ";
 		// ******************************** Properties ***************************************
         private Patron _borrower;
 		public static uint UniqueTitleCount { get; private set; }
@@ -21,14 +22,16 @@ namespace Library
         public MediaType Mtype {get { return mType; }}
         public DateTime dateCheckedOut { get; set; }
         private TimeSpan loanTime;
-		public uint ID { get; private set; }
+        private uint id = 0;
+        public uint ID { get { return id; } set { id = value; } }
 		public string Title { get; private set; }
+        public string Author { get; private set; }
 		public bool CheckedOut { get; private set; }
         private TimeSpan MAX_CHILD_LOAN = new TimeSpan(7, 0, 0, 0);
         private TimeSpan MAX_ADULT_LOAN = new TimeSpan(14, 0, 0, 0);
         private TimeSpan MAX_DVD_LOAN = new TimeSpan(2, 0, 0, 0);
         private TimeSpan MAX_VIDEO_LOAN = new TimeSpan(3, 0, 0, 0);
-        private bool overdue;
+
         /// <summary>
         /// 
         /// </summary>
@@ -36,7 +39,7 @@ namespace Library
         /// <returns>bool</returns>
         public bool Overdue(DateTime date)
         {
-            TimeSpan diff = date - dateCheckedOut;
+            TimeSpan diff = date.Subtract(this.dateCheckedOut);
             if (this.mType == MediaType.ADULTBOOK && diff >= MAX_ADULT_LOAN)
             {
                 return true;
@@ -81,9 +84,10 @@ namespace Library
         /// <param name="title">string</param>
         /// <param name="numberOfCopies">uint</param>
         /// <param name="mType">MediaType</param>
-		public Media(string title, MediaType mType)
+		public Media(string title, string author, MediaType mType)
 		{
-			Title = title;
+            Title = title;
+            Author = author;
             setLoanTime(mType);
             CheckedOut = false;
 			ID = ++ID;
@@ -123,17 +127,20 @@ namespace Library
 		/// Checks the book out, assigns borrower
 		/// </summary>
 		/// <param name="borrower">Patron borrowing the media</param>
-		public void CheckOut(Patron borrower)
+		public void CheckOut(Patron borrower, DateTime dateChecked)
 		{
           //call checkout from patron, which needs to check age for eligibility
             //has patron already checked maximum number of items?
             //is book already checked out?
+            
             if (this.CheckedOut == true)
             {
                 MessageBox.Show("Sorry, the requested media item is already checked out.");
             }
             this.CheckedOut = true;
             borrower.addMedia(this, this.ID);
+            this.dateCheckedOut = dateChecked;
+            MessageBox.Show("Check out successful!");
 		}
 
 		// *********************************************************
@@ -151,8 +158,9 @@ namespace Library
 
         public override string ToString()
         {
-            return String.Format(_title+Title);
+            return String.Format(_title+Title + _author + Author + _checkedout + CheckedOut + "\n");
         }
-      
+      //************************************************************
+
 	}
 }

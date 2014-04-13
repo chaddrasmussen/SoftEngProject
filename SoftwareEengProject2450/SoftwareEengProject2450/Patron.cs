@@ -29,7 +29,7 @@ namespace Library
         private string noneChecked = "This patron does not have any checked-out books to be removed.";
         public static string nameDisplay = "\nName: ";
         public static string cardNumberDisplay = "\nCard Number";
-
+        private int ageThreshold = 18;
         /// <summary>
         /// Purpose: to validate patron info from GUI before saving new object
         /// </summary>
@@ -100,7 +100,7 @@ namespace Library
             _address = address;
             _phoneNumber = phoneNumber;
             _birthday = birthday;
-            if (getAge() >= 18)
+            if (getAge() >= ageThreshold)
             { 
                 _maxCheckouts = 6; 
             }
@@ -142,17 +142,43 @@ namespace Library
             _currentChecked.Remove(ID);
         }
         
-        public bool Overdue
+        public bool getOverdue(DateTime date)
         {
-            //if media.overdue = true, fines = true;
-            get { return _overdueMedia; }
-            set { _overdueMedia = value; }
+            foreach (KeyValuePair<uint, Media> mm in this._currentChecked)
+            {
+                if (mm.Value.Overdue(date) == true)
+                    _overdueMedia = true;
+                else
+                    _overdueMedia = false;
+            }
+            return _overdueMedia;
         }
         public override string ToString()
         {
-            return String.Format(nameDisplay + _name + cardNumberDisplay + CardNumber);
+            return String.Format(nameDisplay+ _name);
         }
-
+        public bool allowed(Media m)
+        {
+            if (getAge() < 18 && m.Mtype == MediaType.ADULTBOOK)
+            {
+                MessageBox.Show("Checkout not allowed due to age restriction on Adult Books.");
+                return false;
+            }
+            return true;
+        }
+        public bool overdueBooks(DateTime date)
+        {
+            bool overdue = false;
+            foreach (KeyValuePair<uint,Media> mm in this._currentChecked)
+            {
+                if (mm.Value.Overdue(date))
+                    overdue=  true;
+                else
+                    overdue =false;
+            }
+            return overdue;
+           
+        }
     }
 
 }

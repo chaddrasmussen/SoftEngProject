@@ -30,15 +30,19 @@
         {
             this.tabControlLibrary = new System.Windows.Forms.TabControl();
             this.tabLibraryMain = new System.Windows.Forms.TabPage();
+            this.btnCheckOut = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtDisplayCheckInOut = new System.Windows.Forms.ListBox();
+            this.btnClearGUI = new System.Windows.Forms.Button();
+            this.btnDeselect = new System.Windows.Forms.Button();
             this.txtDisplayMedia = new System.Windows.Forms.ListBox();
             this.txtDisplayPatron = new System.Windows.Forms.ListBox();
             this.btnViewChkedPerPatron = new System.Windows.Forms.Button();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnCheckInOut = new System.Windows.Forms.Button();
+            this.btnCheckIn = new System.Windows.Forms.Button();
             this.btnSelectMedia = new System.Windows.Forms.Button();
             this.btnSelectPatron = new System.Windows.Forms.Button();
-            this.txtDisplayChickInOut = new System.Windows.Forms.RichTextBox();
             this.btnDisplayAllMedia = new System.Windows.Forms.Button();
             this.txtSearchMedia = new System.Windows.Forms.TextBox();
             this.btnSearchMedia = new System.Windows.Forms.Button();
@@ -49,7 +53,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabListOverdue = new System.Windows.Forms.TabPage();
             this.btnDisplayOverdue = new System.Windows.Forms.Button();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeOverdue = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.displayOverdueMedia = new System.Windows.Forms.RichTextBox();
@@ -68,6 +72,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.txtRemovePatron = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.txtMediaAuthor = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.txtMediaTitle = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -87,8 +93,6 @@
             this.txtPatronName = new System.Windows.Forms.TextBox();
             this.lblpatronName = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.txtbxMediaID = new System.Windows.Forms.TextBox();
-            this.lblMediaID = new System.Windows.Forms.Label();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -108,15 +112,19 @@
             // 
             // tabLibraryMain
             // 
+            this.tabLibraryMain.Controls.Add(this.btnCheckOut);
+            this.tabLibraryMain.Controls.Add(this.label21);
+            this.tabLibraryMain.Controls.Add(this.txtDisplayCheckInOut);
+            this.tabLibraryMain.Controls.Add(this.btnClearGUI);
+            this.tabLibraryMain.Controls.Add(this.btnDeselect);
             this.tabLibraryMain.Controls.Add(this.txtDisplayMedia);
             this.tabLibraryMain.Controls.Add(this.txtDisplayPatron);
             this.tabLibraryMain.Controls.Add(this.btnViewChkedPerPatron);
             this.tabLibraryMain.Controls.Add(this.dateTimePicker);
             this.tabLibraryMain.Controls.Add(this.label2);
-            this.tabLibraryMain.Controls.Add(this.btnCheckInOut);
+            this.tabLibraryMain.Controls.Add(this.btnCheckIn);
             this.tabLibraryMain.Controls.Add(this.btnSelectMedia);
             this.tabLibraryMain.Controls.Add(this.btnSelectPatron);
-            this.tabLibraryMain.Controls.Add(this.txtDisplayChickInOut);
             this.tabLibraryMain.Controls.Add(this.btnDisplayAllMedia);
             this.tabLibraryMain.Controls.Add(this.txtSearchMedia);
             this.tabLibraryMain.Controls.Add(this.btnSearchMedia);
@@ -133,28 +141,77 @@
             this.tabLibraryMain.Text = "Library Main";
             this.tabLibraryMain.UseVisualStyleBackColor = true;
             // 
+            // btnCheckOut
+            // 
+            this.btnCheckOut.Location = new System.Drawing.Point(695, 297);
+            this.btnCheckOut.Name = "btnCheckOut";
+            this.btnCheckOut.Size = new System.Drawing.Size(267, 23);
+            this.btnCheckOut.TabIndex = 27;
+            this.btnCheckOut.Text = "Check Out";
+            this.btnCheckOut.UseVisualStyleBackColor = true;
+            this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(692, 74);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(159, 18);
+            this.label21.TabIndex = 31;
+            this.label21.Text = "Check In/Check Out";
+            // 
+            // txtDisplayCheckInOut
+            // 
+            this.txtDisplayCheckInOut.Location = new System.Drawing.Point(695, 106);
+            this.txtDisplayCheckInOut.Name = "txtDisplayCheckInOut";
+            this.txtDisplayCheckInOut.Size = new System.Drawing.Size(275, 147);
+            this.txtDisplayCheckInOut.TabIndex = 25;
+            // 
+            // btnClearGUI
+            // 
+            this.btnClearGUI.Location = new System.Drawing.Point(695, 355);
+            this.btnClearGUI.Name = "btnClearGUI";
+            this.btnClearGUI.Size = new System.Drawing.Size(267, 23);
+            this.btnClearGUI.TabIndex = 29;
+            this.btnClearGUI.Text = "Clear All";
+            this.btnClearGUI.UseVisualStyleBackColor = true;
+            this.btnClearGUI.Click += new System.EventHandler(this.btnClearGUI_Click);
+            // 
+            // btnDeselect
+            // 
+            this.btnDeselect.Enabled = false;
+            this.btnDeselect.Location = new System.Drawing.Point(695, 326);
+            this.btnDeselect.Name = "btnDeselect";
+            this.btnDeselect.Size = new System.Drawing.Size(267, 23);
+            this.btnDeselect.TabIndex = 28;
+            this.btnDeselect.Text = "Deselect";
+            this.btnDeselect.UseVisualStyleBackColor = true;
+            this.btnDeselect.Click += new System.EventHandler(this.btnDeselect_Click);
+            // 
             // txtDisplayMedia
             // 
             this.txtDisplayMedia.FormattingEnabled = true;
             this.txtDisplayMedia.Location = new System.Drawing.Point(354, 162);
             this.txtDisplayMedia.Name = "txtDisplayMedia";
             this.txtDisplayMedia.Size = new System.Drawing.Size(296, 264);
-            this.txtDisplayMedia.TabIndex = 29;
+            this.txtDisplayMedia.TabIndex = 22;
             // 
             // txtDisplayPatron
             // 
             this.txtDisplayPatron.FormattingEnabled = true;
             this.txtDisplayPatron.Location = new System.Drawing.Point(29, 162);
+            this.txtDisplayPatron.MultiColumn = true;
             this.txtDisplayPatron.Name = "txtDisplayPatron";
             this.txtDisplayPatron.Size = new System.Drawing.Size(296, 264);
-            this.txtDisplayPatron.TabIndex = 28;
+            this.txtDisplayPatron.TabIndex = 8;
             // 
             // btnViewChkedPerPatron
             // 
             this.btnViewChkedPerPatron.Location = new System.Drawing.Point(39, 437);
             this.btnViewChkedPerPatron.Name = "btnViewChkedPerPatron";
             this.btnViewChkedPerPatron.Size = new System.Drawing.Size(156, 23);
-            this.btnViewChkedPerPatron.TabIndex = 27;
+            this.btnViewChkedPerPatron.TabIndex = 10;
             this.btnViewChkedPerPatron.Text = "View Checked Out Media";
             this.btnViewChkedPerPatron.UseVisualStyleBackColor = true;
             this.btnViewChkedPerPatron.Click += new System.EventHandler(this.btnViewChkedPerPatron_Click);
@@ -165,7 +222,7 @@
             this.dateTimePicker.Location = new System.Drawing.Point(28, 38);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker.TabIndex = 26;
+            this.dateTimePicker.TabIndex = 1;
             // 
             // label2
             // 
@@ -177,14 +234,15 @@
             this.label2.TabIndex = 25;
             this.label2.Text = "Select Date";
             // 
-            // btnCheckInOut
+            // btnCheckIn
             // 
-            this.btnCheckInOut.Location = new System.Drawing.Point(695, 279);
-            this.btnCheckInOut.Name = "btnCheckInOut";
-            this.btnCheckInOut.Size = new System.Drawing.Size(267, 23);
-            this.btnCheckInOut.TabIndex = 24;
-            this.btnCheckInOut.Text = "CheckIn/Out";
-            this.btnCheckInOut.UseVisualStyleBackColor = true;
+            this.btnCheckIn.Location = new System.Drawing.Point(695, 268);
+            this.btnCheckIn.Name = "btnCheckIn";
+            this.btnCheckIn.Size = new System.Drawing.Size(267, 23);
+            this.btnCheckIn.TabIndex = 26;
+            this.btnCheckIn.Text = "Check In";
+            this.btnCheckIn.UseVisualStyleBackColor = true;
+            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
             // 
             // btnSelectMedia
             // 
@@ -194,24 +252,17 @@
             this.btnSelectMedia.TabIndex = 23;
             this.btnSelectMedia.Text = "Select";
             this.btnSelectMedia.UseVisualStyleBackColor = true;
+            this.btnSelectMedia.Click += new System.EventHandler(this.btnSelectMedia_Click);
             // 
             // btnSelectPatron
             // 
             this.btnSelectPatron.Location = new System.Drawing.Point(229, 437);
             this.btnSelectPatron.Name = "btnSelectPatron";
             this.btnSelectPatron.Size = new System.Drawing.Size(96, 23);
-            this.btnSelectPatron.TabIndex = 22;
+            this.btnSelectPatron.TabIndex = 13;
             this.btnSelectPatron.Text = "Select";
             this.btnSelectPatron.UseVisualStyleBackColor = true;
-            // 
-            // txtDisplayChickInOut
-            // 
-            this.txtDisplayChickInOut.Location = new System.Drawing.Point(695, 161);
-            this.txtDisplayChickInOut.Name = "txtDisplayChickInOut";
-            this.txtDisplayChickInOut.ReadOnly = true;
-            this.txtDisplayChickInOut.Size = new System.Drawing.Size(267, 96);
-            this.txtDisplayChickInOut.TabIndex = 21;
-            this.txtDisplayChickInOut.Text = "";
+            this.btnSelectPatron.Click += new System.EventHandler(this.btnSelectPatron_Click);
             // 
             // btnDisplayAllMedia
             // 
@@ -235,7 +286,7 @@
             this.btnSearchMedia.Location = new System.Drawing.Point(522, 132);
             this.btnSearchMedia.Name = "btnSearchMedia";
             this.btnSearchMedia.Size = new System.Drawing.Size(128, 23);
-            this.btnSearchMedia.TabIndex = 17;
+            this.btnSearchMedia.TabIndex = 20;
             this.btnSearchMedia.Text = "Search";
             this.btnSearchMedia.UseVisualStyleBackColor = true;
             // 
@@ -254,7 +305,7 @@
             this.btnDisplayAllPatrons.Location = new System.Drawing.Point(29, 131);
             this.btnDisplayAllPatrons.Name = "btnDisplayAllPatrons";
             this.btnDisplayAllPatrons.Size = new System.Drawing.Size(138, 23);
-            this.btnDisplayAllPatrons.TabIndex = 14;
+            this.btnDisplayAllPatrons.TabIndex = 6;
             this.btnDisplayAllPatrons.Text = "Display All";
             this.btnDisplayAllPatrons.UseVisualStyleBackColor = true;
             this.btnDisplayAllPatrons.Click += new System.EventHandler(this.btnDisplayAllPatrons_Click);
@@ -264,14 +315,14 @@
             this.txtSearchPatron.Location = new System.Drawing.Point(29, 105);
             this.txtSearchPatron.Name = "txtSearchPatron";
             this.txtSearchPatron.Size = new System.Drawing.Size(296, 20);
-            this.txtSearchPatron.TabIndex = 13;
+            this.txtSearchPatron.TabIndex = 5;
             // 
             // btnSearchPatron
             // 
             this.btnSearchPatron.Location = new System.Drawing.Point(197, 131);
             this.btnSearchPatron.Name = "btnSearchPatron";
             this.btnSearchPatron.Size = new System.Drawing.Size(128, 23);
-            this.btnSearchPatron.TabIndex = 12;
+            this.btnSearchPatron.TabIndex = 7;
             this.btnSearchPatron.Text = "Search";
             this.btnSearchPatron.UseVisualStyleBackColor = true;
             // 
@@ -288,7 +339,7 @@
             // tabListOverdue
             // 
             this.tabListOverdue.Controls.Add(this.btnDisplayOverdue);
-            this.tabListOverdue.Controls.Add(this.dateTimePicker2);
+            this.tabListOverdue.Controls.Add(this.dateTimeOverdue);
             this.tabListOverdue.Controls.Add(this.label4);
             this.tabListOverdue.Controls.Add(this.label3);
             this.tabListOverdue.Controls.Add(this.displayOverdueMedia);
@@ -308,13 +359,15 @@
             this.btnDisplayOverdue.TabIndex = 29;
             this.btnDisplayOverdue.Text = "Go!";
             this.btnDisplayOverdue.UseVisualStyleBackColor = true;
+            this.btnDisplayOverdue.Click += new System.EventHandler(this.btnDisplayOverdue_Click);
             // 
-            // dateTimePicker2
+            // dateTimeOverdue
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(142, 55);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 28;
+            this.dateTimeOverdue.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimeOverdue.Location = new System.Drawing.Point(142, 55);
+            this.dateTimeOverdue.Name = "dateTimeOverdue";
+            this.dateTimeOverdue.Size = new System.Drawing.Size(200, 20);
+            this.dateTimeOverdue.TabIndex = 28;
             // 
             // label4
             // 
@@ -347,8 +400,6 @@
             // 
             // tabAddRemovePatron
             // 
-            this.tabAddRemovePatron.Controls.Add(this.lblMediaID);
-            this.tabAddRemovePatron.Controls.Add(this.txtbxMediaID);
             this.tabAddRemovePatron.Controls.Add(this.txtMediaType);
             this.tabAddRemovePatron.Controls.Add(this.txtPatronCardNum);
             this.tabAddRemovePatron.Controls.Add(this.label20);
@@ -363,6 +414,8 @@
             this.tabAddRemovePatron.Controls.Add(this.label16);
             this.tabAddRemovePatron.Controls.Add(this.txtRemovePatron);
             this.tabAddRemovePatron.Controls.Add(this.label18);
+            this.tabAddRemovePatron.Controls.Add(this.txtMediaAuthor);
+            this.tabAddRemovePatron.Controls.Add(this.label17);
             this.tabAddRemovePatron.Controls.Add(this.txtMediaTitle);
             this.tabAddRemovePatron.Controls.Add(this.label13);
             this.tabAddRemovePatron.Controls.Add(this.label11);
@@ -398,7 +451,7 @@
             "CHILDBOOK",
             "DVD",
             "VIDEO"});
-            this.txtMediaType.Location = new System.Drawing.Point(661, 142);
+            this.txtMediaType.Location = new System.Drawing.Point(661, 182);
             this.txtMediaType.Name = "txtMediaType";
             this.txtMediaType.Size = new System.Drawing.Size(200, 21);
             this.txtMediaType.TabIndex = 12;
@@ -407,7 +460,6 @@
             // 
             this.txtPatronCardNum.Location = new System.Drawing.Point(194, 108);
             this.txtPatronCardNum.Name = "txtPatronCardNum";
-            this.txtPatronCardNum.ReadOnly = true;
             this.txtPatronCardNum.Size = new System.Drawing.Size(200, 20);
             this.txtPatronCardNum.TabIndex = 2;
             // 
@@ -423,7 +475,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(530, 142);
+            this.label19.Location = new System.Drawing.Point(530, 182);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(69, 13);
             this.label19.TabIndex = 44;
@@ -520,6 +572,22 @@
             this.label18.Size = new System.Drawing.Size(109, 13);
             this.label18.TabIndex = 34;
             this.label18.Text = "Library Card Number: ";
+            // 
+            // txtMediaAuthor
+            // 
+            this.txtMediaAuthor.Location = new System.Drawing.Point(661, 144);
+            this.txtMediaAuthor.Name = "txtMediaAuthor";
+            this.txtMediaAuthor.Size = new System.Drawing.Size(200, 20);
+            this.txtMediaAuthor.TabIndex = 11;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(558, 151);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(41, 13);
+            this.label17.TabIndex = 29;
+            this.label17.Text = "Author:";
             // 
             // txtMediaTitle
             // 
@@ -682,28 +750,11 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
-            // txtbxMediaID
-            // 
-            this.txtbxMediaID.Location = new System.Drawing.Point(661, 183);
-            this.txtbxMediaID.Name = "txtbxMediaID";
-            this.txtbxMediaID.ReadOnly = true;
-            this.txtbxMediaID.Size = new System.Drawing.Size(200, 20);
-            this.txtbxMediaID.TabIndex = 28;
-            // 
-            // lblMediaID
-            // 
-            this.lblMediaID.AutoSize = true;
-            this.lblMediaID.Location = new System.Drawing.Point(530, 190);
-            this.lblMediaID.Name = "lblMediaID";
-            this.lblMediaID.Size = new System.Drawing.Size(56, 13);
-            this.lblMediaID.TabIndex = 47;
-            this.lblMediaID.Text = "Media ID: ";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 624);
+            this.ClientSize = new System.Drawing.Size(1048, 624);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.tabControlLibrary);
             this.Name = "Form1";
@@ -726,10 +777,9 @@
         private System.Windows.Forms.TabPage tabLibraryMain;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnCheckInOut;
+        private System.Windows.Forms.Button btnCheckIn;
         private System.Windows.Forms.Button btnSelectMedia;
         private System.Windows.Forms.Button btnSelectPatron;
-        private System.Windows.Forms.RichTextBox txtDisplayChickInOut;
         private System.Windows.Forms.Button btnDisplayAllMedia;
         private System.Windows.Forms.TextBox txtSearchMedia;
         private System.Windows.Forms.Button btnSearchMedia;
@@ -742,7 +792,7 @@
         private System.Windows.Forms.TabPage tabAddRemovePatron;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.Button btnDisplayOverdue;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimeOverdue;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox displayOverdueMedia;
@@ -781,8 +831,13 @@
         private System.Windows.Forms.TextBox txtPatronCardNum;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox txtMediaType;
-        private System.Windows.Forms.Label lblMediaID;
-        private System.Windows.Forms.TextBox txtbxMediaID;
+        private System.Windows.Forms.Button btnClearGUI;
+        private System.Windows.Forms.Button btnDeselect;
+        private System.Windows.Forms.TextBox txtMediaAuthor;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ListBox txtDisplayCheckInOut;
+        private System.Windows.Forms.Button btnCheckOut;
+        private System.Windows.Forms.Label label21;
 
     }
 }

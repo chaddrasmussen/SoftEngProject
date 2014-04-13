@@ -10,12 +10,6 @@ namespace Library
     {
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
-        private uint[] patronID;
-        private uint[] mediaID;
-        const uint initialMediaID = 10000;
-        const uint initialPatronID = 10000;
-
-
         private Media m;
         DataBaseReadWrite db = new DataBaseReadWrite("patron.bin","media.bin");
         public Form1()
@@ -51,9 +45,10 @@ namespace Library
         /// </summary>
         private void displayPatrons()
         {
+
             foreach (KeyValuePair<uint, Patron> p in this.patronSD)
             {
-                txtDisplayPatron.Items.Add(p.Value.ToString());
+                txtDisplayPatron.Items.Add(p.Value);
             }
         }
         /// <summary>
@@ -61,12 +56,16 @@ namespace Library
         /// </summary>
         private void btnViewChkedPerPatron_Click(object sender, EventArgs e)
         {
-            if (txtDisplayPatron.SelectedIndex.Equals(null))
+            if (txtDisplayPatron.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select a patron for which to view checked out media.");
             }
-            Patron P = (Patron)txtDisplayPatron.SelectedItem; //=txtDisplayPatron.SelectedText
-            displayChecked(P);
+            else
+            {
+                Patron P = (Patron)txtDisplayPatron.SelectedItem; //=txtDisplayPatron.SelectedText
+                displayChecked(P);
+            }
+            
 
         }
         /// <summary>
@@ -92,7 +91,7 @@ namespace Library
         {
             foreach (KeyValuePair<uint, Media> m in mediaSD)
             {
-                txtDisplayMedia.Items.Add(m.Value.ToString());
+                txtDisplayMedia.Items.Add(m.Value);
             }
         }
 
@@ -120,25 +119,25 @@ namespace Library
             {
                 if (txtMediaType.SelectedIndex == 1)
                 {
-                    m = new Media(txtMediaTitle.Text, MediaType.ADULTBOOK);
+                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text, MediaType.ADULTBOOK);
                     mediaSD.Add(m.ID, m);
                 }
                 if (txtMediaType.SelectedIndex == 2)
                 {
-                    m = new Media(txtMediaTitle.Text, MediaType.CHILDBOOK);
+                    m = new Media(txtMediaTitle.Text,txtMediaAuthor.Text, MediaType.CHILDBOOK);
                     mediaSD.Add(m.ID, m);
                 }
                 if (txtMediaType.SelectedIndex == 3)
                 {
-                    m = new Media(txtMediaTitle.Text, MediaType.DVD);
+                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text,MediaType.DVD);
                     mediaSD.Add(m.ID, m);
                 }
                 if (txtMediaType.SelectedIndex == 4)
                 {
-                    m = new Media(txtMediaType.Text, MediaType.VIDEO);
+                    m = new Media(txtMediaType.Text,txtMediaAuthor.Text, MediaType.VIDEO);
                     mediaSD.Add(m.ID, m);
                 }
-                MessageBox.Show("Media item added successfully.");
+                MessageBox.Show("Media item '" +txtMediaTitle.Text+"' added successfully!");
             }
            
         }
@@ -147,6 +146,11 @@ namespace Library
             if (string.IsNullOrEmpty(txtMediaTitle.Text))
             {
                 MessageBox.Show("Please enter a title to add a book.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtMediaAuthor.Text))
+            {
+                MessageBox.Show("Please enter the author to add a book.");
                 return false;
             }
             if (txtMediaType.SelectedIndex == 0)
@@ -172,8 +176,7 @@ namespace Library
             else
             {
                 MessageBox.Show("Please enter a valid library card number");
-            }
-            
+            }            
         }
 
         private void btnRemoveMedia_Click(object sender, EventArgs e)
@@ -190,9 +193,81 @@ namespace Library
             }
         }
 
-        private void setKeys()
+        private void btnClearGUI_Click(object sender, EventArgs e)
         {
-
+            txtDisplayCheckInOut.Items.Clear();
+            txtDisplayMedia.Items.Clear();
+            txtDisplayPatron.Items.Clear();
+            txtSearchMedia.Clear();
+            txtSearchPatron.Clear();
+            dateTimePicker.Value = DateTime.Today;
+            btnDeselect.Enabled = false;
         }
+
+        private void btnDisplayOverdue_Click(object sender, EventArgs e)
+        {
+            foreach (KeyValuePair<uint, Media> mm in this.mediaSD)
+            {
+                if(mm.Value.Overdue(dateTimeOverdue.Value))
+                {
+                    displayOverdueMedia.Text += mm.Value.ToString();
+                }
+            }  
+        }
+
+        private void btnSelectPatron_Click(object sender, EventArgs e)
+        {
+            if (txtDisplayPatron.SelectedIndex != -1)
+            {
+                txtDisplayCheckInOut.Items.Add(txtDisplayPatron.SelectedItem);
+                btnDeselect.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Error: No patron selected.");
+            }     
+        }
+
+        private void btnSelectMedia_Click(object sender, EventArgs e)
+        {
+            if (txtDisplayMedia.SelectedIndex != -1)
+            {
+                txtDisplayCheckInOut.Items.Add(txtDisplayMedia.SelectedItem);
+                btnDeselect.Enabled = true;
+              
+            }
+            else
+            {
+                MessageBox.Show("Error: No media selected.");
+            }
+            
+        }
+
+        private void btnDeselect_Click(object sender, EventArgs e)
+        {
+            txtDisplayCheckInOut.Items.Clear();
+        }
+
+        private void btnCheckIn_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+            //object[] o = new object[2];
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    o[i] = txtDisplayCheckInOut.Items;
+            //}
+            Patron p = (Patron)txtDisplayPatron.SelectedItem;
+            Media m = (Media)txtDisplayMedia.SelectedItem;
+            if (!p.overdueBooks(dateTimePicker.Value) && p.allowed(m))
+            {
+                m.CheckOut(p, dateTimePicker.Value);
+            }
+        }
+
     }
 }
