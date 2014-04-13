@@ -196,22 +196,13 @@ namespace Library
 
         private void btnDisplayOverdue_Click(object sender, EventArgs e)
         {
-            TimeSpan zero = new TimeSpan(0,0,0,0);
-            TimeSpan result;
-            TimeSpan timeChecked;
-            int _result;
             foreach (KeyValuePair<uint, Media> mm in this.mediaSD)
             {
-                  if (mm.Value.Mtype == MediaType.ADULTBOOK)
-                  {
-                      //timeChecked = dateTimeOverdue.Value - mm.Value.dateCheckedOut; //what about prior?
-                      //result = timeChecked - Media.MAX_ADULT_LOAN;
-                      //_result = result.CompareTo(timeChecked)
-                      //if (_resultresult.CompareTo)
-                  }
-            }
-            
+                if(mm.Value.Overdue(dateTimeOverdue.Value))
+                {
+                    displayOverdueMedia.Text += mm.Value.ToString();
+                }
+            }  
         }
-
     }
 }
