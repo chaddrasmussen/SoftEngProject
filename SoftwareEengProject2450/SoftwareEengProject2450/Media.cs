@@ -24,10 +24,10 @@ namespace Library
 		public uint ID { get; private set; }
 		public string Title { get; private set; }
 		public bool CheckedOut { get; private set; }
-        private TimeSpan MAX_CHILD_LOAN = new TimeSpan(7, 0, 0, 0);
-        private TimeSpan MAX_ADULT_LOAN = new TimeSpan(14, 0, 0, 0);
-        private TimeSpan MAX_DVD_LOAN = new TimeSpan(2, 0, 0, 0);
-        private TimeSpan MAX_VIDEO_LOAN = new TimeSpan(3, 0, 0, 0);
+        public static TimeSpan MAX_CHILD_LOAN = new TimeSpan(7, 0, 0, 0);
+        public static TimeSpan MAX_ADULT_LOAN = new TimeSpan(14, 0, 0, 0);
+        public static TimeSpan MAX_DVD_LOAN = new TimeSpan(2, 0, 0, 0);
+        public static TimeSpan MAX_VIDEO_LOAN = new TimeSpan(3, 0, 0, 0);
         private bool overdue;
         /// <summary>
         /// 
@@ -153,6 +153,10 @@ namespace Library
         {
             return String.Format(_title+Title);
         }
-      
+      //************************************************************
+        public bool overDue(DateTime date)
+        {
+
+        }
 	}
 }

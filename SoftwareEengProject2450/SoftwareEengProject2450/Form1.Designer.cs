@@ -49,7 +49,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabListOverdue = new System.Windows.Forms.TabPage();
             this.btnDisplayOverdue = new System.Windows.Forms.Button();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeOverdue = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.displayOverdueMedia = new System.Windows.Forms.RichTextBox();
@@ -291,7 +291,7 @@
             // tabListOverdue
             // 
             this.tabListOverdue.Controls.Add(this.btnDisplayOverdue);
-            this.tabListOverdue.Controls.Add(this.dateTimePicker2);
+            this.tabListOverdue.Controls.Add(this.dateTimeOverdue);
             this.tabListOverdue.Controls.Add(this.label4);
             this.tabListOverdue.Controls.Add(this.label3);
             this.tabListOverdue.Controls.Add(this.displayOverdueMedia);
@@ -311,13 +311,14 @@
             this.btnDisplayOverdue.TabIndex = 29;
             this.btnDisplayOverdue.Text = "Go!";
             this.btnDisplayOverdue.UseVisualStyleBackColor = true;
+            this.btnDisplayOverdue.Click += new System.EventHandler(this.btnDisplayOverdue_Click);
             // 
-            // dateTimePicker2
+            // dateTimeOverdue
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(142, 55);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 28;
+            this.dateTimeOverdue.Location = new System.Drawing.Point(142, 55);
+            this.dateTimeOverdue.Name = "dateTimeOverdue";
+            this.dateTimeOverdue.Size = new System.Drawing.Size(200, 20);
+            this.dateTimeOverdue.TabIndex = 28;
             // 
             // label4
             // 
@@ -744,7 +745,7 @@
         private System.Windows.Forms.TabPage tabAddRemovePatron;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.Button btnDisplayOverdue;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimeOverdue;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox displayOverdueMedia;
