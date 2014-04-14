@@ -107,7 +107,7 @@ namespace Library
         /// </summary>
         private void displayPatrons()
         {
-
+            txtDisplayPatron.Items.Clear();
             foreach (KeyValuePair<uint, Patron> p in this.patronSD)
             {
                 txtDisplayPatron.Items.Add(p.Value);
