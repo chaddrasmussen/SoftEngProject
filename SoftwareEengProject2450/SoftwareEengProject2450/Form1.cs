@@ -99,6 +99,7 @@ namespace Library
         }
         private void displayMedia()
         {
+            txtDisplayMedia.Items.Clear();
             foreach (KeyValuePair<uint, Media> m in mediaSD)
             {
                 txtDisplayMedia.Items.Add(m.Value);
@@ -282,7 +283,7 @@ namespace Library
 
         private void btnDeselect_Click(object sender, EventArgs e)
         {
-            txtDisplayCheckInOut.Items.Clear();
+            txtDisplayCheckInOut.Items.Remove(txtDisplayCheckInOut.SelectedItem);
         }
 
 
