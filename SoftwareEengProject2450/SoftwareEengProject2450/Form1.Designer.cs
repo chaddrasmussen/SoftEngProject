@@ -93,6 +93,8 @@
             this.txtPatronName = new System.Windows.Forms.TextBox();
             this.lblpatronName = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
+            this.lblMediaID = new System.Windows.Forms.Label();
+            this.txtMediaID = new System.Windows.Forms.TextBox();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -400,6 +402,8 @@
             // 
             // tabAddRemovePatron
             // 
+            this.tabAddRemovePatron.Controls.Add(this.txtMediaID);
+            this.tabAddRemovePatron.Controls.Add(this.lblMediaID);
             this.tabAddRemovePatron.Controls.Add(this.txtMediaType);
             this.tabAddRemovePatron.Controls.Add(this.txtPatronCardNum);
             this.tabAddRemovePatron.Controls.Add(this.label20);
@@ -460,6 +464,7 @@
             // 
             this.txtPatronCardNum.Location = new System.Drawing.Point(194, 108);
             this.txtPatronCardNum.Name = "txtPatronCardNum";
+            this.txtPatronCardNum.ReadOnly = true;
             this.txtPatronCardNum.Size = new System.Drawing.Size(200, 20);
             this.txtPatronCardNum.TabIndex = 2;
             // 
@@ -475,7 +480,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(530, 182);
+            this.label19.Location = new System.Drawing.Point(530, 186);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(69, 13);
             this.label19.TabIndex = 44;
@@ -503,7 +508,7 @@
             // 
             // btnAddMedia
             // 
-            this.btnAddMedia.Location = new System.Drawing.Point(661, 216);
+            this.btnAddMedia.Location = new System.Drawing.Point(661, 219);
             this.btnAddMedia.Name = "btnAddMedia";
             this.btnAddMedia.Size = new System.Drawing.Size(200, 23);
             this.btnAddMedia.TabIndex = 13;
@@ -575,7 +580,7 @@
             // 
             // txtMediaAuthor
             // 
-            this.txtMediaAuthor.Location = new System.Drawing.Point(661, 144);
+            this.txtMediaAuthor.Location = new System.Drawing.Point(661, 108);
             this.txtMediaAuthor.Name = "txtMediaAuthor";
             this.txtMediaAuthor.Size = new System.Drawing.Size(200, 20);
             this.txtMediaAuthor.TabIndex = 11;
@@ -583,7 +588,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(558, 151);
+            this.label17.Location = new System.Drawing.Point(558, 111);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(41, 13);
             this.label17.TabIndex = 29;
@@ -591,7 +596,7 @@
             // 
             // txtMediaTitle
             // 
-            this.txtMediaTitle.Location = new System.Drawing.Point(661, 105);
+            this.txtMediaTitle.Location = new System.Drawing.Point(661, 72);
             this.txtMediaTitle.Name = "txtMediaTitle";
             this.txtMediaTitle.Size = new System.Drawing.Size(200, 20);
             this.txtMediaTitle.TabIndex = 10;
@@ -599,7 +604,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(566, 109);
+            this.label13.Location = new System.Drawing.Point(566, 75);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(33, 13);
             this.label13.TabIndex = 29;
@@ -609,7 +614,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(694, 41);
+            this.label11.Location = new System.Drawing.Point(694, 37);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(124, 18);
             this.label11.TabIndex = 18;
@@ -750,6 +755,23 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
+            // lblMediaID
+            // 
+            this.lblMediaID.AutoSize = true;
+            this.lblMediaID.Location = new System.Drawing.Point(543, 151);
+            this.lblMediaID.Name = "lblMediaID";
+            this.lblMediaID.Size = new System.Drawing.Size(56, 13);
+            this.lblMediaID.TabIndex = 47;
+            this.lblMediaID.Text = "Media ID: ";
+            // 
+            // txtMediaID
+            // 
+            this.txtMediaID.Location = new System.Drawing.Point(661, 145);
+            this.txtMediaID.Name = "txtMediaID";
+            this.txtMediaID.ReadOnly = true;
+            this.txtMediaID.Size = new System.Drawing.Size(200, 20);
+            this.txtMediaID.TabIndex = 48;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -838,6 +860,8 @@
         private System.Windows.Forms.ListBox txtDisplayCheckInOut;
         private System.Windows.Forms.Button btnCheckOut;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtMediaID;
+        private System.Windows.Forms.Label lblMediaID;
 
     }
 }

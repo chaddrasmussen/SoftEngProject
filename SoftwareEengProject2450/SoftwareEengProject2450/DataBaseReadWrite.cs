@@ -17,16 +17,56 @@ namespace Library
         private BinaryFormatter bf = new BinaryFormatter();
         public string mediaFile { get; set; }
         public string patronFile { get; set; }
-        
+        /// <summary>
+        /// Purpose: takes two stacks and writes them to file
+        /// </summary>
+        /// <param name="pIDs"></param>
+        /// <param name="mIDs"></param>
         public void writeIDs (Stack pIDs, Stack mIDs)
         {
-            object[] temp;
-            temp = pIDs.ToArray();
-            StreamWriter file = new StreamWriter(@"data.txt");
-            foreach (object o in temp)
+            object[] tempP;
+            object[] tempM;
+            tempP = pIDs.ToArray();
+            tempM = mIDs.ToArray();
+            StreamWriter fileP = new StreamWriter(@"Pdata.txt");
+            StreamWriter fileM = new StreamWriter(@"Mdata.txt");
+            foreach (object o in tempP)
             {
-                file.WriteLine(o);
+                fileP.WriteLine(o.ToString());
             }
+            foreach (object o in tempM)
+            {
+                fileM.WriteLine(o.ToString());
+            }
+            fileP.Close();
+            fileM.Close();
+        }
+
+        /// <summary>
+        /// Purpose: reads saved ID's from file and outs them to stacks
+        /// </summary>
+        /// <param name="pIDs"></param>
+        /// <param name="mIDs"></param>
+        public void readIDs(out Stack pIDs, out Stack mIDs)
+        {
+            Stack temp = new Stack();
+            string line;
+            StreamReader fileP = new StreamReader(@"Pdata.txt");
+            StreamReader fileM = new StreamReader(@"Mdata.txt");
+            while((line = fileP.ReadLine())!= null)
+            {
+                temp.Push(line);
+            }
+            pIDs = temp;
+            temp.Clear();
+            line = "";
+            while ((line = fileM.ReadLine()) != null)
+            {
+                temp.Push(line);
+            }
+            mIDs = temp;
+            fileM.Close();
+            fileP.Close();
         }
         public DataBaseReadWrite(string p,string m)
         {

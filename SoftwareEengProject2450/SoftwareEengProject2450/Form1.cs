@@ -18,6 +18,9 @@ namespace Library
 
         Stack patronIDs = new Stack();
         Stack mediaIDs = new Stack();
+        uint mediaID;
+        uint patronID;
+
         private Media m;
         DataBaseReadWrite db = new DataBaseReadWrite("patron.bin","media.bin");
         private string noPatron = "Error: No patron selected. Please click the patron's name, and then click the Select button.";
@@ -30,11 +33,60 @@ namespace Library
             txtMediaType.SelectedIndex = 0;
             db.readCatalog(ref mediaSD);
             db.readPatron(ref patronSD);
+            db.readIDs(out patronIDs, out mediaIDs);
+            setMediaID();
+            setPatronID();
+        }
+
+        /// <summary>
+        /// Purpose: Sets the media ID based on what is in the media sorted dictionary and/or the media ID array
+        /// </summary>
+        private void setMediaID()
+        {
+            if (mediaSD.Count == 0)
+            {
+                mediaID = 10000;
+            }
+            else
+            {
+                if (mediaIDs.Count == 0)
+                {
+                    mediaID = mediaSD.Keys.Last() + 1;
+                }
+                else
+                {
+                    mediaID = (uint)mediaIDs.Pop();
+                }
+            }
+            txtPatronCardNum.Text = mediaID.ToString();
+        }
+
+        /// <summary>
+        /// Purpose: Sets the patron ID based on what is in the media sorted dictionary and/or the patron ID array
+        /// </summary>
+        private void setPatronID()
+        {
+            if (patronSD.Count == 0)
+            {
+                patronID = 10000;
+            }
+            else
+            {
+                if (patronIDs.Count == 0)
+                {
+                    patronID = patronSD.Keys.Last() + 1;
+                }
+                else
+                {
+                    patronID = (uint)patronIDs.Pop();
+                }
+            }
+            txtMediaID.Text = patronID.ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -181,6 +233,7 @@ namespace Library
             if(uint.TryParse(txtRemovePatron.Text,out cardNumber))
             {
                 patronSD.Remove(cardNumber);
+                patronIDs.Push(cardNumber);
                 MessageBox.Show("removed");
             }
             else
@@ -194,6 +247,7 @@ namespace Library
             uint mediaID;
             if (uint.TryParse(txtMediaRemoveID.Text, out mediaID))
             {
+                mediaIDs.Push(mediaID);
                 mediaSD.Remove(mediaID);
                 MessageBox.Show("removed");
             }
