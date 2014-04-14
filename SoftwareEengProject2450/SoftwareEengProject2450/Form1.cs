@@ -285,10 +285,10 @@ namespace Library
             txtDisplayCheckInOut.Items.Clear();
         }
 
+
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
-            
-            
+            CheckInMedia();            
         }
 
         private void btnCheckOut_Click(object sender, EventArgs e)
@@ -309,6 +309,33 @@ namespace Library
                 if (!p.overdueBooks(dateTimePicker.Value) && p.allowed(m))
                 {
                     m.CheckOut(p, dateTimePicker.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks in the media
+        /// </summary>
+        /// <param name="media">media to be returned</param>
+        /// <param name="patron">patron returning the media</param>
+        private void CheckInMedia()
+        {
+            if (txtDisplayPatron.SelectedIndex == -1)
+            {
+                MessageBox.Show(noPatron);
+            }
+            if (txtDisplayMedia.SelectedIndex == -1)
+            {
+                MessageBox.Show(noMedia);
+            }
+            else
+            {
+                Patron patron = txtDisplayPatron.SelectedItem as Patron;
+                Media media = txtDisplayMedia.SelectedItem as Media;
+
+                if (patron._currentChecked.ContainsKey(media.ID))
+                {
+                    media.CheckIn();
                 }
             }
         }

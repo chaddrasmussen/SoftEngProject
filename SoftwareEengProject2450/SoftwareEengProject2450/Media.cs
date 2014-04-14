@@ -90,8 +90,7 @@ namespace Library
             Author = author;
             setLoanTime(mType);
             CheckedOut = false;
-			ID = ++ID;
-			++UniqueTitleCount;
+			ID = ++UniqueTitleCount;
             this.mType = mType;
 		}
 
@@ -134,11 +133,12 @@ namespace Library
             //has patron already checked maximum number of items?
             //is book already checked out?
             
-            if (this.CheckedOut == false && borrower._currentChecked.Count >= borrower._maxCheckouts)
+            if (this.CheckedOut == false && borrower._currentChecked.Count <= borrower._maxCheckouts)
             {
                 this.CheckedOut = true;
                 borrower.addMedia(this, this.ID);
                 this.dateCheckedOut = dateChecked;
+                Borrower = borrower;
                 MessageBox.Show("Check out successful!");
             }
             else
@@ -154,8 +154,17 @@ namespace Library
 		/// </summary>
 		public void CheckIn()
 		{
-            this.CheckedOut = false;
-            Borrower.removeMedia(this, this.ID);
+            if (this.CheckedOut && Borrower != null)
+            {
+                this.CheckedOut = false;
+                Borrower.removeMedia(this, this.ID);
+                Borrower = Patron.None;
+                MessageBox.Show("Check in successful!");
+            }
+            else
+            {
+                MessageBox.Show("Check in failed!");
+            }
 		}
 
 		// ***********************************************************************************
