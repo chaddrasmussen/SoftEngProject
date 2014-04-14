@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +18,22 @@ namespace Library
         public string mediaFile { get; set; }
         public string patronFile { get; set; }
         
+        public void writeIDs (Stack pIDs, Stack mIDs)
+        {
+            object[] temp;
+            temp = pIDs.ToArray();
+            StreamWriter file = new StreamWriter(@"data.txt");
+            foreach (object o in temp)
+            {
+                file.WriteLine(o);
+            }
+        }
         public DataBaseReadWrite(string p,string m)
         {
             mediaFile = m;
             patronFile = p;
         }
+
         public void readCatalog(ref SortedDictionary<uint, Media> m)
         {
             mediaStream = new FileStream(mediaFile, FileMode.OpenOrCreate);
