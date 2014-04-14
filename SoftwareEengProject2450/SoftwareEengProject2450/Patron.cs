@@ -22,6 +22,10 @@ namespace Library
         private DateTime _birthday;
         private int ageThreshold = 18;
         public SortedDictionary<uint, Media> _currentChecked { get; set; }
+        public static Patron _none = new Patron();
+        public static Patron None { get {return _none;} set {_none = value;} }
+
+
 
         //validation and display messages/popups
         static Regex validator;

@@ -57,7 +57,7 @@ namespace Library
                 {
                     mediaID = (uint)mediaIDs.Pop();
                 }
-            }
+        }
             txtPatronCardNum.Text = mediaID.ToString();
         }
 
@@ -86,7 +86,7 @@ namespace Library
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -229,31 +229,59 @@ namespace Library
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
+            Patron p;
             uint cardNumber;
-            if(uint.TryParse(txtRemovePatron.Text,out cardNumber))
+            if (!uint.TryParse(txtRemovePatron.Text, out cardNumber))
             {
-                patronSD.Remove(cardNumber);
-                patronIDs.Push(cardNumber);
-                MessageBox.Show("removed");
+
+                MessageBox.Show("Please enter a valid library card number");
             }
             else
             {
-                MessageBox.Show("Please enter a valid library card number");
+                if (!patronSD.TryGetValue(cardNumber, out p))
+                {
+                    if (patronSD.Count == 0)
+                    {
+                        MessageBox.Show("No patrons to remove.");
             }            
+                    else
+                    MessageBox.Show("No patron with such ID exists.");
+        }
+                else
+                {
+                    patronIDs.Push(cardNumber);
+                    MessageBox.Show("Removed "+p.ToString());
+                    patronSD.Remove(cardNumber);
+
+                }
+            }
         }
 
         private void btnRemoveMedia_Click(object sender, EventArgs e)
         {
-            uint mediaID;
-            if (uint.TryParse(txtMediaRemoveID.Text, out mediaID))
+            uint i;
+            Media M;
+            if (!uint.TryParse(txtMediaRemoveID.Text, out i))
             {
-                mediaIDs.Push(mediaID);
-                mediaSD.Remove(mediaID);
-                MessageBox.Show("removed");
+                MessageBox.Show("Please enter a valid media ID number");
             }
             else
             {
-                MessageBox.Show("Please enter a valid media ID number");
+                if (!mediaSD.TryGetValue(i, out M))
+                {
+                    if (mediaSD.Count == 0)
+                    {
+                        MessageBox.Show("No media items to remove.");
+                    }
+                    else
+                    MessageBox.Show("No media with such ID exists.");
+            }
+            else
+            {
+                    MessageBox.Show(M.Title + " removed.");
+                    mediaSD.Remove(i);
+                    mediaIDs.Push(i);
+                
             }
         }
 
@@ -312,10 +340,10 @@ namespace Library
             txtDisplayCheckInOut.Items.Clear();
         }
 
+
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
-            
-            
+            CheckInMedia();            
         }
 
         private void btnCheckOut_Click(object sender, EventArgs e)
@@ -336,6 +364,33 @@ namespace Library
                 if (!p.overdueBooks(dateTimePicker.Value) && p.allowed(m))
                 {
                     m.CheckOut(p, dateTimePicker.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks in the media
+        /// </summary>
+        /// <param name="media">media to be returned</param>
+        /// <param name="patron">patron returning the media</param>
+        private void CheckInMedia()
+        {
+            if (txtDisplayPatron.SelectedIndex == -1)
+            {
+                MessageBox.Show(noPatron);
+            }
+            if (txtDisplayMedia.SelectedIndex == -1)
+            {
+                MessageBox.Show(noMedia);
+            }
+            else
+            {
+                Patron patron = txtDisplayPatron.SelectedItem as Patron;
+                Media media = txtDisplayMedia.SelectedItem as Media;
+
+                if (patron._currentChecked.ContainsKey(media.ID))
+                {
+                    media.CheckIn();
                 }
             }
         }
