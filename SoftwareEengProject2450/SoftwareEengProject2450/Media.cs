@@ -119,6 +119,7 @@ namespace Library
                 loanTime = MAX_VIDEO_LOAN;
             }
         }
+        //*****************************************************
         public TimeSpan getLoanTime()
         {
             return loanTime;
@@ -133,14 +134,17 @@ namespace Library
             //has patron already checked maximum number of items?
             //is book already checked out?
             
-            if (this.CheckedOut == true)
+            if (this.CheckedOut == false && borrower._currentChecked.Count >= borrower._maxCheckouts)
+            {
+                this.CheckedOut = true;
+                borrower.addMedia(this, this.ID);
+                this.dateCheckedOut = dateChecked;
+                MessageBox.Show("Check out successful!");
+            }
+            else
             {
                 MessageBox.Show("Sorry, the requested media item is already checked out.");
             }
-            this.CheckedOut = true;
-            borrower.addMedia(this, this.ID);
-            this.dateCheckedOut = dateChecked;
-            MessageBox.Show("Check out successful!");
 		}
 
 		// *********************************************************
@@ -158,7 +162,7 @@ namespace Library
 
         public override string ToString()
         {
-            return String.Format(_title+Title + _author + Author + _checkedout + CheckedOut + "\n");
+            return String.Format(_title+Title+ _checkedout + CheckedOut + "\n");
         }
       //************************************************************
 

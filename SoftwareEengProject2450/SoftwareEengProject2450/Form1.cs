@@ -20,6 +20,8 @@ namespace Library
         Stack mediaIDs = new Stack();
         private Media m;
         DataBaseReadWrite db = new DataBaseReadWrite("patron.bin","media.bin");
+        private string noPatron = "Error: No patron selected. Please click the patron's name, and then click the Select button.";
+        private string noMedia = "Error: No media selected. Please click the name of the media to be checked in/out, and then click the Select button.";
         public Form1()
         {
             InitializeComponent();
@@ -232,7 +234,7 @@ namespace Library
             }
             else
             {
-                MessageBox.Show("Error: No patron selected.");
+                MessageBox.Show(noPatron);
             }     
         }
 
@@ -246,7 +248,7 @@ namespace Library
             }
             else
             {
-                MessageBox.Show("Error: No media selected.");
+                MessageBox.Show(noMedia);
             }
             
         }
@@ -264,18 +266,14 @@ namespace Library
 
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
-            //object[] o = new object[2];
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    o[i] = txtDisplayCheckInOut.Items;
-            //}
+           
             if (txtDisplayPatron.SelectedIndex == -1)
             {
-                MessageBox.Show("Error: No patron selected");
+                MessageBox.Show(noPatron);
             }
             if (txtDisplayMedia.SelectedIndex == -1)
             {
-                MessageBox.Show("Error: No media selected");
+                MessageBox.Show(noMedia);
             }
             else
             {

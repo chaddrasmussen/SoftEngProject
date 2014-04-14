@@ -513,7 +513,7 @@
             // 
             // btnAddPatron
             // 
-            this.btnAddPatron.Location = new System.Drawing.Point(194, 360);
+            this.btnAddPatron.Location = new System.Drawing.Point(194, 351);
             this.btnAddPatron.Name = "btnAddPatron";
             this.btnAddPatron.Size = new System.Drawing.Size(200, 23);
             this.btnAddPatron.TabIndex = 9;
@@ -531,7 +531,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(543, 442);
+            this.label14.Location = new System.Drawing.Point(543, 438);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(56, 13);
             this.label14.TabIndex = 38;
@@ -541,7 +541,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(703, 400);
+            this.label15.Location = new System.Drawing.Point(698, 396);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(120, 18);
             this.label15.TabIndex = 37;
@@ -567,7 +567,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(27, 435);
+            this.label18.Location = new System.Drawing.Point(25, 438);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(109, 13);
             this.label18.TabIndex = 34;
@@ -689,7 +689,7 @@
             // 
             // txtPatronZip
             // 
-            this.txtPatronZip.Location = new System.Drawing.Point(194, 324);
+            this.txtPatronZip.Location = new System.Drawing.Point(194, 320);
             this.txtPatronZip.Name = "txtPatronZip";
             this.txtPatronZip.Size = new System.Drawing.Size(200, 20);
             this.txtPatronZip.TabIndex = 8;
