@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -10,6 +11,13 @@ namespace Library
     {
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
+
+        //stacks
+        //each time a patron or media object is removed the id is stored on the stack. 
+        //When adding new patrons or media items we will use numbers on the stack before adding new items.
+
+        Stack patronIDs = new Stack();
+        Stack mediaIDs = new Stack();
         private Media m;
         DataBaseReadWrite db = new DataBaseReadWrite("patron.bin","media.bin");
         private string noPatron = "Error: No patron selected. Please click the patron's name, and then click the Select button.";
