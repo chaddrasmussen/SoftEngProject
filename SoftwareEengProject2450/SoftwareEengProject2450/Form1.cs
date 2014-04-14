@@ -169,29 +169,56 @@ namespace Library
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
+            Patron p;
             uint cardNumber;
-            if(uint.TryParse(txtRemovePatron.Text,out cardNumber))
+            if (!uint.TryParse(txtRemovePatron.Text, out cardNumber))
             {
-                patronSD.Remove(cardNumber);
-                MessageBox.Show("removed");
+                MessageBox.Show("Please enter a valid library card number");
             }
             else
             {
-                MessageBox.Show("Please enter a valid library card number");
-            }            
+                if (!patronSD.TryGetValue(cardNumber, out p))
+                {
+                    if (patronSD.Count == 0)
+                    {
+                        MessageBox.Show("No patrons to remove.");
+                    }
+                    else
+                    MessageBox.Show("No patron with such ID exists.");
+                }
+                else
+                {
+                    MessageBox.Show("Removed "+p.ToString());
+                    patronSD.Remove(cardNumber);
+                  
+                }
+            }
         }
 
         private void btnRemoveMedia_Click(object sender, EventArgs e)
         {
-            uint mediaID;
-            if (uint.TryParse(txtMediaRemoveID.Text, out mediaID))
+            uint i;
+            Media M;
+            if (!uint.TryParse(txtMediaRemoveID.Text, out i))
             {
-                mediaSD.Remove(mediaID);
-                MessageBox.Show("removed");
+                MessageBox.Show("Please enter a valid media ID number");
             }
             else
             {
-                MessageBox.Show("Please enter a valid media ID number");
+                if (!mediaSD.TryGetValue(i, out M))
+                {
+                    if (mediaSD.Count == 0)
+                    {
+                        MessageBox.Show("No media items to remove.");
+                    }
+                    else
+                    MessageBox.Show("No media with such ID exists.");
+                }
+                else
+                {
+                    MessageBox.Show(M.Title + " removed.");
+                    mediaSD.Remove(i);
+                }
             }
         }
 
