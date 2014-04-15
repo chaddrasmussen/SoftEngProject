@@ -43,22 +43,25 @@ namespace Library
         /// <returns>bool</returns>
         public bool Overdue(DateTime date)
         {
-            TimeSpan diff = date.Subtract(this.dateCheckedOut);
-            if (this.mType == MediaType.ADULTBOOK && diff >= MAX_ADULT_LOAN)
+            if (this.CheckedOut)
             {
-                return true;
-            }
-            if (this.mType == MediaType.CHILDBOOK && diff >= MAX_CHILD_LOAN)
-            {
-                return true;
-            }
-            if (this.mType == MediaType.DVD && diff >= MAX_DVD_LOAN)
-            {
-                return true;
-            }
-            if (this.mType == MediaType.VIDEO && diff >= MAX_VIDEO_LOAN)
-            {
-                return true;
+                TimeSpan diff = date.Subtract(this.dateCheckedOut);
+                if (this.mType == MediaType.ADULTBOOK && diff >= MAX_ADULT_LOAN)
+                {
+                    return true;
+                }
+                if (this.mType == MediaType.CHILDBOOK && diff >= MAX_CHILD_LOAN)
+                {
+                    return true;
+                }
+                if (this.mType == MediaType.DVD && diff >= MAX_DVD_LOAN)
+                {
+                    return true;
+                }
+                if (this.mType == MediaType.VIDEO && diff >= MAX_VIDEO_LOAN)
+                {
+                    return true;
+                }               
             }
             return false;
         }

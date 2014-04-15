@@ -140,7 +140,7 @@
             this.clmID});
             this.lstvwMediaList.Location = new System.Drawing.Point(354, 161);
             this.lstvwMediaList.Name = "lstvwMediaList";
-            this.lstvwMediaList.Size = new System.Drawing.Size(296, 226);
+            this.lstvwMediaList.Size = new System.Drawing.Size(313, 226);
             this.lstvwMediaList.TabIndex = 32;
             this.lstvwMediaList.UseCompatibleStateImageBehavior = false;
             this.lstvwMediaList.View = System.Windows.Forms.View.Details;
@@ -161,13 +161,13 @@
             // 
             this.clmID.Text = "ID";
             this.clmID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.clmID.Width = 40;
+            this.clmID.Width = 59;
             // 
             // btnCheckOut
             // 
             this.btnCheckOut.Location = new System.Drawing.Point(367, 403);
             this.btnCheckOut.Name = "btnCheckOut";
-            this.btnCheckOut.Size = new System.Drawing.Size(267, 23);
+            this.btnCheckOut.Size = new System.Drawing.Size(284, 23);
             this.btnCheckOut.TabIndex = 27;
             this.btnCheckOut.Text = "Check Out";
             this.btnCheckOut.UseVisualStyleBackColor = true;
@@ -231,9 +231,9 @@
             // 
             // btnCheckIn
             // 
-            this.btnCheckIn.Location = new System.Drawing.Point(686, 324);
+            this.btnCheckIn.Location = new System.Drawing.Point(704, 324);
             this.btnCheckIn.Name = "btnCheckIn";
-            this.btnCheckIn.Size = new System.Drawing.Size(267, 23);
+            this.btnCheckIn.Size = new System.Drawing.Size(244, 23);
             this.btnCheckIn.TabIndex = 26;
             this.btnCheckIn.Text = "Check In";
             this.btnCheckIn.UseVisualStyleBackColor = true;
@@ -243,14 +243,14 @@
             // 
             this.txtSearchMedia.Location = new System.Drawing.Point(354, 134);
             this.txtSearchMedia.Name = "txtSearchMedia";
-            this.txtSearchMedia.Size = new System.Drawing.Size(195, 20);
+            this.txtSearchMedia.Size = new System.Drawing.Size(211, 20);
             this.txtSearchMedia.TabIndex = 18;
             // 
             // btnSearchMedia
             // 
-            this.btnSearchMedia.Location = new System.Drawing.Point(555, 132);
+            this.btnSearchMedia.Location = new System.Drawing.Point(571, 131);
             this.btnSearchMedia.Name = "btnSearchMedia";
-            this.btnSearchMedia.Size = new System.Drawing.Size(95, 23);
+            this.btnSearchMedia.Size = new System.Drawing.Size(96, 23);
             this.btnSearchMedia.TabIndex = 20;
             this.btnSearchMedia.Text = "Search";
             this.btnSearchMedia.UseVisualStyleBackColor = true;
@@ -415,6 +415,7 @@
             // 
             this.txtPatronCardNum.Location = new System.Drawing.Point(194, 108);
             this.txtPatronCardNum.Name = "txtPatronCardNum";
+            this.txtPatronCardNum.ReadOnly = true;
             this.txtPatronCardNum.Size = new System.Drawing.Size(200, 20);
             this.txtPatronCardNum.TabIndex = 2;
             // 

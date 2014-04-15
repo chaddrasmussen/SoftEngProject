@@ -160,7 +160,7 @@ namespace Library
             {
                 ListViewItem item = new ListViewItem(m.Value.Title);
                 item.SubItems.Add(m.Value.Borrower._name);
-                item.SubItems.Add(m.Value.ID.ToString());
+                item.SubItems.Add(m.Key.ToString());
                 lstvwMediaList.Items.Add(item);
             }
 
@@ -532,8 +532,8 @@ namespace Library
                 {
                     if (selectionNotCheckedOut)
                     {
-                        Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index].Text)];
-
+                        Media media = mediaSD[uint.Parse(item.SubItems[clmID.Index].Text)];
+                        
                         selectionNotCheckedOut = media.CheckedOut ? false : true;
                     }
                 }
@@ -635,5 +635,6 @@ namespace Library
                 btnCheckIn.Enabled = false;
             }
         }
+
     }
 }
