@@ -90,6 +90,8 @@
             this.txtPatronName = new System.Windows.Forms.TextBox();
             this.lblpatronName = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
+            this.txtMediaID = new System.Windows.Forms.TextBox();
+            this.lblMediaID = new System.Windows.Forms.Label();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -355,6 +357,8 @@
             // 
             // tabAddRemovePatron
             // 
+            this.tabAddRemovePatron.Controls.Add(this.lblMediaID);
+            this.tabAddRemovePatron.Controls.Add(this.txtMediaID);
             this.tabAddRemovePatron.Controls.Add(this.txtMediaType);
             this.tabAddRemovePatron.Controls.Add(this.txtPatronCardNum);
             this.tabAddRemovePatron.Controls.Add(this.label20);
@@ -406,7 +410,7 @@
             "CHILDBOOK",
             "DVD",
             "VIDEO"});
-            this.txtMediaType.Location = new System.Drawing.Point(661, 182);
+            this.txtMediaType.Location = new System.Drawing.Point(661, 186);
             this.txtMediaType.Name = "txtMediaType";
             this.txtMediaType.Size = new System.Drawing.Size(200, 21);
             this.txtMediaType.TabIndex = 12;
@@ -415,6 +419,7 @@
             // 
             this.txtPatronCardNum.Location = new System.Drawing.Point(194, 108);
             this.txtPatronCardNum.Name = "txtPatronCardNum";
+            this.txtPatronCardNum.ReadOnly = true;
             this.txtPatronCardNum.Size = new System.Drawing.Size(200, 20);
             this.txtPatronCardNum.TabIndex = 2;
             // 
@@ -458,7 +463,7 @@
             // 
             // btnAddMedia
             // 
-            this.btnAddMedia.Location = new System.Drawing.Point(661, 216);
+            this.btnAddMedia.Location = new System.Drawing.Point(661, 252);
             this.btnAddMedia.Name = "btnAddMedia";
             this.btnAddMedia.Size = new System.Drawing.Size(200, 23);
             this.btnAddMedia.TabIndex = 13;
@@ -705,6 +710,22 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
+            // txtMediaID
+            // 
+            this.txtMediaID.Location = new System.Drawing.Point(661, 219);
+            this.txtMediaID.Name = "txtMediaID";
+            this.txtMediaID.Size = new System.Drawing.Size(200, 20);
+            this.txtMediaID.TabIndex = 47;
+            // 
+            // lblMediaID
+            // 
+            this.lblMediaID.AutoSize = true;
+            this.lblMediaID.Location = new System.Drawing.Point(530, 222);
+            this.lblMediaID.Name = "lblMediaID";
+            this.lblMediaID.Size = new System.Drawing.Size(53, 13);
+            this.lblMediaID.TabIndex = 48;
+            this.lblMediaID.Text = "Media ID:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -790,6 +811,8 @@
         private System.Windows.Forms.ColumnHeader clmTitle;
         private System.Windows.Forms.ColumnHeader clmCheckedOut;
         private System.Windows.Forms.ColumnHeader clmID;
+        private System.Windows.Forms.Label lblMediaID;
+        private System.Windows.Forms.TextBox txtMediaID;
 
     }
 }

@@ -65,7 +65,7 @@ namespace Library
                     mediaID = (uint)mediaIDs.Pop();
                 }
             }
-            //txtMediaID.Text = mediaID.ToString();
+            txtMediaID.Text = mediaID.ToString();
         }
 
         /// <summary>
@@ -279,6 +279,7 @@ namespace Library
                         patronIDs.Push(cardNumber);
                         MessageBox.Show("Removed " + " " + p.ToString());
                         patronSD.Remove(cardNumber);
+                        setPatronID();
                     }
 					UpdateScreens();
 					ClearRemovePatronFields();
@@ -318,7 +319,8 @@ namespace Library
                 	    {
                     	    MessageBox.Show(M.Title + " removed.");
                 	        mediaSD.Remove(i);
-                  	      mediaIDs.Push(i);
+                  	        mediaIDs.Push(i);
+                            setMediaID();
                     	}
 					}
 
