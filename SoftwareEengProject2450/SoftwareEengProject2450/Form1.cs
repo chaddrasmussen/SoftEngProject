@@ -160,12 +160,12 @@ namespace Library
             {
                 if (m.Value != null)
                 {
-                    ListViewItem item = new ListViewItem(m.Value.Title);
+                ListViewItem item = new ListViewItem(m.Value.Title);
                     if(m.Value.CheckedOut)
-                        item.SubItems.Add(m.Value.Borrower._name);
-                    item.SubItems.Add(m.Value.ID.ToString());
-                    lstvwMediaList.Items.Add(item);
-                }
+                item.SubItems.Add(m.Value.Borrower._name);
+                item.SubItems.Add(m.Value.ID.ToString());
+                lstvwMediaList.Items.Add(item);
+            }
             }
 
         }
