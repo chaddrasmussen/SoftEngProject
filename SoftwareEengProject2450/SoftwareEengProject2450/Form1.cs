@@ -230,7 +230,11 @@ namespace Library
         {
             this.Close();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemove_Click(object sender, EventArgs e)
         {
             Patron p;
@@ -247,17 +251,24 @@ namespace Library
                     if (patronSD.Count == 0)
                     {
                         MessageBox.Show("No patrons to remove.");
-                    }            
+                    }
                     else
                     MessageBox.Show("No patron with such ID exists.");
                 }
+
                 else
                 {
                     p = patronSD[cardNumber];
-                    patronIDs.Push(cardNumber);
-                    MessageBox.Show("Removed " + " " + p.ToString());
-                    patronSD.Remove(cardNumber);
-
+                    if (p._currentChecked.Count > 0)
+                    {
+                        MessageBox.Show("This patron currently has books checked out, and cannot be removed.");
+                    }
+                    else
+                    {
+                        patronIDs.Push(cardNumber);
+                        MessageBox.Show("Removed " + " " + p.ToString());
+                        patronSD.Remove(cardNumber);
+                    }
                 }
             }
         }
@@ -283,10 +294,17 @@ namespace Library
                 }
                 else
                 {
-                    MessageBox.Show(M.Title + " removed.");
-                    mediaSD.Remove(i);
-                    mediaIDs.Push(i);
-
+                    mediaSD[i] = m;
+                    if (m.CheckedOut)
+                    {
+                        MessageBox.Show("This book is currently checked out, and cannot be removed.");
+                    }
+                    else
+                    {
+                        MessageBox.Show(M.Title + " removed.");
+                        mediaSD.Remove(i);
+                        mediaIDs.Push(i);
+                    }
                 }
             }
         }
