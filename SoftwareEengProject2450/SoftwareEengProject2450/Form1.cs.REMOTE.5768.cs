@@ -163,7 +163,7 @@ namespace Library
                 ListViewItem item = new ListViewItem(m.Value.Title);
                     if(m.Value.CheckedOut)
                 item.SubItems.Add(m.Value.Borrower._name);
-                item.SubItems.Add(m.Key.ToString());
+                item.SubItems.Add(m.Value.ID.ToString());
                 lstvwMediaList.Items.Add(item);
             }
             }
@@ -537,9 +537,9 @@ namespace Library
                 {
                     if (selectionNotCheckedOut)
                     {
-                        Media media = mediaSD[uint.Parse(item.SubItems[clmID.Index].Text)];
+                        //had to put index-1 because was getting an index out of range error
                         Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index-1].Text)];
-                        
+
                         selectionNotCheckedOut = media.CheckedOut ? false : true;
                     }
                 }
@@ -645,6 +645,5 @@ namespace Library
                 btnCheckIn.Enabled = false;
             }
         }
-
     }
 }

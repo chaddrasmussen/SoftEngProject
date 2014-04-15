@@ -537,9 +537,14 @@ namespace Library
                 {
                     if (selectionNotCheckedOut)
                     {
+<<<<<<< HEAD
                         Media media = mediaSD[uint.Parse(item.SubItems[clmID.Index].Text)];
-                        Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index-1].Text)];
                         
+=======
+                        //had to put index-1 because was getting an index out of range error
+                        Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index-1].Text)];
+
+>>>>>>> fbadd507b0dbbd1c99f2b47948be0342b00a1da1
                         selectionNotCheckedOut = media.CheckedOut ? false : true;
                     }
                 }

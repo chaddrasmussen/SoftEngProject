@@ -65,7 +65,7 @@ namespace Library
                     mediaID = (uint)mediaIDs.Pop();
                 }
             }
-            txtMediaID.Text = mediaID.ToString();
+            //txtMediaID.Text = mediaID.ToString();
         }
 
         /// <summary>
@@ -158,14 +158,10 @@ namespace Library
 
             foreach (KeyValuePair<uint, Media> m in mediaSD)
             {
-                if (m.Value != null)
-                {
                 ListViewItem item = new ListViewItem(m.Value.Title);
-                    if(m.Value.CheckedOut)
                 item.SubItems.Add(m.Value.Borrower._name);
                 item.SubItems.Add(m.Key.ToString());
                 lstvwMediaList.Items.Add(item);
-            }
             }
 
         }
@@ -279,7 +275,6 @@ namespace Library
                         patronIDs.Push(cardNumber);
                         MessageBox.Show("Removed " + " " + p.ToString());
                         patronSD.Remove(cardNumber);
-                        setPatronID();
                     }
 					UpdateScreens();
 					ClearRemovePatronFields();
@@ -319,8 +314,7 @@ namespace Library
                 	    {
                     	    MessageBox.Show(M.Title + " removed.");
                 	        mediaSD.Remove(i);
-                  	        mediaIDs.Push(i);
-                            setMediaID();
+                  	      mediaIDs.Push(i);
                     	}
 					}
 
@@ -328,7 +322,8 @@ namespace Library
                     mediaSD.Remove(i);
                     UpdateScreens();
                     ClearRemoveMediaFields();
-				
+					UpdateScreens();
+					ClearRemoveMediaFields();
                 }
             }
         }
@@ -538,7 +533,6 @@ namespace Library
                     if (selectionNotCheckedOut)
                     {
                         Media media = mediaSD[uint.Parse(item.SubItems[clmID.Index].Text)];
-                        Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index-1].Text)];
                         
                         selectionNotCheckedOut = media.CheckedOut ? false : true;
                     }
@@ -574,14 +568,10 @@ namespace Library
             {
                 txtPatronItemsCheckedOut.Items.Clear();
             }
-            if (mediaSD.Count >0)
-            {
-                displayMedia();
-            }
-            if (patronSD.Count > 0)
-            {
-                displayPatrons();
-            }
+
+            displayMedia();
+            displayPatrons();
+
             if (txtDisplayPatron.SelectedItems.Count == 0)
             {
                 btnCheckOut.Enabled = false;
