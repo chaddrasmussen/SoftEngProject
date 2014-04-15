@@ -155,13 +155,19 @@ namespace Library
         private void displayMedia()
         {
             lstvwMediaList.Items.Clear();
-
-            foreach (KeyValuePair<uint, Media> m in mediaSD)
+            if (mediaSD.Count > 0)
             {
-                ListViewItem item = new ListViewItem(m.Value.Title);
-                item.SubItems.Add(m.Value.Borrower._name);
-                item.SubItems.Add(m.Value.ID.ToString());
-                lstvwMediaList.Items.Add(item);
+                foreach (KeyValuePair<uint, Media> m in mediaSD)
+                {
+                    ListViewItem item = new ListViewItem(m.Value.Title);
+                    item.SubItems.Add(m.Value.Borrower._name);
+                    item.SubItems.Add(m.Value.ID.ToString());
+                    lstvwMediaList.Items.Add(item);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Empty database.");
             }
 
         }
