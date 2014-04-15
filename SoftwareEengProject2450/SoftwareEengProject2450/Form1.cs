@@ -158,10 +158,14 @@ namespace Library
 
             foreach (KeyValuePair<uint, Media> m in mediaSD)
             {
-                ListViewItem item = new ListViewItem(m.Value.Title);
-                item.SubItems.Add(m.Value.Borrower._name);
-                item.SubItems.Add(m.Value.ID.ToString());
-                lstvwMediaList.Items.Add(item);
+                if (m.Value != null)
+                {
+                    ListViewItem item = new ListViewItem(m.Value.Title);
+                    if(m.Value.CheckedOut)
+                        item.SubItems.Add(m.Value.Borrower._name);
+                    item.SubItems.Add(m.Value.ID.ToString());
+                    lstvwMediaList.Items.Add(item);
+                }
             }
 
         }
