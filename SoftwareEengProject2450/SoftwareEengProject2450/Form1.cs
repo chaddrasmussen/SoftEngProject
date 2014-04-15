@@ -16,8 +16,8 @@ namespace Library
         //each time a patron or media object is removed the id is stored on the stack. 
         //When adding new patrons or media items we will use numbers on the stack before adding new items.
 
-        Stack patronIDs = new Stack();
-        Stack mediaIDs = new Stack();
+        Stack patronIDs;
+        Stack mediaIDs;
         uint mediaID;
         uint patronID;
 
@@ -58,7 +58,7 @@ namespace Library
                     mediaID = (uint)mediaIDs.Pop();
                 }
         }
-            txtPatronCardNum.Text = mediaID.ToString();
+            txtMediaID.Text = mediaID.ToString();
         }
 
         /// <summary>
@@ -78,10 +78,10 @@ namespace Library
                 }
                 else
                 {
-                    patronID = (uint)patronIDs.Pop();
+                    patronID = uint.Parse(patronIDs.Pop().ToString());
                 }
             }
-            txtMediaID.Text = patronID.ToString();
+            txtPatronCardNum.Text = patronID.ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -92,6 +92,7 @@ namespace Library
         {
             db.writeCatalog(mediaSD);
             db.writePatron(patronSD);
+            db.writeIDs(patronIDs, mediaIDs);
             base.OnClosed(e);
         }
         /// <summary>
@@ -161,6 +162,8 @@ namespace Library
         private void btnAddPatron_Click(object sender, EventArgs e)
         {
             saveNewPatron();
+            setPatronID();
+
         }
         private void saveNewPatron()
         {
@@ -239,19 +242,20 @@ namespace Library
             }
             else
             {
-                if (!patronSD.TryGetValue(cardNumber, out p))
+                if (!patronSD.ContainsKey(cardNumber))
                 {
                     if (patronSD.Count == 0)
                     {
                         MessageBox.Show("No patrons to remove.");
-            }            
+                    }            
                     else
                     MessageBox.Show("No patron with such ID exists.");
-        }
+                }
                 else
                 {
+                    p = patronSD[cardNumber];
                     patronIDs.Push(cardNumber);
-                    MessageBox.Show("Removed "+p.ToString());
+                    MessageBox.Show("Removed " + " " + p.ToString());
                     patronSD.Remove(cardNumber);
 
                 }
@@ -266,7 +270,7 @@ namespace Library
             {
                 MessageBox.Show("Please enter a valid media ID number");
             }
-            else
+            else if (mediaSD.ContainsKey(uint.Parse(txtMediaRemoveID.Text)))
             {
                 if (!mediaSD.TryGetValue(i, out M))
                 {
@@ -275,14 +279,15 @@ namespace Library
                         MessageBox.Show("No media items to remove.");
                     }
                     else
-                    MessageBox.Show("No media with such ID exists.");
-            }
-            else
-            {
+                        MessageBox.Show("No media with such ID exists.");
+                }
+                else
+                {
                     MessageBox.Show(M.Title + " removed.");
                     mediaSD.Remove(i);
                     mediaIDs.Push(i);
-                
+
+                }
             }
         }
 

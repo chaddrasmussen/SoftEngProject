@@ -178,7 +178,7 @@ namespace Library
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format(nameDisplay+ _name);
+            return String.Format(_cardNumber + "  " + _name);
         }
         /// <summary>
         /// Purpose: determine media type allowed

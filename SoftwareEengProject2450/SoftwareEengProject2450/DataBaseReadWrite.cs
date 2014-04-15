@@ -49,24 +49,43 @@ namespace Library
         /// <param name="mIDs"></param>
         public void readIDs(out Stack pIDs, out Stack mIDs)
         {
+            StreamReader fileP;
             Stack temp = new Stack();
+            
+
             string line;
-            StreamReader fileP = new StreamReader(@"Pdata.txt");
-            StreamReader fileM = new StreamReader(@"Mdata.txt");
-            while((line = fileP.ReadLine())!= null)
+           
+            StreamReader fileM;
+            if (File.Exists("Pdata.txt"))
             {
-                temp.Push(line);
+                fileP = new StreamReader(@"Pdata.txt");
+                while ((line = fileP.ReadLine()) != null)
+                {
+                    temp.Push(line);
+                }
+                pIDs = (Stack)temp.Clone();
+                temp.Clear();
+                line = "";
+                fileP.Close();
             }
-            pIDs = temp;
-            temp.Clear();
-            line = "";
-            while ((line = fileM.ReadLine()) != null)
+            else
+                pIDs = new Stack();
+            if(File.Exists("Mdata.txt"))
             {
-                temp.Push(line);
+                fileM = new StreamReader(@"Mdata.txt");
+                while ((line = fileM.ReadLine()) != null)
+                {
+                    temp.Push(line);
+                }
+                mIDs = temp;
+                fileM.Close();
             }
-            mIDs = temp;
-            fileM.Close();
-            fileP.Close();
+            else
+                mIDs = new Stack();
+            
+            
+            
+            
         }
         public DataBaseReadWrite(string p,string m)
         {
