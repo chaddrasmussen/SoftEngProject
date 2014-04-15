@@ -326,8 +326,7 @@ namespace Library
                     mediaSD.Remove(i);
                     UpdateScreens();
                     ClearRemoveMediaFields();
-					UpdateScreens();
-					ClearRemoveMediaFields();
+				
                 }
             }
         }
@@ -573,10 +572,14 @@ namespace Library
             {
                 txtPatronItemsCheckedOut.Items.Clear();
             }
-
-            displayMedia();
-            displayPatrons();
-
+            if (mediaSD.Count >0)
+            {
+                displayMedia();
+            }
+            if (patronSD.Count > 0)
+            {
+                displayPatrons();
+            }
             if (txtDisplayPatron.SelectedItems.Count == 0)
             {
                 btnCheckOut.Enabled = false;
