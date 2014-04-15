@@ -177,6 +177,7 @@ namespace Library
         private void btnAddMedia_Click(object sender, EventArgs e)
         {
             saveNewMedia();
+            setMediaID();
         }
         private void saveNewMedia()
         {
@@ -186,22 +187,22 @@ namespace Library
                 if (txtMediaType.SelectedIndex == 1)
                 {
                     m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text, MediaType.ADULTBOOK);
-                    mediaSD.Add(m.ID, m);
+                    mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 2)
                 {
                     m = new Media(txtMediaTitle.Text,txtMediaAuthor.Text, MediaType.CHILDBOOK);
-                    mediaSD.Add(m.ID, m);
+                    mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 3)
                 {
                     m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text,MediaType.DVD);
-                    mediaSD.Add(m.ID, m);
+                    mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 4)
                 {
                     m = new Media(txtMediaType.Text,txtMediaAuthor.Text, MediaType.VIDEO);
-                    mediaSD.Add(m.ID, m);
+                    mediaSD.Add(mediaID, m);
                 }
                 MessageBox.Show("Media item '" +txtMediaTitle.Text+"' added successfully!");
             }
