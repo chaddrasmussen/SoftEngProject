@@ -92,6 +92,9 @@
             this.txtPatronName = new System.Windows.Forms.TextBox();
             this.lblpatronName = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
+            this.lstvwPatronList = new System.Windows.Forms.ListView();
+            this.clmPatronName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmPatronCardID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -111,6 +114,7 @@
             // 
             // tabLibraryMain
             // 
+            this.tabLibraryMain.Controls.Add(this.lstvwPatronList);
             this.tabLibraryMain.Controls.Add(this.lstvwMediaList);
             this.tabLibraryMain.Controls.Add(this.btnCheckOut);
             this.tabLibraryMain.Controls.Add(this.lblPatronDispName);
@@ -206,10 +210,10 @@
             // txtDisplayPatron
             // 
             this.txtDisplayPatron.FormattingEnabled = true;
-            this.txtDisplayPatron.Location = new System.Drawing.Point(29, 162);
+            this.txtDisplayPatron.Location = new System.Drawing.Point(6, 162);
             this.txtDisplayPatron.MultiColumn = true;
             this.txtDisplayPatron.Name = "txtDisplayPatron";
-            this.txtDisplayPatron.Size = new System.Drawing.Size(296, 264);
+            this.txtDisplayPatron.Size = new System.Drawing.Size(319, 264);
             this.txtDisplayPatron.TabIndex = 8;
             this.txtDisplayPatron.SelectedIndexChanged += new System.EventHandler(this.txtDisplayPatron_SelectedIndexChanged);
             // 
@@ -235,7 +239,7 @@
             // 
             this.btnCheckIn.Location = new System.Drawing.Point(704, 323);
             this.btnCheckIn.Name = "btnCheckIn";
-            this.btnCheckIn.Size = new System.Drawing.Size(258, 23);
+            this.btnCheckIn.Size = new System.Drawing.Size(259, 23);
             this.btnCheckIn.TabIndex = 26;
             this.btnCheckIn.Text = "Check In";
             this.btnCheckIn.UseVisualStyleBackColor = true;
@@ -252,7 +256,7 @@
             // 
             this.btnSearchMedia.Location = new System.Drawing.Point(571, 131);
             this.btnSearchMedia.Name = "btnSearchMedia";
-            this.btnSearchMedia.Size = new System.Drawing.Size(96, 23);
+            this.btnSearchMedia.Size = new System.Drawing.Size(95, 23);
             this.btnSearchMedia.TabIndex = 20;
             this.btnSearchMedia.Text = "Search";
             this.btnSearchMedia.UseVisualStyleBackColor = true;
@@ -726,6 +730,31 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
+            // lstvwPatronList
+            // 
+            this.lstvwPatronList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clmPatronName,
+            this.clmPatronCardID});
+            this.lstvwPatronList.HideSelection = false;
+            this.lstvwPatronList.Location = new System.Drawing.Point(29, 162);
+            this.lstvwPatronList.Name = "lstvwPatronList";
+            this.lstvwPatronList.Size = new System.Drawing.Size(296, 264);
+            this.lstvwPatronList.TabIndex = 28;
+            this.lstvwPatronList.UseCompatibleStateImageBehavior = false;
+            this.lstvwPatronList.View = System.Windows.Forms.View.Details;
+            this.lstvwPatronList.SelectedIndexChanged += new System.EventHandler(this.lstvwPatronList_SelectedIndexChanged);
+            // 
+            // clmPatronName
+            // 
+            this.clmPatronName.Text = "Name";
+            this.clmPatronName.Width = 200;
+            // 
+            // clmPatronCardID
+            // 
+            this.clmPatronCardID.Text = "ID";
+            this.clmPatronCardID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.clmPatronCardID.Width = 91;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -813,6 +842,9 @@
         private System.Windows.Forms.ColumnHeader clmID;
         private System.Windows.Forms.Label lblMediaID;
         private System.Windows.Forms.TextBox txtMediaID;
+        private System.Windows.Forms.ListView lstvwPatronList;
+        private System.Windows.Forms.ColumnHeader clmPatronName;
+        private System.Windows.Forms.ColumnHeader clmPatronCardID;
 
     }
 }

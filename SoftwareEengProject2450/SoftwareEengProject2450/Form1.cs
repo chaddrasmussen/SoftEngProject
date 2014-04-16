@@ -115,10 +115,16 @@ namespace Library
         private void displayPatrons()
         {
             txtDisplayPatron.Items.Clear();
+            lstvwPatronList.Items.Clear();
+
             foreach (KeyValuePair<uint, Patron> p in this.patronSD)
             {
                 txtDisplayPatron.Items.Add(p.Value);
                 txtDisplayPatron.DisplayMember = "_name";
+
+                ListViewItem item = new ListViewItem(p.Value._name);
+                item.SubItems.Add(p.Value.CardNumber.ToString());
+                lstvwPatronList.Items.Add(item);
             }
         }
 
@@ -374,6 +380,22 @@ namespace Library
         }
 
         /// <summary>
+        /// Updates the PatronItemsCheckedOut info
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lstvwPatronList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           if (lstvwPatronList.SelectedItems.Count > 0)
+           {
+               ListViewItem item = lstvwPatronList.SelectedItems[0];
+               Patron patron = patronSD[uint.Parse(item.SubItems[clmPatronCardID.Index].Text)];
+               lblPatronDispName.Text = patron._name;
+               UpdatePatronItemsCheckedOut(patron);
+           }
+        }
+
+        /// <summary>
         /// Fills the list box with the items the patron currently has checked out
         /// </summary>
         /// <param name="patron"></param>
@@ -411,57 +433,67 @@ namespace Library
         /// </summary>
         private void CheckOutMedia()
         {
-            if (txtDisplayPatron.SelectedIndex == -1)
+            if (txtDisplayPatron.SelectedIndex != -1 /*temp*/ || lstvwPatronList.SelectedItems.Count > 0)
             {
-                MessageBox.Show(noPatron);
-            }
 
-            if (lstvwMediaList.SelectedItems.Count <= 0)
-            {
-                MessageBox.Show(noMedia);
+
+                if (lstvwMediaList.SelectedItems.Count <= 0)
+                {
+                    MessageBox.Show(noMedia);
+                }
+                else
+                {
+                    Patron p = (Patron)txtDisplayPatron.SelectedItem;
+                    ListViewItem pItem = lstvwPatronList.SelectedItems[0];
+                    Patron patron = patronSD[uint.Parse(pItem.SubItems[clmPatronCardID.Index].Text)];
+
+                    //Check to see if checkout possible
+                    if (!patron.overdueBooks(dateTimePicker.Value))
+                    //if (!p.overdueBooks(dateTimePicker.Value))
+                    {
+                        bool success = true;
+
+                        // For multiple check outs, check that each one is successful
+                        foreach (ListViewItem item in lstvwMediaList.SelectedItems)
+                        {
+                            if (success)
+                            {
+                                Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index].Text)];
+
+                                if (patron.allowed(media))
+                                //if (p.allowed(media))
+                                {
+                                    success = media.CheckOut(patron, dateTimePicker.Value) ? true : false;
+                                    //success = media.CheckOut(p, dateTimePicker.Value) ? true : false;
+                                }
+                                else
+                                {
+                                    success = false;
+                                }
+                            }
+                        }
+
+                        // Print results
+                        if (success)
+                        {
+                            MessageBox.Show("Check out successful!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Check out failed!");
+                        }
+
+                        // Update info on main screen
+                        UpdatePatronItemsCheckedOut(patron);
+                        //UpdatePatronItemsCheckedOut(p);
+                        displayMedia();
+                        CheckCheckInButton();
+                    }
+                }
             }
             else
             {
-                Patron p = (Patron)txtDisplayPatron.SelectedItem;
-
-                //Check to see if checkout possible
-                if (!p.overdueBooks(dateTimePicker.Value))
-                {
-                    bool success = true;
-
-                    // For multiple check outs, check that each one is successful
-                    foreach (ListViewItem item in lstvwMediaList.SelectedItems)
-                    {
-                        if (success)
-                        {
-                            Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index].Text)];
-
-                            if (p.allowed(media))
-                            {
-                                success = media.CheckOut(p, dateTimePicker.Value) ? true : false;
-                            }
-                            else
-                            {
-                                success = false;
-                            }
-                        }
-                    }
-
-                    // Print results
-                    if (success)
-                    {
-                        MessageBox.Show("Check out successful!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Check out failed!");
-                    }                   
-
-                    // Update info on main screen
-                    UpdatePatronItemsCheckedOut(p);
-                    displayMedia();
-                    CheckCheckInButton();
-                }
+                MessageBox.Show(noPatron);
             }
         }
 
@@ -541,7 +573,7 @@ namespace Library
                 }
 
                 // Toggle button if user can check media out
-                if (selectionNotCheckedOut && txtDisplayPatron.SelectedItems.Count > 0)
+                if (selectionNotCheckedOut && (txtDisplayPatron.SelectedItems.Count > 0 || lstvwPatronList.SelectedItems.Count > 0))
                 {
                     btnCheckOut.Enabled = true;
                 }
