@@ -158,14 +158,10 @@ namespace Library
 
             foreach (KeyValuePair<uint, Media> m in mediaSD)
             {
-                if (m.Value != null)
-                {
-                ListViewItem item = new ListViewItem(m.Value.Title);
-                    if(m.Value.CheckedOut)
-                item.SubItems.Add(m.Value.Borrower._name);
-                item.SubItems.Add(m.Key.ToString());
-                lstvwMediaList.Items.Add(item);
-            }
+                    ListViewItem item = new ListViewItem(m.Value.Title);
+                    item.SubItems.Add(m.Value.Borrower._name);
+                    item.SubItems.Add(m.Key.ToString());
+                    lstvwMediaList.Items.Add(item);
             }
 
         }
@@ -538,7 +534,7 @@ namespace Library
                     if (selectionNotCheckedOut)
                     {
                         Media media = mediaSD[uint.Parse(item.SubItems[clmID.Index].Text)];
-                        Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index-1].Text)];
+                        //Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index].Text)];
                         
                         selectionNotCheckedOut = media.CheckedOut ? false : true;
                     }

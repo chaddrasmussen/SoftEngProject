@@ -55,6 +55,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.displayOverdueMedia = new System.Windows.Forms.RichTextBox();
             this.tabAddRemovePatron = new System.Windows.Forms.TabPage();
+            this.lblMediaID = new System.Windows.Forms.Label();
+            this.txtMediaID = new System.Windows.Forms.TextBox();
             this.txtMediaType = new System.Windows.Forms.ComboBox();
             this.txtPatronCardNum = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -90,8 +92,6 @@
             this.txtPatronName = new System.Windows.Forms.TextBox();
             this.lblpatronName = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.txtMediaID = new System.Windows.Forms.TextBox();
-            this.lblMediaID = new System.Windows.Forms.Label();
             this.tabControlLibrary.SuspendLayout();
             this.tabLibraryMain.SuspendLayout();
             this.tabListOverdue.SuspendLayout();
@@ -179,7 +179,7 @@
             // 
             this.lblPatronDispName.AutoSize = true;
             this.lblPatronDispName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPatronDispName.Location = new System.Drawing.Point(683, 134);
+            this.lblPatronDispName.Location = new System.Drawing.Point(692, 133);
             this.lblPatronDispName.Name = "lblPatronDispName";
             this.lblPatronDispName.Size = new System.Drawing.Size(107, 18);
             this.lblPatronDispName.TabIndex = 31;
@@ -187,7 +187,7 @@
             // 
             // txtPatronItemsCheckedOut
             // 
-            this.txtPatronItemsCheckedOut.Location = new System.Drawing.Point(686, 162);
+            this.txtPatronItemsCheckedOut.Location = new System.Drawing.Point(695, 161);
             this.txtPatronItemsCheckedOut.Name = "txtPatronItemsCheckedOut";
             this.txtPatronItemsCheckedOut.Size = new System.Drawing.Size(275, 147);
             this.txtPatronItemsCheckedOut.TabIndex = 25;
@@ -195,7 +195,7 @@
             // 
             // btnClearGUI
             // 
-            this.btnClearGUI.Location = new System.Drawing.Point(750, 383);
+            this.btnClearGUI.Location = new System.Drawing.Point(759, 382);
             this.btnClearGUI.Name = "btnClearGUI";
             this.btnClearGUI.Size = new System.Drawing.Size(141, 43);
             this.btnClearGUI.TabIndex = 29;
@@ -233,9 +233,9 @@
             // 
             // btnCheckIn
             // 
-            this.btnCheckIn.Location = new System.Drawing.Point(704, 324);
+            this.btnCheckIn.Location = new System.Drawing.Point(704, 323);
             this.btnCheckIn.Name = "btnCheckIn";
-            this.btnCheckIn.Size = new System.Drawing.Size(244, 23);
+            this.btnCheckIn.Size = new System.Drawing.Size(258, 23);
             this.btnCheckIn.TabIndex = 26;
             this.btnCheckIn.Text = "Check In";
             this.btnCheckIn.UseVisualStyleBackColor = true;
@@ -400,6 +400,22 @@
             this.tabAddRemovePatron.TabIndex = 2;
             this.tabAddRemovePatron.Text = "Add  or Remove New Patron/Media";
             this.tabAddRemovePatron.UseVisualStyleBackColor = true;
+            // 
+            // lblMediaID
+            // 
+            this.lblMediaID.AutoSize = true;
+            this.lblMediaID.Location = new System.Drawing.Point(530, 222);
+            this.lblMediaID.Name = "lblMediaID";
+            this.lblMediaID.Size = new System.Drawing.Size(53, 13);
+            this.lblMediaID.TabIndex = 48;
+            this.lblMediaID.Text = "Media ID:";
+            // 
+            // txtMediaID
+            // 
+            this.txtMediaID.Location = new System.Drawing.Point(661, 219);
+            this.txtMediaID.Name = "txtMediaID";
+            this.txtMediaID.Size = new System.Drawing.Size(200, 20);
+            this.txtMediaID.TabIndex = 47;
             // 
             // txtMediaType
             // 
@@ -709,22 +725,6 @@
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
-            // 
-            // txtMediaID
-            // 
-            this.txtMediaID.Location = new System.Drawing.Point(661, 219);
-            this.txtMediaID.Name = "txtMediaID";
-            this.txtMediaID.Size = new System.Drawing.Size(200, 20);
-            this.txtMediaID.TabIndex = 47;
-            // 
-            // lblMediaID
-            // 
-            this.lblMediaID.AutoSize = true;
-            this.lblMediaID.Location = new System.Drawing.Point(530, 222);
-            this.lblMediaID.Name = "lblMediaID";
-            this.lblMediaID.Size = new System.Drawing.Size(53, 13);
-            this.lblMediaID.TabIndex = 48;
-            this.lblMediaID.Text = "Media ID:";
             // 
             // Form1
             // 
