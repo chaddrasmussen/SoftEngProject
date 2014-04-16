@@ -404,15 +404,15 @@
             // lblMediaID
             // 
             this.lblMediaID.AutoSize = true;
-            this.lblMediaID.Location = new System.Drawing.Point(530, 222);
+            this.lblMediaID.Location = new System.Drawing.Point(543, 226);
             this.lblMediaID.Name = "lblMediaID";
-            this.lblMediaID.Size = new System.Drawing.Size(53, 13);
+            this.lblMediaID.Size = new System.Drawing.Size(56, 13);
             this.lblMediaID.TabIndex = 48;
-            this.lblMediaID.Text = "Media ID:";
+            this.lblMediaID.Text = "Media ID: ";
             // 
             // txtMediaID
             // 
-            this.txtMediaID.Location = new System.Drawing.Point(661, 219);
+            this.txtMediaID.Location = new System.Drawing.Point(661, 222);
             this.txtMediaID.Name = "txtMediaID";
             this.txtMediaID.Size = new System.Drawing.Size(200, 20);
             this.txtMediaID.TabIndex = 47;
@@ -426,7 +426,7 @@
             "CHILDBOOK",
             "DVD",
             "VIDEO"});
-            this.txtMediaType.Location = new System.Drawing.Point(661, 186);
+            this.txtMediaType.Location = new System.Drawing.Point(661, 182);
             this.txtMediaType.Name = "txtMediaType";
             this.txtMediaType.Size = new System.Drawing.Size(200, 21);
             this.txtMediaType.TabIndex = 12;
@@ -451,7 +451,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(530, 182);
+            this.label19.Location = new System.Drawing.Point(530, 190);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(69, 13);
             this.label19.TabIndex = 44;
@@ -459,9 +459,10 @@
             // 
             // btnRemoveMedia
             // 
+            this.btnRemoveMedia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRemoveMedia.Location = new System.Drawing.Point(661, 476);
             this.btnRemoveMedia.Name = "btnRemoveMedia";
-            this.btnRemoveMedia.Size = new System.Drawing.Size(200, 23);
+            this.btnRemoveMedia.Size = new System.Drawing.Size(200, 30);
             this.btnRemoveMedia.TabIndex = 17;
             this.btnRemoveMedia.Text = "Remove Media";
             this.btnRemoveMedia.UseVisualStyleBackColor = true;
@@ -469,9 +470,10 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(194, 472);
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.Location = new System.Drawing.Point(194, 476);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(200, 23);
+            this.btnRemove.Size = new System.Drawing.Size(200, 30);
             this.btnRemove.TabIndex = 15;
             this.btnRemove.Text = "Remove Patron";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -479,9 +481,10 @@
             // 
             // btnAddMedia
             // 
-            this.btnAddMedia.Location = new System.Drawing.Point(661, 252);
+            this.btnAddMedia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddMedia.Location = new System.Drawing.Point(661, 255);
             this.btnAddMedia.Name = "btnAddMedia";
-            this.btnAddMedia.Size = new System.Drawing.Size(200, 23);
+            this.btnAddMedia.Size = new System.Drawing.Size(200, 31);
             this.btnAddMedia.TabIndex = 13;
             this.btnAddMedia.Text = "Add Media";
             this.btnAddMedia.UseVisualStyleBackColor = true;
@@ -489,9 +492,10 @@
             // 
             // btnAddPatron
             // 
+            this.btnAddPatron.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddPatron.Location = new System.Drawing.Point(194, 351);
             this.btnAddPatron.Name = "btnAddPatron";
-            this.btnAddPatron.Size = new System.Drawing.Size(200, 23);
+            this.btnAddPatron.Size = new System.Drawing.Size(200, 29);
             this.btnAddPatron.TabIndex = 9;
             this.btnAddPatron.Text = "Add Patron";
             this.btnAddPatron.UseVisualStyleBackColor = true;
@@ -559,7 +563,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(558, 151);
+            this.label17.Location = new System.Drawing.Point(558, 147);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(41, 13);
             this.label17.TabIndex = 29;
@@ -575,7 +579,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(566, 109);
+            this.label13.Location = new System.Drawing.Point(566, 108);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(33, 13);
             this.label13.TabIndex = 29;

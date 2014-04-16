@@ -159,7 +159,14 @@ namespace Library
             foreach (KeyValuePair<uint, Media> m in mediaSD)
             {
                     ListViewItem item = new ListViewItem(m.Value.Title);
-                    item.SubItems.Add(m.Value.Borrower._name);
+                    if (m.Value.CheckedOut == true)
+                    {
+                        item.SubItems.Add(m.Value.Borrower._name);
+                    }
+                    else
+                    {
+                        item.SubItems.Add(" ");
+                    }
                     item.SubItems.Add(m.Key.ToString());
                     lstvwMediaList.Items.Add(item);
             }
@@ -349,6 +356,7 @@ namespace Library
 
         private void btnDisplayOverdue_Click(object sender, EventArgs e)
         {
+            displayOverdueMedia.Clear();
             foreach (KeyValuePair<uint, Media> mm in this.mediaSD)
             {
                 if(mm.Value.Overdue(dateTimeOverdue.Value))
