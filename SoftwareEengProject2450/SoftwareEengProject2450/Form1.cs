@@ -313,8 +313,8 @@ namespace Library
                 {
 					if (M.Borrower != Patron.None)
 					{
-         	           mediaSD[i] = m;
-         	           if (m.CheckedOut)
+         	           //mediaSD[i] = m;
+         	           if (M.CheckedOut)
             	        {
         	                MessageBox.Show("This book is currently checked out, and cannot be removed.");
                 	    }
@@ -325,13 +325,7 @@ namespace Library
                   	        mediaIDs.Push(i);
                             setMediaID();
                     	}
-					}
-
-                    MessageBox.Show(M.Title + " removed.");
-                    mediaSD.Remove(i);
-                    UpdateScreens();
-                    ClearRemoveMediaFields();
-				
+					}				
                 }
             }
         }
