@@ -208,7 +208,6 @@
             // 
             this.txtDisplayPatron.FormattingEnabled = true;
             this.txtDisplayPatron.Location = new System.Drawing.Point(29, 162);
-            this.txtDisplayPatron.MultiColumn = true;
             this.txtDisplayPatron.Name = "txtDisplayPatron";
             this.txtDisplayPatron.Size = new System.Drawing.Size(296, 264);
             this.txtDisplayPatron.TabIndex = 8;
