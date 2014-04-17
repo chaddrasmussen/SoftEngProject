@@ -7,8 +7,12 @@ using System.Windows.Forms;
 
 namespace Library
 {
+    /// <summary>
+    /// Purpose: GUI for Library Manager
+    /// </summary>
     public partial class Form1 : Form
     {
+        //Nikki
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
 
@@ -428,7 +432,7 @@ namespace Library
             {
                 Patron p = (Patron)txtDisplayPatron.SelectedItem;
 
-                //Check to see if checkout possible
+                //Check to see if patron has overdue books
                 if (!p.overdueBooks(dateTimePicker.Value))
                 {
                     bool success = true;
@@ -440,7 +444,7 @@ namespace Library
                         {
                             Media media = mediaSD[(uint)Convert.ToInt32(item.SubItems[clmID.Index].Text)];
 
-                            if (p.allowed(media))
+                            if (p.allowed(media))//is checkout allowed based on age restrictions?
                             {
                                 success = media.CheckOut(p, dateTimePicker.Value) ? true : false;
                             }
