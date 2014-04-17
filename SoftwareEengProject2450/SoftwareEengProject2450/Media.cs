@@ -91,13 +91,13 @@ namespace Library
         /// <param name="title">string</param>
         /// <param name="numberOfCopies">uint</param>
         /// <param name="mType">MediaType</param>
-		public Media(string title, string author, MediaType mType)
+		public Media(string title, string author, MediaType mType, uint id)
 		{
             Title = title;
             Author = author;
             setLoanTime(mType);
             CheckedOut = false;
-			ID = ++UniqueTitleCount;
+			ID = id;
             Borrower = Patron.None;
             this.mType = mType;
 		}
@@ -169,7 +169,6 @@ namespace Library
             if (Borrower != Patron.None)
             {
                 CheckedOut = false;
-                Borrower.removeMedia(this, this.ID);
                 Borrower = Patron.None;
                 return true;
             }

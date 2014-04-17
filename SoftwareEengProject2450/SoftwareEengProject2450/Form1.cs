@@ -35,6 +35,7 @@ namespace Library
             db.readPatron(ref patronSD);
             txtPatronItemsCheckedOut.SelectionMode = SelectionMode.MultiExtended;
             lblPatronDispName.Text = string.Empty;
+			lblPatronID.Text = string.Empty;
             if (mediaSD.Count > 0)
 			{
 				Media.Setup(mediaSD.Keys.Last());
@@ -202,22 +203,22 @@ namespace Library
             {
                 if (txtMediaType.SelectedIndex == 1)
                 {
-                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text, MediaType.ADULTBOOK);
+                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text, MediaType.ADULTBOOK,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 2)
                 {
-                    m = new Media(txtMediaTitle.Text,txtMediaAuthor.Text, MediaType.CHILDBOOK);
+                    m = new Media(txtMediaTitle.Text,txtMediaAuthor.Text, MediaType.CHILDBOOK,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 3)
                 {
-                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text,MediaType.DVD);
+                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text,MediaType.DVD,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 4)
                 {
-                    m = new Media(txtMediaType.Text,txtMediaAuthor.Text, MediaType.VIDEO);
+                    m = new Media(txtMediaType.Text,txtMediaAuthor.Text, MediaType.VIDEO,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 MessageBox.Show("Media item '" +txtMediaTitle.Text+"' added successfully!");
@@ -313,8 +314,8 @@ namespace Library
                 {
 					if (M.Borrower != Patron.None)
 					{
-         	           mediaSD[i] = m;
-         	           if (m.CheckedOut)
+         	           //mediaSD[i] = m;
+         	           if (M.CheckedOut)
             	        {
         	                MessageBox.Show("This book is currently checked out, and cannot be removed.");
                 	    }
@@ -325,13 +326,7 @@ namespace Library
                   	        mediaIDs.Push(i);
                             setMediaID();
                     	}
-					}
-
-                    MessageBox.Show(M.Title + " removed.");
-                    mediaSD.Remove(i);
-                    UpdateScreens();
-                    ClearRemoveMediaFields();
-				
+					}				
                 }
             }
         }
@@ -346,14 +341,13 @@ namespace Library
         /// </summary>
         private void ClearMainGUI()
         {
-            txtSearchMedia.Clear();
-            txtSearchPatron.Clear();
             dateTimePicker.Value = DateTime.Today;
             lblPatronDispName.Text = string.Empty;
+			lblPatronID.Text = string.Empty;
             txtDisplayPatron.SelectedIndex = -1;
             UpdateScreens();
         }
-
+		
         private void btnDisplayOverdue_Click(object sender, EventArgs e)
         {
             displayOverdueMedia.Clear();
@@ -376,7 +370,8 @@ namespace Library
             if (txtDisplayPatron.SelectedIndex != -1)
             {
                 Patron patron = txtDisplayPatron.SelectedItem as Patron;
-                lblPatronDispName.Text = "Checked out to: " + patron._name;
+                lblPatronDispName.Text = patron._name;
+				lblPatronID.Text = "ID: " + patron.CardNumber;
                 UpdatePatronItemsCheckedOut(patron);
             }
         }
@@ -412,6 +407,7 @@ namespace Library
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
             CheckInMedia();
+            displayMedia();
         }
 
         /// <summary>
@@ -489,6 +485,7 @@ namespace Library
             else
             {
                 Patron patron = txtDisplayPatron.SelectedItem as Patron;
+                
                 bool success = true;
 
                 // For multiple check ins, check that each is successful
@@ -500,7 +497,8 @@ namespace Library
 
                         if (patron._currentChecked.ContainsKey(media.ID))
                         {
-                            success = media.CheckIn() ? true : false;
+                            success = mediaSD[media.ID].CheckIn() ? true : false;
+                            patronSD[patron.CardNumber].removeMedia(media.ID);
                         }
                     }
                 }
@@ -649,6 +647,5 @@ namespace Library
                 btnCheckIn.Enabled = false;
             }
         }
-
     }
 }
