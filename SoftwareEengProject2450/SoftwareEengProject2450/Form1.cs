@@ -12,7 +12,7 @@ namespace Library
     /// </summary>
     public partial class Form1 : Form
     {
-        //Nikki
+        //Database of media and patrons
         private SortedDictionary<uint, Media> mediaSD;
         private SortedDictionary<uint, Patron> patronSD;
 
@@ -27,8 +27,8 @@ namespace Library
 
         private Media m;
         DataBaseReadWrite db = new DataBaseReadWrite("patron.bin","media.bin");
-        private string noPatron = "Error: No patron selected. Please click the patron's name, and then click the Select button.";
-        private string noMedia = "Error: No media selected. Please click the name of the media to be checked in/out, and then click the Select button.";
+        private string noPatron = "Error: No patron selected. Please click the patron's name.";
+        private string noMedia = "Error: No media selected. Please click the name of the media to be checked in/out.";
         public Form1()
         {
             InitializeComponent();
@@ -109,6 +109,7 @@ namespace Library
         }
         /// <summary>
         /// Purpose: to display all patrons
+        /// Nikki
         /// </summary>
         private void btnDisplayAllPatrons_Click(object sender, EventArgs e)
         {
@@ -116,6 +117,7 @@ namespace Library
         }
         /// <summary>
         /// Purpose: helper for btnDisplayAllPatrons
+        /// Nikki/Jon rewrite
         /// </summary>
         private void displayPatrons()
         {
@@ -152,11 +154,16 @@ namespace Library
         }
         /// <summary>
         /// Purpose: to display all media items
+        /// Nikki
         /// </summary>
         private void btnDisplayAllMedia_Click(object sender, EventArgs e)
         {
             displayMedia();
         }
+        /// <summary>
+        /// Purpose: helper for displaymedia button click
+        /// Nikki, Jon rewrite
+        /// </summary>
         private void displayMedia()
         {
             lstvwMediaList.Items.Clear();
@@ -184,14 +191,19 @@ namespace Library
             setPatronID();
 
         }
+        /// <summary>
+        /// Purpose: save new patron once validated
+        /// Nikki
+        /// </summary>
         private void saveNewPatron()
         {
             if (Patron.validate(txtPatronName.Text, txtPatronAddress.Text, txtPatronCity.Text, txtPatronState.Text, txtPatronZip.Text, txtPatronPhone.Text, txtPatronCardNum.Text))
             {
                 string combinedAddress = string.Concat(txtPatronAddress.Text, " ,", txtPatronCity.Text, ", ", txtPatronState.Text, ", ", txtPatronZip.Text);
+              
                 patronSD.Add(uint.Parse(txtPatronCardNum.Text), new Patron(txtPatronName.Text, uint.Parse(txtPatronCardNum.Text), combinedAddress, txtPatronPhone.Text, txtPatronDateofBirth.Value));
                 MessageBox.Show("Patron added successfully!");
-                UpdateScreens();
+                UpdateScreens();//jon
                 ClearAddPatronFields();
             }
         }
@@ -200,37 +212,46 @@ namespace Library
             saveNewMedia();
             setMediaID();
         }
+        /// <summary>
+        /// Purpose: helper for button save media
+        /// Nikki
+        /// </summary>
         private void saveNewMedia()
         {
             
-            if (validateMedia())
+            if (validateMedia()) //validate GUI fields
             {
-                if (txtMediaType.SelectedIndex == 1)
+                if (txtMediaType.SelectedIndex == 1) //Adult Book
                 {
                     m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text, MediaType.ADULTBOOK,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
-                if (txtMediaType.SelectedIndex == 2)
+                if (txtMediaType.SelectedIndex == 2) //Child Book
                 {
                     m = new Media(txtMediaTitle.Text,txtMediaAuthor.Text, MediaType.CHILDBOOK,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
-                if (txtMediaType.SelectedIndex == 3)
+                if (txtMediaType.SelectedIndex == 3) //DVD
                 {
                     m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text,MediaType.DVD,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
-                if (txtMediaType.SelectedIndex == 4)
+                if (txtMediaType.SelectedIndex == 4) //Video
                 {
                     m = new Media(txtMediaType.Text,txtMediaAuthor.Text, MediaType.VIDEO,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 MessageBox.Show("Media item '" +txtMediaTitle.Text+"' added successfully!");
-                UpdateScreens();
+                UpdateScreens(); //jon
                 ClearAddMediaFields();
             }
            
         }
+        /// <summary>
+        /// Purpose: to validate media
+        /// Nikki
+        /// </summary>
+        /// <returns>bool</returns>
         private bool validateMedia()
         {
             if (string.IsNullOrEmpty(txtMediaTitle.Text))
@@ -250,41 +271,49 @@ namespace Library
             }
             return true;
         }
+        /// <summary>
+        /// Purpose: exit the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnQuit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        /// Purpose: to remove patrons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemove_Click(object sender, EventArgs e)
         {
             Patron p;
             uint cardNumber;
-            if (!uint.TryParse(txtRemovePatron.Text, out cardNumber))
+            if (!uint.TryParse(txtRemovePatron.Text, out cardNumber))  //check if ID number is valid
             {
-
                 MessageBox.Show("Please enter a valid library card number");
             }
             else
             {
-                if (!patronSD.ContainsKey(cardNumber))
+                if (!patronSD.ContainsKey(cardNumber))//check if patron exists by ID number
                 {
-                    if (patronSD.Count == 0)
+                    if (patronSD.Count == 0) //is patron database empty?
                     {
                         MessageBox.Show("No patrons to remove.");
                     }
-                    else
+                    else //patron not found
                     MessageBox.Show("No patron with such ID exists.");
                 }
                 else
                 {
                     p = patronSD[cardNumber];
-                    if (p._currentChecked.Count > 0)
+                    if (p._currentChecked.Count > 0) //check if patron has checkedout books
                     {
                         MessageBox.Show("This patron currently has books checked out, and cannot be removed.");
                     }
-                    else
+                    else 
                     {
-                        patronIDs.Push(cardNumber);
+                        patronIDs.Push(cardNumber); //mason
                         MessageBox.Show("Removed " + " " + p.ToString());
                         patronSD.Remove(cardNumber);
                         setPatronID();
@@ -294,20 +323,25 @@ namespace Library
                 }
             }
         }
-
+        /// <summary>
+        /// Purpose: remove media
+        /// Nikki
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemoveMedia_Click(object sender, EventArgs e)
         {
             uint i;
             Media M;
-            if (!uint.TryParse(txtMediaRemoveID.Text, out i))
+            if (!uint.TryParse(txtMediaRemoveID.Text, out i)) //check if id number is valid
             {
                 MessageBox.Show("Please enter a valid media ID number");
             }
-            else if (mediaSD.ContainsKey(uint.Parse(txtMediaRemoveID.Text)))
+            else if (mediaSD.ContainsKey(uint.Parse(txtMediaRemoveID.Text))) //find book by Id number
             {
                 if (!mediaSD.TryGetValue(i, out M))
                 {
-                    if (mediaSD.Count == 0)
+                    if (mediaSD.Count == 0) //is database empty?
                     {
                         MessageBox.Show("No media items to remove.");
                     }
@@ -318,7 +352,7 @@ namespace Library
                 {
 					if (M.Borrower != Patron.None)
 					{
-         	           //mediaSD[i] = m;
+         	           //check if book is checkedout before removing
          	           if (M.CheckedOut)
             	        {
         	                MessageBox.Show("This book is currently checked out, and cannot be removed.");
@@ -327,7 +361,7 @@ namespace Library
                 	    {
                     	    MessageBox.Show(M.Title + " removed.");
                 	        mediaSD.Remove(i);
-                  	        mediaIDs.Push(i);
+                  	        mediaIDs.Push(i);//mason
                             setMediaID();
                     	}
 					}				
@@ -342,6 +376,7 @@ namespace Library
 
         /// <summary>
         /// Clears everything on the main page
+        /// Nikki, Jon
         /// </summary>
         private void ClearMainGUI()
         {
@@ -351,10 +386,15 @@ namespace Library
             txtDisplayPatron.SelectedIndex = -1;
             UpdateScreens();
         }
-		
+		/// <summary>
+		/// Purpose: to display overdue media per patron
+        /// Nikki
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void btnDisplayOverdue_Click(object sender, EventArgs e)
         {
-            displayOverdueMedia.Clear();
+            displayOverdueMedia.Clear(); 
             foreach (KeyValuePair<uint, Media> mm in this.mediaSD)
             {
                 if(mm.Value.Overdue(dateTimeOverdue.Value))
@@ -366,6 +406,7 @@ namespace Library
 
         /// <summary>
         /// Updates the patron name label
+        /// Jon
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -382,6 +423,7 @@ namespace Library
 
         /// <summary>
         /// Fills the list box with the items the patron currently has checked out
+        /// Jon
         /// </summary>
         /// <param name="patron"></param>
         private void UpdatePatronItemsCheckedOut(Patron patron)
@@ -402,12 +444,21 @@ namespace Library
             
             CheckCheckInButton();
         }
-
+        /// <summary>
+        /// Purpose: checkout media
+        /// Nikki
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
             CheckOutMedia();            
         }
-
+        /// <summary>
+        /// Purpose: check in media
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
             CheckInMedia();
@@ -415,16 +466,17 @@ namespace Library
         }
 
         /// <summary>
-        /// Checks out media
+        /// Checks out media -helper for btn click
+        /// Nikki, Jon
         /// </summary>
         private void CheckOutMedia()
         {
-            if (txtDisplayPatron.SelectedIndex == -1)
+            if (txtDisplayPatron.SelectedIndex == -1) //check if patron selected
             {
                 MessageBox.Show(noPatron);
             }
 
-            if (lstvwMediaList.SelectedItems.Count <= 0)
+            if (lstvwMediaList.SelectedItems.Count <= 0) //check if media selected
             {
                 MessageBox.Show(noMedia);
             }
@@ -474,15 +526,16 @@ namespace Library
         }
 
         /// <summary>
-        /// Checks in the media
+        /// Checks in the media - helper for btn click
+        /// Nikki, Jon
         /// </summary>
         private void CheckInMedia()
         {
-            if (txtDisplayPatron.SelectedIndex == -1)
+            if (txtDisplayPatron.SelectedIndex == -1) //check if patron selected
             {
                 MessageBox.Show(noPatron);
             }
-            if (txtPatronItemsCheckedOut.SelectedIndex == -1)
+            if (txtPatronItemsCheckedOut.SelectedIndex == -1) //check if media selected
             {
                 MessageBox.Show(noMedia);
             }
