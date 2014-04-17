@@ -147,7 +147,7 @@ namespace Library
                     {
                         using (patronStream)
                         {
-                            p = (SortedDictionary<uint, Patron>)bf.Deserialize(mediaStream);
+                            p = (SortedDictionary<uint, Patron>)bf.Deserialize(patronStream);
                         }
                     }
                 }
