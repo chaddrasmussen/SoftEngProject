@@ -143,7 +143,7 @@ namespace Library
             //has patron already checked maximum number of items?
             //is book already checked out?
             
-            if (CheckedOut == false && borrower._currentChecked.Count <= borrower._maxCheckouts)
+            if (CheckedOut == false && borrower._currentChecked.Count < borrower._maxCheckouts)
             {
                 CheckedOut = true;
                 borrower.addMedia(this, this.ID);
