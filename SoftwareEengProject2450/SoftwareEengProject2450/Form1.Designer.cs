@@ -392,6 +392,7 @@
             // 
             // txtMediaType
             // 
+            this.txtMediaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtMediaType.FormattingEnabled = true;
             this.txtMediaType.Items.AddRange(new object[] {
             "NONE",
@@ -713,6 +714,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Library";
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabControlLibrary.ResumeLayout(false);
             this.tabLibraryMain.ResumeLayout(false);
             this.tabLibraryMain.PerformLayout();
