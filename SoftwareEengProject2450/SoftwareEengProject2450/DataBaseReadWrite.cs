@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
@@ -14,6 +13,10 @@ namespace Library
         //variables used to write data to a file
         private Stream mediaStream;
         private Stream patronStream;
+
+        OpenFileDialog openMedia = new OpenFileDialog();
+        OpenFileDialog openPatron = new OpenFileDialog();
+
         private BinaryFormatter bf = new BinaryFormatter();
         public string mediaFile { get; set; }
         public string patronFile { get; set; }
@@ -93,32 +96,67 @@ namespace Library
             patronFile = p;
         }
 
+        /// <summary>
+        /// Purpose: reads in a file
+        /// </summary>
+        /// <param name="m"></param>
         public void readCatalog(ref SortedDictionary<uint, Media> m)
         {
-            mediaStream = new FileStream(mediaFile, FileMode.OpenOrCreate);
-            try 
-            { 
-                m = (SortedDictionary<uint,Media>)bf.Deserialize(mediaStream);
-            }
-            catch
+            openMedia.Filter = "bin files (*.bin)|*.bin";
+            openMedia.FilterIndex = 2 ;
+            openMedia.RestoreDirectory = true ;
+            MessageBox.Show("select media file");
+            if (openMedia.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("empty file");
+                try
+                {
+                    if ((mediaStream = openMedia.OpenFile()) != null)
+                    {
+                        using (mediaStream)
+                        {
+                            m = (SortedDictionary<uint, Media>)bf.Deserialize(mediaStream);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+                mediaStream.Close();
             }
-            mediaStream.Close();
+    
+            
+            
         }
 
+        /// <summary>
+        /// Purpose: reads in a file
+        /// </summary>
+        /// <param name="p"></param>
         public void readPatron(ref SortedDictionary<uint, Patron> p)
         {
-            patronStream = new FileStream(patronFile, FileMode.OpenOrCreate);
-            try
+            openPatron.Filter = "bin files (*.bin)|*.bin";
+            openPatron.FilterIndex = 2;
+            openPatron.RestoreDirectory = true;
+            MessageBox.Show("select patron file");
+            if (openPatron.ShowDialog() == DialogResult.OK)
             {
-                p = (SortedDictionary<uint, Patron>)bf.Deserialize(patronStream);
+                try
+                {
+                    if ((patronStream = openPatron.OpenFile()) != null)
+                    {
+                        using (patronStream)
+                        {
+                            p = (SortedDictionary<uint, Patron>)bf.Deserialize(mediaStream);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+                patronStream.Close();
             }
-            catch
-            {
-                MessageBox.Show("empty file");
-            }
-            patronStream.Close();
         }
         /// <summary>
         /// Pre-Condition - a sorted dictionary of all media is passed in
@@ -155,19 +193,6 @@ namespace Library
                 MessageBox.Show(ex.Message);
             }
         }
-
-        //uint searchTitle(SortedDictionary<uint,MediaObject> b, string n)
-        //{
-        //    foreach (KeyValuePair<uint,MediaObject> item in b)
-        //    {
-        //        if (item.Value.title.Contains(n))
-        //        {
-        //            return item.Key;
-        //        }
-        //    }
-        //    return 0;
-            
-        //}
     }
                
                

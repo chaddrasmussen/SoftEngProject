@@ -28,22 +28,6 @@ namespace Library
         public Form1()
         {
             InitializeComponent();
-            mediaSD = new SortedDictionary<uint, Media> { };
-            patronSD = new SortedDictionary<uint, Patron> { };
-            txtMediaType.SelectedIndex = 0;
-            db.readCatalog(ref mediaSD);
-            db.readPatron(ref patronSD);
-            txtPatronItemsCheckedOut.SelectionMode = SelectionMode.MultiExtended;
-            lblPatronDispName.Text = string.Empty;
-			lblPatronID.Text = string.Empty;
-            if (mediaSD.Count > 0)
-			{
-				Media.Setup(mediaSD.Keys.Last());
-			}
-			UpdateScreens();
-            db.readIDs(out patronIDs, out mediaIDs);
-            setMediaID();
-            setPatronID();
         }
 
         /// <summary>
@@ -646,6 +630,26 @@ namespace Library
             {
                 btnCheckIn.Enabled = false;
             }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            mediaSD = new SortedDictionary<uint, Media> { };
+            patronSD = new SortedDictionary<uint, Patron> { };
+            txtMediaType.SelectedIndex = 0;
+            db.readCatalog(ref mediaSD);
+            db.readPatron(ref patronSD);
+            txtPatronItemsCheckedOut.SelectionMode = SelectionMode.MultiExtended;
+            lblPatronDispName.Text = string.Empty;
+            lblPatronID.Text = string.Empty;
+            if (mediaSD.Count > 0)
+            {
+                Media.Setup(mediaSD.Keys.Last());
+            }
+            UpdateScreens();
+            db.readIDs(out patronIDs, out mediaIDs);
+            setMediaID();
+            setPatronID();
         }
     }
 }
