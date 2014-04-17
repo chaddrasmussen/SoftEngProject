@@ -6,7 +6,8 @@ using System.Text.RegularExpressions;
 namespace Library
 {
     /// <summary>
-    /// Class Patron
+    /// Class Patron: child (3 max checkout) or adult (6 max checkout, 18+ age)
+    /// Nikki Talley
     /// </summary>
     [Serializable]
     public class Patron : object
@@ -32,6 +33,7 @@ namespace Library
 
         /// <summary>
         /// Purpose: default constructor
+        /// Nikki
         /// </summary>
         public Patron()
         {
@@ -46,6 +48,7 @@ namespace Library
         }
         /// <summary>
         /// Purpose: parameterized constructor
+        /// Nikki
         /// </summary>
         /// <param name="name">string</param>
         /// <param name="cardNumber">uint</param>
@@ -61,7 +64,8 @@ namespace Library
             _overdueMedia = false;
             _cardNumber = cardNumber;
             _currentChecked = new SortedDictionary<uint, Media>();
-            if (getAge() >= ageThreshold)
+            
+            if (getAge() >= ageThreshold)//threshold = 18 getAge checks birthday
             {
                 _maxCheckouts = 6; //adult
             }
@@ -72,7 +76,8 @@ namespace Library
         }
         
         /// <summary>
-        /// Purpose: to return number of checked books
+        /// Purpose: to return number of checked books in _currentChecked SD
+        /// Nikki
         /// </summary>
         /// <returns>int</returns>
         public int getNumChecked()
@@ -81,6 +86,7 @@ namespace Library
         }
         /// <summary>
         /// Purpose:calculate age based on birthday
+        /// Nikki
         /// </summary>
         /// <returns>int</returns>
         public int getAge()
@@ -90,7 +96,8 @@ namespace Library
                 (DateTime.Now.Month - _birthday.Month) * 31 + (DateTime.Now.Day - _birthday.Day)) / 372;
         }
         /// <summary>
-        /// Purpose: to validate patron info from GUI before saving new object
+        /// Purpose: to validate patron info from GUI before saving new object- called when Add Patron button is clicked
+        /// Nikki
         /// </summary>
         /// <param name="name">string</param>
         /// <param name="address">string</param>
@@ -99,7 +106,7 @@ namespace Library
         /// <param name="zip">string</param>
         /// <param name="phone">string</param>
         /// <param name="cardNumber">string</param>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public static bool validate(string name, string address, string city, string state, string zip, string phone, string cardNumber)
         {
             validator = new Regex(@"((\d{1,6}\-\d{1,6})|(\d{1,6}\\\d{1,6})|(\d{1,6})(\/)(\d{1,6})|(\w{1}\-?\d{1,6})|(\w{1}\s\d{1,6})|((P\.?O\.?\s)((BOX)|(Box))(\s\d{1,6}))|((([R]{2})|([H][C]))(\s\d{1,6}\s)((BOX)|(Box))(\s\d{1,6}))?)$");
@@ -108,7 +115,7 @@ namespace Library
                 MessageBox.Show(address + " was an invalid entry for address. Please try again.");
                 return false;
             }
-            validator = new Regex(@"^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$");
+            validator = new Regex(@"^[a-zA-Z]+(?:[\s-.][a-zA-Z]+)*$");
             if (!validator.Match(city).Success)
             {
                 MessageBox.Show(city + "was an invalid entry for city. Please try again.");
@@ -140,14 +147,16 @@ namespace Library
             }
             return true;
         }
+        
         /// <summary>
         /// Purpose: to add media to the _checkedout SortedDictionary (check out)
+        /// Nikki
         /// </summary>
         /// <param name="media">Media</param>
         /// <param name="ID">media ID</param>
         public virtual void addMedia(Media media, uint ID)
         {
-            if(_currentChecked.Count <= _maxCheckouts)
+            if(_currentChecked.Count < _maxCheckouts) // check number of checked out books
             {
                 _currentChecked.Add(ID, media);
             }
@@ -158,12 +167,13 @@ namespace Library
         }
         /// <summary>
         /// Purpose: Check in media/ remove from _checkedout SD
+        /// Nikki
         /// </summary>
         /// <param name="media">Media</param>
         /// <param name="ID">ID</param>
         public virtual void removeMedia(uint ID)
         {
-            if (_currentChecked.Count == 0)
+            if (_currentChecked.Count == 0) //if no checkedout books to remove, show error message
             {
                 MessageBox.Show(noneChecked);
             }
@@ -172,6 +182,7 @@ namespace Library
 
         /// <summary>
         /// Purpose: display Patron object
+        /// Nikki
         /// </summary>
         /// <returns>string</returns>
         public override string ToString()
@@ -179,7 +190,8 @@ namespace Library
             return String.Format(_cardNumber + "  " + _name);
         }
         /// <summary>
-        /// Purpose: determine media type allowed
+        /// Purpose: determine media type allowed - called when Checkout button is clicked
+        /// Nikki
         /// </summary>
         /// <param name="m">Media</param>
         /// <returns>bool</returns>
@@ -193,7 +205,8 @@ namespace Library
             return true;
         }
         /// <summary>
-        /// Purpose: determine if patron has overdue books
+        /// Purpose: determine if patron has overdue books based on selected date from GUI
+        /// Nikki
         /// </summary>
         /// <param name="date">DateTime</param>
         /// <returns>bool</returns>
