@@ -169,7 +169,6 @@ namespace Library
             if (Borrower != Patron.None)
             {
                 CheckedOut = false;
-                Borrower.removeMedia(this.ID);
                 Borrower = Patron.None;
                 return true;
             }
