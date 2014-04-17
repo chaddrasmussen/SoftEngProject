@@ -35,6 +35,7 @@ namespace Library
             db.readPatron(ref patronSD);
             txtPatronItemsCheckedOut.SelectionMode = SelectionMode.MultiExtended;
             lblPatronDispName.Text = string.Empty;
+			lblPatronID.Text = string.Empty;
             if (mediaSD.Count > 0)
 			{
 				Media.Setup(mediaSD.Keys.Last());
@@ -340,14 +341,13 @@ namespace Library
         /// </summary>
         private void ClearMainGUI()
         {
-            txtSearchMedia.Clear();
-            txtSearchPatron.Clear();
             dateTimePicker.Value = DateTime.Today;
             lblPatronDispName.Text = string.Empty;
+			lblPatronID.Text = string.Empty;
             txtDisplayPatron.SelectedIndex = -1;
             UpdateScreens();
         }
-
+		
         private void btnDisplayOverdue_Click(object sender, EventArgs e)
         {
             displayOverdueMedia.Clear();
@@ -370,7 +370,8 @@ namespace Library
             if (txtDisplayPatron.SelectedIndex != -1)
             {
                 Patron patron = txtDisplayPatron.SelectedItem as Patron;
-                lblPatronDispName.Text = "Checked out to: " + patron._name;
+                lblPatronDispName.Text = patron._name;
+				lblPatronID.Text = "ID: " + patron.CardNumber;
                 UpdatePatronItemsCheckedOut(patron);
             }
         }
@@ -646,6 +647,5 @@ namespace Library
                 btnCheckIn.Enabled = false;
             }
         }
-
     }
 }
