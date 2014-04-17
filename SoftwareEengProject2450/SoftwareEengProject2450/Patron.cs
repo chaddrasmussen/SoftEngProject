@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 namespace Library
 {
     /// <summary>
-    /// Class Patron
+    /// Class Patron: child (3 max checkout) or adult (6 max checkout, 18+ age)
     /// </summary>
     [Serializable]
     public class Patron : object
@@ -61,7 +61,8 @@ namespace Library
             _overdueMedia = false;
             _cardNumber = cardNumber;
             _currentChecked = new SortedDictionary<uint, Media>();
-            if (getAge() >= ageThreshold)
+            
+            if (getAge() >= ageThreshold)//threshold = 18 getAge checks birthday
             {
                 _maxCheckouts = 6; //adult
             }
@@ -72,7 +73,7 @@ namespace Library
         }
         
         /// <summary>
-        /// Purpose: to return number of checked books
+        /// Purpose: to return number of checked books in SD
         /// </summary>
         /// <returns>int</returns>
         public int getNumChecked()
@@ -99,7 +100,7 @@ namespace Library
         /// <param name="zip">string</param>
         /// <param name="phone">string</param>
         /// <param name="cardNumber">string</param>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public static bool validate(string name, string address, string city, string state, string zip, string phone, string cardNumber)
         {
             validator = new Regex(@"((\d{1,6}\-\d{1,6})|(\d{1,6}\\\d{1,6})|(\d{1,6})(\/)(\d{1,6})|(\w{1}\-?\d{1,6})|(\w{1}\s\d{1,6})|((P\.?O\.?\s)((BOX)|(Box))(\s\d{1,6}))|((([R]{2})|([H][C]))(\s\d{1,6}\s)((BOX)|(Box))(\s\d{1,6}))?)$");
@@ -108,7 +109,7 @@ namespace Library
                 MessageBox.Show(address + " was an invalid entry for address. Please try again.");
                 return false;
             }
-            validator = new Regex(@"^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$");
+            validator = new Regex(@"^[a-zA-Z]+(?:[\s-.][a-zA-Z]+)*$");
             if (!validator.Match(city).Success)
             {
                 MessageBox.Show(city + "was an invalid entry for city. Please try again.");
@@ -147,7 +148,7 @@ namespace Library
         /// <param name="ID">media ID</param>
         public virtual void addMedia(Media media, uint ID)
         {
-            if(_currentChecked.Count <= _maxCheckouts)
+            if(_currentChecked.Count < _maxCheckouts) // if 
             {
                 _currentChecked.Add(ID, media);
             }
