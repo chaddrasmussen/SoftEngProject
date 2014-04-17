@@ -202,22 +202,22 @@ namespace Library
             {
                 if (txtMediaType.SelectedIndex == 1)
                 {
-                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text, MediaType.ADULTBOOK);
+                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text, MediaType.ADULTBOOK,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 2)
                 {
-                    m = new Media(txtMediaTitle.Text,txtMediaAuthor.Text, MediaType.CHILDBOOK);
+                    m = new Media(txtMediaTitle.Text,txtMediaAuthor.Text, MediaType.CHILDBOOK,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 3)
                 {
-                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text,MediaType.DVD);
+                    m = new Media(txtMediaTitle.Text, txtMediaAuthor.Text,MediaType.DVD,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 if (txtMediaType.SelectedIndex == 4)
                 {
-                    m = new Media(txtMediaType.Text,txtMediaAuthor.Text, MediaType.VIDEO);
+                    m = new Media(txtMediaType.Text,txtMediaAuthor.Text, MediaType.VIDEO,mediaID);
                     mediaSD.Add(mediaID, m);
                 }
                 MessageBox.Show("Media item '" +txtMediaTitle.Text+"' added successfully!");
@@ -412,6 +412,7 @@ namespace Library
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
             CheckInMedia();
+            displayMedia();
         }
 
         /// <summary>
@@ -489,6 +490,7 @@ namespace Library
             else
             {
                 Patron patron = txtDisplayPatron.SelectedItem as Patron;
+                
                 bool success = true;
 
                 // For multiple check ins, check that each is successful
@@ -500,7 +502,8 @@ namespace Library
 
                         if (patron._currentChecked.ContainsKey(media.ID))
                         {
-                            success = media.CheckIn() ? true : false;
+                            success = mediaSD[media.ID].CheckIn() ? true : false;
+                            patronSD[patron.CardNumber].removeMedia(media.ID);
                         }
                     }
                 }

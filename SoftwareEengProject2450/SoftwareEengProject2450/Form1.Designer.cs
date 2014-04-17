@@ -140,6 +140,7 @@
             this.clmTitle,
             this.clmCheckedOut,
             this.clmID});
+            this.lstvwMediaList.FullRowSelect = true;
             this.lstvwMediaList.Location = new System.Drawing.Point(354, 161);
             this.lstvwMediaList.Name = "lstvwMediaList";
             this.lstvwMediaList.Size = new System.Drawing.Size(313, 226);
@@ -414,6 +415,7 @@
             // 
             this.txtMediaID.Location = new System.Drawing.Point(661, 222);
             this.txtMediaID.Name = "txtMediaID";
+            this.txtMediaID.ReadOnly = true;
             this.txtMediaID.Size = new System.Drawing.Size(200, 20);
             this.txtMediaID.TabIndex = 47;
             // 

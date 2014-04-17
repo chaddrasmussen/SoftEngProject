@@ -161,7 +161,7 @@ namespace Library
         /// </summary>
         /// <param name="media">Media</param>
         /// <param name="ID">ID</param>
-        public virtual void removeMedia(Media media, uint ID)
+        public virtual void removeMedia(uint ID)
         {
             if (_currentChecked.Count == 0)
             {
